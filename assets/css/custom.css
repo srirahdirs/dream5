@@ -1,0 +1,67 @@
+body{
+    background: #367EC1;
+}
+.slim-header {
+    background-color: #367EC1;
+    border-bottom-width: 0;
+}
+.slim-logo a {
+    color: #fff;
+    font-weight: 500;
+}
+.header-notification {
+    color: rgba(255, 255, 255, 0.75);
+}
+.header-notification .indicator {
+    background-color: #367EC1;
+}
+.logged-user {
+    color: rgba(255, 255, 255, 0.75);
+}
+.carousel-item{
+  height: 400px;
+}
+
+.carousel-item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 400px;
+}
+.signin-box{
+    width: 279px !important;
+}
+
+.register_page{
+    position: absolute;
+    right: 11.3%;
+    top: 19.8%;
+}
+.slider{
+    position: relative;
+}
+.signin-box{
+    padding: 60px 30px;
+    background: #367EC1;
+    border: 1px solid #367EC1;
+}
+.toc{
+    font-size: 9px;
+    color: white;
+}
+.toc a {
+    color: #F49917;
+}
+.signin-title-primary{
+    color:#fff;
+    text-align: center;
+}
+.form-control, .dataTables_filter input {
+    border: 0;
+}
+@media (min-width: 320px) and (max-width:1025px)
+{
+    .register_page{
+        display:none;
+    }
+}
