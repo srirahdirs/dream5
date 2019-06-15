@@ -1,8 +1,8 @@
 body{
-    background: #367EC1;
+    background: #282d31;
 }
 .slim-header {
-    background-color: #367EC1;
+    background-color: #282d31;
     border-bottom-width: 0;
 }
 .slim-logo a {
@@ -41,13 +41,14 @@ body{
     position: relative;
 }
 .signin-box{
-    padding: 60px 30px;
-    background: #367EC1;
-    border: 1px solid #367EC1;
+    padding: 40px 30px;
+    background: #282d31;
+    border: 1px solid #282d31;
 }
 .toc{
     font-size: 9px;
     color: white;
+    margin-top: 10px;
 }
 .toc a {
     color: #F49917;
@@ -58,6 +59,48 @@ body{
 }
 .form-control, .dataTables_filter input {
     border: 0;
+}
+.register_form .alert {
+    padding: 0px 5px;
+    font-size: 11px;
+    margin-bottom: .5rem;
+}
+.register_form .alert-danger {
+    color: orangered;
+    background-color:transparent;
+    border-color: transparent;
+}
+.register_form input::placeholder {
+  color: #C6C6C6 !important;
+  font-size: 1em;
+  opacity: 1;
+}
+.login_form input::placeholder {
+  color: #C6C6C6 !important;
+  font-size: 12px;
+  opacity: 1;
+}
+.login-box {
+    margin-top: 15px;
+}
+.add_chips a {
+    color: black;
+    text-align: center;
+    padding: 6px 10px;
+    display: block;
+    background: #FFB612;
+}
+.btn-primary {
+    background: #FFB612;
+    color:black;
+    border: 1px solid #FFB612;
+}
+.slim-navbar .nav-item.active .nav-link {
+    background: #FFB612;
+    color:black;
+}
+.slim-header-right .dropdown-a {
+    margin-right: 10px;
 }
 @media (min-width: 320px) and (max-width:1025px)
 {

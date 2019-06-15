@@ -8,7 +8,7 @@ $this->load->view('layouts/homeSliderBottom');
 ?>
         
 <div class="slim-mainpanel">
-      <div class="container pd-t-50">
+<!--      <div class="container pd-t-50">
         <div class="row">
           <div class="col-lg-6">
             <h3 class="tx-inverse mg-b-15">Welcome back, Katherine!</h3>
@@ -21,17 +21,17 @@ $this->load->view('layouts/homeSliderBottom');
                   <h6>Today's Earnings</h6>
                   <h1>$950</h1>
                   <span>Based on list price</span>
-                </div><!-- card -->
-              </div><!-- col-6 -->
+                </div> card 
+              </div> col-6 
               <div class="col-sm-6">
                 <div class="card card-earning-summary mg-sm-l--1 bd-t-0 bd-sm-t">
                   <h6>This Week's Earnings</h6>
                   <h1>$12,420</h1>
                   <span>Based on list price</span>
-                </div><!-- card -->
-              </div><!-- col-6 -->
-            </div><!-- row -->
-          </div><!-- col-6 -->
+                </div> card 
+              </div> col-6 
+            </div> row 
+          </div> col-6 
           <div class="col-lg-6 mg-t-20 mg-sm-t-30 mg-lg-t-0">
             <div class="card card-dash-headline">
               <h4>Introducing the responsive admin dashboard template made with Bootstrap 4</h4>
@@ -39,14 +39,14 @@ $this->load->view('layouts/homeSliderBottom');
               <div class="row row-sm">
                 <div class="col-sm-6">
                   <a href="" class="btn btn-primary btn-block">Account Settings</a>
-                </div><!-- col-6 -->
+                </div> col-6 
                 <div class="col-sm-6 mg-t-10 mg-sm-t-0">
                   <a href="" class="btn btn-success btn-block">Upgrade Account</a>
-                </div><!-- col-6 -->
-              </div><!-- row -->
-            </div><!-- card -->
-          </div><!-- col-6 -->
-        </div><!-- row -->
+                </div> col-6 
+              </div> row 
+            </div> card 
+          </div> col-6 
+        </div> row 
 
         <div class="card card-dash-chart-one mg-t-20 mg-sm-t-30">
           <div class="row no-gutters">
@@ -61,7 +61,7 @@ $this->load->view('layouts/homeSliderBottom');
                 <div class="active-visitor-wrapper">
                   <h1>746</h1>
                   <p>Online Visitors on Site</p>
-                </div><!-- active-visitor-wrapper -->
+                </div> active-visitor-wrapper 
 
                 <hr class="mg-t-30 mg-b-40">
 
@@ -70,33 +70,33 @@ $this->load->view('layouts/homeSliderBottom');
                 <label class="mg-b-5">macOS (30%)</label>
                 <div class="progress mg-b-15">
                   <div class="progress-bar bg-warning progress-bar-xs wd-30p" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                </div><!-- progress -->
+                </div> progress 
 
                 <label class="mg-b-5">Windows 10 (50%)</label>
                 <div class="progress mg-b-15">
                   <div class="progress-bar bg-success progress-bar-xs wd-50p" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                </div><!-- progress -->
+                </div> progress 
 
                 <label class="mg-b-5">Linux (10%)</label>
                 <div class="progress mg-b-15">
                   <div class="progress-bar bg-danger progress-bar-xs wd-10p" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                </div><!-- progress -->
+                </div> progress 
 
                 <label class="mg-b-5">Ubuntu (10%)</label>
                 <div class="progress mg-b-15">
                   <div class="progress-bar bg-danger progress-bar-xs wd-10p" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                </div><!-- progress -->
+                </div> progress 
 
-              </div><!-- left-panel -->
-            </div><!-- col-4 -->
+              </div> left-panel 
+            </div> col-4 
             <div class="col-lg-8">
               <div class="right-panel">
                 <h6 class="slim-card-title">Visitor's Locations</h6>
                 <div id="vmap" class="ht-250 ht-sm-350 ht-md-450 bg-gray-300"></div>
-              </div><!-- right-panel -->
-            </div><!-- col-8 -->
-          </div><!-- row -->
-        </div><!-- card -->
+              </div> right-panel 
+            </div> col-8 
+          </div> row 
+        </div> card 
 
         <div class="card card-table mg-t-20 mg-sm-t-30">
           <div class="card-header">
@@ -106,7 +106,7 @@ $this->load->view('layouts/homeSliderBottom');
               <a href="" class="nav-link">This Week</a>
               <a href="" class="nav-link">This Month</a>
             </nav>
-          </div><!-- card-header -->
+          </div> card-header 
           <div class="table-responsive">
             <table class="table mg-b-0 tx-13">
               <thead>
@@ -209,13 +209,13 @@ $this->load->view('layouts/homeSliderBottom');
                 </tr>
               </tbody>
             </table>
-          </div><!-- table-responsive -->
+          </div> table-responsive 
           <div class="card-footer tx-12 pd-y-15 bg-transparent">
             <a href=""><i class="fa fa-angle-down mg-r-5"></i>View All Products</a>
-          </div><!-- card-footer -->
-        </div><!-- card -->
-      </div><!-- container -->
-    </div><!-- slim-mainpanel -->
+          </div> card-footer 
+        </div> card 
+      </div> container -->
+</div><!-- slim-mainpanel -->
 
 <?php
     $this->load->view('layouts/footer');       

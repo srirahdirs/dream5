@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 14, 2019 at 05:16 PM
+-- Generation Time: Jun 15, 2019 at 07:12 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -45,16 +45,15 @@ INSERT INTO `migration` (`version`, `apply_time`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Table structure for table `users`
 --
 
-CREATE TABLE `user` (
+CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `mobile_number` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
-  `auth_key` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `password_hash` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `password_reset_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `gender` enum('Male','Female') COLLATE utf8_unicode_ci DEFAULT NULL,
   `otp` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -62,19 +61,51 @@ CREATE TABLE `user` (
   `email_verified` smallint(6) DEFAULT '0',
   `admin_verified` smallint(6) DEFAULT '0',
   `status` smallint(6) NOT NULL DEFAULT '10',
-  `created_at` int(11) NOT NULL,
-  `updated_at` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `verification_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `user` (`id`, `username`, `email`, `mobile_number`, `auth_key`, `password_hash`, `password_reset_token`, `gender`, `otp`, `otp_verified`, `email_verified`, `admin_verified`, `status`, `created_at`, `updated_at`, `verification_token`) VALUES
-(1, 'admin', 'sri.rahdirs@gmail.com', '', 'o6oETJsbi9c7tEpGul8bEKN8Dtu40fmt', '$2y$13$2U1ozn3YqkInXDOChIlLzOT16bkyqbtWLQZKYdzgtEN0i6Z5E4AIu', NULL, NULL, NULL, 0, 0, 0, 9, 1554984088, 1554984088, 'ymhrxvuvK2MjfJjd0Qhlvue-Et56jT-5_1554984088'),
-(2, 'sridhar', 'sridhar@omgtech.in', '9789253515', '2FkcrJNFtVl3XdDI0krgJiG5xbp3cypz', '$2y$13$rDZOifhLPo/euXGeCd2hVOuaBA1kWG2Sn4uob39Dj44t87NEObuNC', NULL, NULL, NULL, 0, 0, 0, 9, 1555579897, 1555579897, '9R-IVTUG5D8btVdwHJ3GXK3spDKlTJKU_1555579897'),
-(4, 'smssri', 'sridharvmsccs@gmail.com', '6381566734', 'wUF1BwDoTmSmio6gIhlzVUqjZjyCf5Jo', '$2y$13$OalvBPm3/BhVfC.ufvbVsOtApVa69GeWxF9/8Ary5uRqvTp9pQyzS', NULL, NULL, NULL, 0, 0, 0, 9, 1555585043, 1555585043, 'bw44SjMUjPTP2B7r67YFrLAlu2GkUVGk_1555585043');
+INSERT INTO `users` (`id`, `username`, `email`, `mobile_number`, `password`, `password_reset_token`, `gender`, `otp`, `otp_verified`, `email_verified`, `admin_verified`, `status`, `created_at`, `updated_at`, `verification_token`) VALUES
+(1, 'smssri', 'sri.rahdirs@gmail.com', '9789253515', '$2y$10$.V78/z2qqjC4w11lKcsMXupr4C5VFqg/e8qqgfReplp51livA4skW', NULL, NULL, NULL, 0, 0, 0, 10, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
+(2, 'ragu', 'sri.rahdirs@gmail.com1', '9789253516', '$2y$10$MX3LceTvKvnuOmc/cRMepuQWymMQG69T8bfW1Qk/y9EGQAywiZHoO', NULL, NULL, NULL, 0, 0, 0, 10, '2019-06-15 13:39:05', '2019-06-15 13:39:05', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_details`
+--
+
+CREATE TABLE `user_details` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `first_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(55) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pan_card` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pan_card_file` text COLLATE utf8mb4_unicode_ci,
+  `aadhar_card` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `aadhar_card_file` text COLLATE utf8mb4_unicode_ci,
+  `account_number` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ifsc_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `bank_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `bank_file` text COLLATE utf8mb4_unicode_ci,
+  `is_pan_verified` enum('Yes','Rejected') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `is_aadhar_verified` enum('Yes','Rejected') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `is_account_verified` enum('Yes','Rejected') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `user_details`
+--
+
+INSERT INTO `user_details` (`id`, `user_id`, `first_name`, `last_name`, `pan_card`, `pan_card_file`, `aadhar_card`, `aadhar_card_file`, `account_number`, `ifsc_code`, `bank_name`, `bank_file`, `is_pan_verified`, `is_aadhar_verified`, `is_account_verified`, `created_at`, `updated_at`) VALUES
+(1, 2, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-06-15 13:39:05', '2019-06-15 13:39:05');
 
 --
 -- Indexes for dumped tables
@@ -87,9 +118,9 @@ ALTER TABLE `migration`
   ADD PRIMARY KEY (`version`);
 
 --
--- Indexes for table `user`
+-- Indexes for table `users`
 --
-ALTER TABLE `user`
+ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`),
   ADD UNIQUE KEY `email` (`email`),
@@ -98,14 +129,37 @@ ALTER TABLE `user`
   ADD UNIQUE KEY `otp` (`otp`);
 
 --
+-- Indexes for table `user_details`
+--
+ALTER TABLE `user_details`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT for table `users`
 --
-ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `user_details`
+--
+ALTER TABLE `user_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `user_details`
+--
+ALTER TABLE `user_details`
+  ADD CONSTRAINT `user_details_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

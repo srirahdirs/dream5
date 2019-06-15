@@ -32,8 +32,8 @@
             <div class="col-lg-3">
                 <i class="icon ion-ios-world-outline"></i>
                 <div class="dash-content">
-                    <label class="tx-danger">Earnings</label>
-                    <h2>369,657</h2>
+                    <label class="tx-danger">Likes</label>
+                    <h2>100.3 K</h2>
                 </div><!-- dash-content -->
             </div><!-- col-3 -->
         </div><!-- row -->
