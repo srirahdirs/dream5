@@ -18,7 +18,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?= site_url('home') ?>">
-                    <i class="icon ion-ios-play"></i>
+                    <i class="icon ion-ios-game-controller-b"></i>
                     <span>PLAY GAME</span>
                 </a>            
             </li>

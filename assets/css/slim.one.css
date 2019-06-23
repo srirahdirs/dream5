@@ -5,6 +5,15 @@ body {
 .slim-header {
   background-color: #212529;
   border-bottom-color: #343a40; }
+  .slim-header.with-sidebar .slim-sidebar-menu {
+    border-color: rgba(255, 255, 255, 0.2); }
+    .slim-header.with-sidebar .slim-sidebar-menu span, .slim-header.with-sidebar .slim-sidebar-menu span::before, .slim-header.with-sidebar .slim-sidebar-menu span::after {
+      background-color: rgba(255, 255, 255, 0.2); }
+    .slim-header.with-sidebar .slim-sidebar-menu:hover, .slim-header.with-sidebar .slim-sidebar-menu:focus {
+      border-color: rgba(255, 255, 255, 0.72);
+      background-color: transparent; }
+      .slim-header.with-sidebar .slim-sidebar-menu:hover span, .slim-header.with-sidebar .slim-sidebar-menu:hover span::before, .slim-header.with-sidebar .slim-sidebar-menu:hover span::after, .slim-header.with-sidebar .slim-sidebar-menu:focus span, .slim-header.with-sidebar .slim-sidebar-menu:focus span::before, .slim-header.with-sidebar .slim-sidebar-menu:focus span::after {
+        background-color: rgba(255, 255, 255, 0.72); }
 
 .slim-logo a {
   color: #1b84e7; }
@@ -163,6 +172,9 @@ hr {
 .img-thumbnail {
   border-color: #343a40;
   background-color: #212529; }
+
+.show-sidebar .slim-header.with-sidebar .slim-sidebar-menu span {
+  background-color: transparent; }
 
 /******************** DASHBOARD ********************/
 .dash-headline-item-one {
@@ -1013,6 +1025,45 @@ hr {
 .card-blog-split .blog-title a {
   color: #fff; }
 
+/******************** SIDEBAR NAVIGATION *******************/
+.slim-sidebar {
+  border-right-color: #343a40;
+  background-color: #212529; }
+
+.sidebar-label {
+  color: #6c757d;
+  margin-bottom: 15px; }
+
+.sidebar-nav-item:first-child .sidebar-nav-link {
+  border-top-color: #343a40; }
+  .sidebar-nav-item:first-child .sidebar-nav-link.active {
+    border-top-width: 1px; }
+
+.sidebar-nav-link {
+  border-bottom-color: #343a40;
+  color: #868ba1; }
+  .sidebar-nav-link:hover, .sidebar-nav-link:focus {
+    background-color: #282d31;
+    color: #fff; }
+  .sidebar-nav-link.active {
+    background-image: none;
+    background-color: #282d31;
+    border-bottom-width: 1px;
+    color: #1b84e7; }
+    .sidebar-nav-link.active i {
+      color: #1b84e7; }
+
+.sidebar-nav-sub {
+  border-bottom-color: #343a40;
+  padding: 8px 0;
+  background-color: #1c2023; }
+  .sidebar-nav-sub .nav-sub-link:hover, .sidebar-nav-sub .nav-sub-link:focus {
+    color: #1b84e7;
+    background-color: transparent; }
+  .sidebar-nav-sub .nav-sub-link.active {
+    background-color: transparent;
+    color: #1b84e7; }
+
 /******************** RTL SUPPORT *********************/
 [dir="rtl"] .card-dash-one .row > div + div {
   border-color: #343a40; }
@@ -1059,6 +1110,10 @@ hr {
 [dir="rtl"] .card-popular-product .row > div:last-child::before {
   border-color: #343a40; }
 
+[dir="rtl"] .slim-sidebar {
+  border-left-color: #343a40; }
+
+/******************** TEMPLATE SETTINGS (USED IN DEMO ONLY) *******************/
 .template-options-wrapper {
   border-color: #292d32;
   background-color: #16181b; }
@@ -1068,12 +1123,18 @@ hr {
   border-color: #292d32;
   color: #fff; }
 
+.template-option-logo {
+  border-bottom-color: #343a40; }
+
 .template-options-title {
   color: #fff;
   font-weight: 500; }
 
 .option-row-wrapper + .option-row-wrapper {
   border-color: #292d32; }
+
+.option-page-hor::before {
+  background-color: rgba(22, 24, 27, 0.85); }
 
 .skin-mode-item a.skin-light-mode,
 .skin-mode-item a.skin-dark-mode {

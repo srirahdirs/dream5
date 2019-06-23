@@ -12,9 +12,16 @@ class Welcome extends CI_Controller {
     }
 
     public function index() {
-        $this->load->view('users/dashboard');
-    }
+        if($this->session->userdata('username')) {
+            $this->load->view('users/dashboard_session');
+        } else {
+            $this->load->view('users/dashboard');
+        }
 
+    }
+    public function myprofile() {
+        $this->load->view('users/my_profile');
+    }
     public function register() {
         $this->form_validation->set_rules('username', 'Userame', 'required|is_unique[users.username]',[
             'required'      => '%s is required',

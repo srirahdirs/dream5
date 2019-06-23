@@ -5,6 +5,12 @@ body{
     background-color: #282d31;
     border-bottom-width: 0;
 }
+.slim-footer {
+    margin-top: 0;
+}
+.sidebar-nav-link i {    
+    margin-right: 25px;    
+}
 .slim-logo a {
     color: #fff;
     font-weight: 500;
@@ -100,11 +106,19 @@ body{
     color:black;
 }
 .slim-header-right .dropdown-a {
-    margin-right: 10px;
+    margin: 0 10px;
 }
 @media (min-width: 320px) and (max-width:1025px)
 {
     .register_page{
         display:none;
     }
+}
+.slim-body {
+    max-width: 1140px;
+    margin: 0 auto; 
+    padding: 0 15px;
+}
+.slim-body .myprofile .container {
+    padding: 25px 0 25px 25px;
 }

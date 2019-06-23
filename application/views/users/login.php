@@ -58,7 +58,7 @@
 
                         $(".alert-danger").css('display', 'none');
 
-                        alert(data.success);
+                        location.href = "<?php echo base_url('home'); ?>";
 
                     } else {
                         console.log(data.error);
