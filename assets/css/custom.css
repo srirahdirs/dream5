@@ -63,7 +63,7 @@ body{
     color:#fff;
     text-align: center;
 }
-.form-control, .dataTables_filter input {
+.login_form .form-control, .dataTables_filter input, .register_form .form-control,   .dataTables_filter input {
     border: 0;
 }
 .register_form .alert {

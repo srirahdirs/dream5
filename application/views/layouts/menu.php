@@ -23,9 +23,9 @@
                 </a>            
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?= site_url('home') ?>">
+                <a class="nav-link add_cash" href="<?= site_url('home') ?>">
                     <i class="icon ion-cash"></i>
-                    <span>BUY CASH</span>
+                    <span>ADD CASH</span>
                 </a>            
             </li>
             <li class="nav-item">

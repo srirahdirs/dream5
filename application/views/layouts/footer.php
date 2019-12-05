@@ -13,8 +13,10 @@
 <script src="<?= $baseUrl ?>/lib/jquery.cookie/js/jquery.cookie.js"></script>
 <script src="<?= $baseUrl ?>/lib/jqvmap/js/jquery.vmap.min.js"></script>
 <script src="<?= $baseUrl ?>/lib/jqvmap/js/jquery.vmap.world.js"></script>
+<script src="<?= $baseUrl ?>/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js"></script>
 
 <script src="<?= $baseUrl ?>/js/slim.js"></script>
+<script src="<?= $baseUrl ?>/js/ResizeSensor.js"></script>
 <script src="<?= $baseUrl ?>/js/jquery.vmap.sampledata.js"></script>
 <script>
     $(function () {

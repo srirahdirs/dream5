@@ -11,7 +11,7 @@
         <link href="<?= $baseUrl ?>/lib/Ionicons/css/ionicons.css" rel="stylesheet">
         <link href="<?= $baseUrl ?>/lib/jqvmap/css/jqvmap.min.css" rel="stylesheet">
         <link href="<?= $baseUrl ?>/lib/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
-
+        <link href="<?= $baseUrl ?>/lib/perfect-scrollbar/css/perfect-scrollbar.min.css" rel="stylesheet">
         <!-- Slim CSS -->
         <link rel="stylesheet" href="<?= $baseUrl ?>/css/slim.css">
         <link rel="stylesheet" href="<?= $baseUrl ?>/css/slim.one.css">

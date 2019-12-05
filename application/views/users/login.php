@@ -5,14 +5,14 @@
     <div class="row">
         <div class="col-lg-4">
             <div class="form-group">             
-                <input type="text" class="form-control" name="username_or_email" placeholder="USERNAME or EMAIL">                
+                <input type="text" class="form-control" name="username_or_email" placeholder="USERNAME or EMAIL" autocomplete="off">                
             </div>
         </div>
        
 
         <div class="col-lg-4">
             <div class="form-group">
-                <input type="password" class="form-control" name="login_password" placeholder="PASSWORD">
+                <input type="password" class="form-control" name="login_password" placeholder="PASSWORD" autocomplete="off">
             </div>
         </div><!-- row -->
         

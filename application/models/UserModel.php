@@ -18,6 +18,14 @@ class UserModel extends CI_Model
      * @param $id
      * @return mixed
      */
+    public function getStateList()
+    {
+        return $this->db->get_where("all_states")->result_array(0);
+    }
+    public function getCityList($state_code)
+    {
+        return $this->db->get_where("all_cities", array("state_code" => $state_code))->result_array();
+    }
 //    public function find($id)
 //    {
 //        return $this->db->get_where("users", array("id" => $id))->row(0);
@@ -144,13 +152,13 @@ class UserModel extends CI_Model
 //    }
 //
 //    
-//    public function delete($id)
-//    {
-//        $this->db->where('id',$id);
-//        $data['status'] = 0;
-//        $this->db->update('users',$data);
-//       
-//    }
+    public function delete($id)
+    {
+        $this->db->where('id',$id);
+        $data['status'] = 0;
+        $this->db->update('users',$data);
+       
+    }
     
 
 }

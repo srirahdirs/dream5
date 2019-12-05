@@ -13,17 +13,21 @@ class Welcome extends CI_Controller {
 
     public function index() {
         if($this->session->userdata('username')) {
+            
             $this->load->view('users/dashboard_session');
         } else {
             $this->load->view('users/dashboard');
         }
 
     }
-    public function myprofile() {
-        $this->load->view('users/my_profile');
+    
+    public function getCityList() {
+        $model = new UserModel();
+        $state_code = $this->input->post('state_code');
+        echo json_encode($model->getCityList($state_code));
     }
     public function register() {
-        $this->form_validation->set_rules('username', 'Userame', 'required|is_unique[users.username]',[
+        $this->form_validation->set_rules('username', 'Username', 'required|is_unique[users.username]',[
             'required'      => '%s is required',
             'is_unique'     => '%s already exists.'
         ]);
@@ -84,5 +88,5 @@ class Welcome extends CI_Controller {
 
         return false;
     }
-
+    
 }

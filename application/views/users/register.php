@@ -13,28 +13,28 @@
 
     <div class="row row-xs mg-b-10">
         <div class="col-sm mg-t-10 mg-sm-t-0">             
-            <input type="text" class="form-control" name="username" placeholder="USERNAME">                
+            <input type="text" class="form-control" name="username" placeholder="USERNAME" autocomplete="off">                
         </div>
     </div>
     <div class="alert alert-danger err_username" style="display:none"></div>
 
     <div class="row row-xs mg-b-10">
         <div class="col-sm mg-t-10 mg-sm-t-0">
-            <input type="email" class="form-control" name="email" placeholder="E-MAIL ">
+            <input type="email" class="form-control" name="email" placeholder="E-MAIL " autocomplete="off">
         </div>
     </div><!-- row -->            
     <div class="alert alert-danger err_email" style="display:none"></div>
 
     <div class="row row-xs mg-b-10">
         <div class="col-sm mg-t-10 mg-sm-t-0">
-            <input type="number" class="form-control"  name="mobile_number" placeholder="MOBILE NUMBER">
+            <input type="number" class="form-control"  name="mobile_number" placeholder="MOBILE NUMBER" autocomplete="off">
         </div>
     </div><!-- row -->            
     <div class="alert alert-danger err_mobile_number" style="display:none"></div>
 
     <div class="row row-xs mg-b-10">
         <div class="col-sm mg-t-10 mg-sm-t-0">
-            <input type="password" class="form-control" name="password" placeholder="PASSWORD">
+            <input type="password" class="form-control" name="password" placeholder="PASSWORD" autocomplete="off">
         </div>
     </div><!-- row -->
     <div class="alert alert-danger err_password" style="display:none"></div>
