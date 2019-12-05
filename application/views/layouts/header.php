@@ -9,6 +9,8 @@
         <!-- vendor css -->
         <link href="<?= $baseUrl ?>/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
         <link href="<?= $baseUrl ?>/lib/Ionicons/css/ionicons.css" rel="stylesheet">
+        <link href="<?= $baseUrl ?>/lib/jquery-toggles/css/toggles-full.css" rel="stylesheet">
+        <link href="<?= $baseUrl ?>/lib/spectrum/css/spectrum.css" rel="stylesheet">
         <link href="<?= $baseUrl ?>/lib/jqvmap/css/jqvmap.min.css" rel="stylesheet">
         <link href="<?= $baseUrl ?>/lib/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
        

@@ -122,3 +122,11 @@ body{
 .slim-body .myprofile .container {
     padding: 25px 0 25px 25px;
 }
+.jconfirm.jconfirm-white .jconfirm-box, .jconfirm.jconfirm-light .jconfirm-box {
+    background: #FFB612;
+    color: #000;
+}
+.jconfirm-box .jconfirm-buttons button.btn-default {
+    background: #000 !important;
+    color: #fff !important;
+}

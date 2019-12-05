@@ -12,37 +12,61 @@ $this->load->view('layouts/menu_session');
             <form action="<?= base_url().'profile-update'?>" method="POST">
             <div class="form-layout">
                 <div class="row mg-b-25">
-                    <div class="col-lg-4">
+                    <div class="col-lg-6">
                         <div class="form-group">
                             <label class="form-control-label">First Name: <span class="tx-danger">*</span></label>
-                            <input class="form-control" type="text" name="firstname"  placeholder="Enter firstname">
+                            <input class="form-control" type="text" name="first_name"  placeholder="Enter firstname" value="<?= $user->first_name ?>" autocomplete="off">
                         </div>
                     </div><!-- col-4 -->
-                    <div class="col-lg-4">
+                    <div class="col-lg-6">
                         <div class="form-group">
                             <label class="form-control-label">Last Name: </label>
-                            <input class="form-control" type="text" name="lastname" placeholder="Enter lastname">
+                            <input class="form-control" type="text" name="last_name" placeholder="Enter lastname" value="<?= $user->last_name ?>" autocomplete="off">
                         </div>
                     </div><!-- col-4 -->
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label class="form-control-label">Email: <span class="tx-danger">*</span></label>
-                            <input class="form-control" type="text" name="email" placeholder="Enter email address">
+                            <input class="form-control" type="text" name="email" placeholder="Enter email address" value="<?= $user->email ?>" disabled autocomplete="off">
                         </div>
                     </div><!-- col-4 -->
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label class="form-control-label" style="visibility: hidden;">LABEL HIDDEN</label>
+                            <button class="btn btn-primary bd-0">Update</button>                             
+                        </div>
+                    </div><!-- col 2 -->
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label class="form-control-label">Mobile Number: <span class="tx-danger">*</span></label>
+                            <input class="form-control" type="text" name="mobile_number" placeholder="Enter mobile number" value="<?= $user->mobile_number ?>" disabled autocomplete="off">
+                        </div>
+                    </div><!-- col-4 -->
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label class="form-control-label" style="visibility: hidden;">LABEL HIDDEN</label>
+                            <button class="btn btn-primary bd-0" id="mobile_number_update">Update</button>                              
+                        </div>
+                    </div><!-- col 2 -->
                     <div class="col-lg-12">
                         <div class="form-group mg-b-10-force">
                             <label class="form-control-label">Address: <span class="tx-danger">*</span></label>
-                            <textarea class="form-control" type="text" name="address" ></textarea>
+                            <textarea class="form-control" type="text" name="address" ><?= $user->address ?></textarea>
                         </div>
                     </div><!-- col-8 -->
                     <div class="col-lg-6">
                         <div class="form-group mg-b-10-force">
                             <label class="form-control-label">State: <span class="tx-danger">*</span></label>
-                            <select class="form-control select2 select2-hidden-accessible" data-placeholder="Select state" name="state" id="state">
+                            <select class="form-control select2 select2-hidden-accessible" data-placeholder="Select state" name="state_id" id="state_id">
                                 <option value="">Select State</option>
-                                <?php foreach ($state_list as $state): ?>
-                                    <option value="<?= $state['state_code'] ?>"><?= $state['state_name'] ?></option>
+                                <?php foreach ($state_list as $state): 
+                                    if($user->state_id == $state['state_code']){
+                                        $selected_state = 'selected=selected';
+                                    } else {
+                                        $selected_state='';
+                                    }
+                                ?>
+                                    <option value="<?= $state['state_code'] ?>" <?= $selected_state ?>><?= $state['state_name'] ?></option>
                                 <?php endforeach; ?>                               
                             </select>                            
                         </div>
@@ -50,7 +74,7 @@ $this->load->view('layouts/menu_session');
                     <div class="col-lg-6">
                         <div class="form-group mg-b-10-force">
                             <label class="form-control-label">City: <span class="tx-danger">*</span></label>
-                            <select class="form-control select2 select2-hidden-accessible" name="city" id="city">
+                            <select class="form-control select2 select2-hidden-accessible" name="city_id" id="city">
                                 <option value="">Select City</option>                                                            
                             </select>                            
                         </div>
@@ -82,7 +106,7 @@ $this->load->view('layouts/footer');
     $(document).ready(function () {
 
         // City change
-        $('#state').change(function () {
+        $('#state_id').change(function () {
             var state = $(this).val();
 
             // AJAX request
@@ -93,7 +117,7 @@ $this->load->view('layouts/footer');
                 dataType: 'json',
                 success: function (response) {
                     // Add options
-                    $('#city').find('option').not(':first').remove();
+                    $('#city_id').find('option').not(':first').remove();
                     $.each(response, function (index, data) {
                         $('#city').append('<option value="' + data['city_code'] + '">' + data['city_name'] + '</option>');
                     });
@@ -103,4 +127,21 @@ $this->load->view('layouts/footer');
 
 
     });
+
+
+    $('#mobile_number_update').click(function (e) {
+            e.preventDefault();
+            $.confirm({
+                title: 'Please Confirm',
+                content: 'Are sure you ready?.',
+                buttons: {
+                    confirm: function () {
+                        $('#create_proposal_form').submit();
+                    }, //confirm btn ends
+                    cancel: function () {
+
+                    },
+                },
+            }); //confirm e
+        });
 </script>

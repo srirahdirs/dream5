@@ -13,9 +13,15 @@ class User extends CI_Controller {
         $data = [];
         $model = new UserModel();
         $data['state_list'] = $model->getStateList();
+        $data['user'] = $model->findUserDetails($this->session->userdata('user_id'));
+
         $this->load->view('users/my_profile',$data);
     }
     public function updateProfile(){
-        
+        echo "<pre>";
+        print_r($this->input->post());
+        exit;
+        $model = new UserModel();
+        $model->updateProfile();
     }
 }

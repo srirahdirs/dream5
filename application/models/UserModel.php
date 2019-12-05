@@ -26,7 +26,11 @@ class UserModel extends CI_Model
     {
         return $this->db->get_where("all_cities", array("state_code" => $state_code))->result_array();
     }
-//    public function find($id)
+   public function findUserDetails($user_id)
+   {
+       return $this->db->select('users.*,ud.*')->join('user_details ud','ud.user_id = users.id','left')->get_where("users", array("users.id" => $user_id))->row(0);
+   }
+    // public function find($id)
 //    {
 //        return $this->db->get_where("users", array("id" => $id))->row(0);
 //    }
@@ -121,35 +125,25 @@ class UserModel extends CI_Model
      * @param $data
      * @return mixed
      */
-//    public function editUser($id)
-//    {
-//        $data = array(
-//            'name' => $this->input->post('name'),
-//            'email' => $this->input->post('email'),
-//            'contact_number' => $this->input->post('contact_number'),            
-//            'role_id' => $this->input->post('role_id'),
-//            'status' => $this->input->post('status'),          
-//        );
-//        if($this->input->post('companies')){
-//            $this->db->delete('user_companies', array('user_id' => $id));
-//            foreach ($this->input->post('companies') as $company) {
-//                
-//                if($company) {
-//                    $dataComp['user_id'] = $id;
-//                    $dataComp['company_id'] = $company;
-//                    $this->db->insert('user_companies', $dataComp);
-//                }
-//            }
-//        }
-//        if($id == 0){
-//            return $this->db->insert('users',$data);
-//        } else {
-//            $this->editRoles($id, $this->input->post('role_id'));
-//            $this->db->where('id',$id);
-//            return $this->db->update('users',$data);
-//        }        
-//
-//    }
+   public function editUser($id)
+   {
+       $dataUserDetails = array(
+           'first_name' => $this->input->post('first_name'),
+           'last_name' => $this->input->post('last_name'),
+           'address' => $this->input->post('address'),            
+           'state_id' => $this->input->post('state_id'),
+           'city_id' => $this->input->post('city_id'),          
+       );
+       
+       if($id == 0){
+           return $this->db->insert('user_details',$data);
+       } else {
+           
+           $this->db->where('user_id',$id);
+           return $this->db->update('user_details',$dataUserDetails);
+       }        
+
+   }
 //
 //    
     public function delete($id)

@@ -17,7 +17,7 @@ $route['add-cash'] = 'payments/addCash';
 
 //user
 $route['my-profile'] = 'user/myProfile';
-$route['update-profile'] = 'user/updateProfile';
+$route['profile-update'] = 'user/updateProfile';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

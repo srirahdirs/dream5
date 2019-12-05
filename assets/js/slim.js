@@ -1,6 +1,11 @@
 $(function(){
   'use strict';
-
+  
+        // Toggles
+        $('.toggle').toggles({
+          on: true,
+          height: 26
+        });
   // showing 2nd level sub menu while hiding others
   $('.sidebar-nav-link').on('click', function(e){
     var subMenu = $(this).next();

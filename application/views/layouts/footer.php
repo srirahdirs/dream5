@@ -11,9 +11,12 @@
 <script src="<?= $baseUrl ?>/lib/popper.js/js/popper.js"></script>
 <script src="<?= $baseUrl ?>/lib/bootstrap/js/bootstrap.js"></script>
 <script src="<?= $baseUrl ?>/lib/jquery.cookie/js/jquery.cookie.js"></script>
+<script src="<?= $baseUrl ?>/lib/jquery-toggles/js/toggles.min.js"></script>
+<script src="<?= $baseUrl ?>/lib/spectrum/js/spectrum.js"></script>
 <script src="<?= $baseUrl ?>/lib/jqvmap/js/jquery.vmap.min.js"></script>
 <script src="<?= $baseUrl ?>/lib/jqvmap/js/jquery.vmap.world.js"></script>
 <script src="<?= $baseUrl ?>/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js"></script>
+<script src="<?= $baseUrl ?>/js_external/jquery-confirm.min.js"></script>
 
 <script src="<?= $baseUrl ?>/js/slim.js"></script>
 <script src="<?= $baseUrl ?>/js/ResizeSensor.js"></script>
