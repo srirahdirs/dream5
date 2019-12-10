@@ -17,7 +17,7 @@ $encrypted_user_id = encryptId($this->session->userdata('user_id'));
             <a href="" class="sidebar-nav-link my_profile"><i class="icon ion-ios-contact "></i> My Profile</a>
             <ul class="nav sidebar-nav-sub">
               <li class="nav-sub-item "><a href="<?= site_url('my-profile/'.$encrypted_user_id) ?>" class="nav-sub-link edit_profile">Edit Profile</a></li>
-              <li class="nav-sub-item"><a href="index2.html" class="nav-sub-link">Change Password</a></li>             
+              <li class="nav-sub-item"><a href="<?= site_url('change-password/'.$encrypted_user_id) ?>" class="nav-sub-link change_password">Change Password</a></li>             
               <li class="nav-sub-item"><a href="index5.html" class="nav-sub-link">KYC</a></li>
             </ul>
           </li>

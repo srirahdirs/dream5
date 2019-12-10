@@ -29,57 +29,57 @@ class UserModel extends CI_Model {
         return $this->db->select('users.*,ud.*')->join('user_details ud', 'ud.user_id = users.id', 'left')->get_where("users", array("users.id" => $user_id))->row(0);
     }
 
-    // public function find($id)
-//    {
-//        return $this->db->get_where("users", array("id" => $id))->row(0);
-//    }
-//    public function findWithEmail($email)
-//    {
-//        return $this->db->get_where("users", array("email" => $email))->row(0);
-//    }
-//    public function findWithToken($token)
-//    {
-//        return $this->db->get_where("users", array("password_reset_token" => $token))->row(0);
-//    }
-//    public function sendSetPasswordLink($email){
-//        
-//        $getUserData = $this->findWithEmail($email);
-//        $generateToken = $this->generateToken($getUserData->id);
-//        
-//        if($generateToken){
-//            
-//            $this->load->library('email');
-//            $getUserDetails = $this->find($getUserData->id);
-//            $link = 'http://localhost/dwf/resetPassword/';
-//            if($_SERVER['SERVER_NAME'] == 'localhost') :
-//                $link = 'http://localhost/dwf/resetPassword/';
-//            else:                   
-//                $link = 'https://projects.omgtech.in/dwf/resetPassword/';
-//            endif;
-//            $data['link'] = $link.$getUserDetails->password_reset_token;
-//            $message = $this->load->view('emailer/resetPassword', $data,  TRUE);
-//            $this->email->from('info@leadh.co', 'DWF - Set Your Passsword');
-//            $this->email->to($getUserDetails->email);
-//            $this->email->subject('DWF - Set Password');
-//            $this->email->message($message);
-//
-//            if($this->email->send()){
-//                $this->session->set_flashdata('success', 'Mail sent successfully');
-//            } else {
-//                $this->session->set_flashdata('error', 'Failed to send email.');
-//            }
-//            
-//            
-//        }
-//        
-//    }
-//    public function generateToken($id)
-//    {
-//        $token = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 50);
-//        $data['password_reset_token'] = $token;
-//        $this->db->where('id',$id);
-//        return $this->db->update('users',$data);        
-//    }
+     public function find($id)
+    {
+        return $this->db->get_where("users", array("id" => $id))->row(0);
+    }
+    public function findWithEmail($email)
+    {
+        return $this->db->get_where("users", array("email" => $email))->row(0);
+    }
+    public function findWithToken($token)
+    {
+        return $this->db->get_where("users", array("password_reset_token" => $token))->row(0);
+    }
+    public function sendSetPasswordLink($email){
+        
+        $getUserData = $this->findWithEmail($email);
+        $generateToken = $this->generateToken($getUserData->id);
+        
+        if($generateToken){
+            
+            $this->load->library('email');
+            $getUserDetails = $this->find($getUserData->id);
+            $link = 'http://localhost/dwf/resetPassword/';
+            if($_SERVER['SERVER_NAME'] == 'localhost') :
+                $link = 'http://localhost/dwf/resetPassword/';
+            else:                   
+                $link = 'https://projects.omgtech.in/dwf/resetPassword/';
+            endif;
+            $data['link'] = $link.$getUserDetails->password_reset_token;
+            $message = $this->load->view('emailer/resetPassword', $data,  TRUE);
+            $this->email->from('info@leadh.co', 'DWF - Set Your Passsword');
+            $this->email->to($getUserDetails->email);
+            $this->email->subject('DWF - Set Password');
+            $this->email->message($message);
+
+            if($this->email->send()){
+                $this->session->set_flashdata('success', 'Mail sent successfully');
+            } else {
+                $this->session->set_flashdata('error', 'Failed to send email.');
+            }
+            
+            
+        }
+        
+    }
+    public function generateToken($id)
+    {
+        $token = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 50);
+        $data['password_reset_token'] = $token;
+        $this->db->where('id',$id);
+        return $this->db->update('users',$data);        
+    }
 //
 //    /**
 //     * Find all data.
@@ -115,7 +115,20 @@ class UserModel extends CI_Model {
     public function setPassword($data) {
         return password_hash($data["password"], PASSWORD_BCRYPT);
     }
-
+    public function changePassword($data)
+    {
+        $this->db->where('id',$data['id']);
+        $data["password"] = password_hash($data["password"], PASSWORD_BCRYPT);
+        return $this->db->update('users', $data);
+    }
+    public function fetchPasswordHashFromDB(){
+        $id = $this->session->userdata('user_id');
+        $users = $this->db->get_where("users", array("id" => $id))->row(0);
+        if($users){
+            return $users->password;
+        }
+    }
+    
     /**
      * Edit data.
      *
