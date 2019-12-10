@@ -4,6 +4,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+$encrypted_user_id = encryptId($this->session->userdata('user_id'));
 ?>
 <div class="slim-body">
      
@@ -15,7 +16,7 @@
           <li class="sidebar-nav-item with-sub">
             <a href="" class="sidebar-nav-link my_profile"><i class="icon ion-ios-contact "></i> My Profile</a>
             <ul class="nav sidebar-nav-sub">
-              <li class="nav-sub-item "><a href="<?= site_url('my-profile') ?>" class="nav-sub-link edit_profile">Edit Profile</a></li>
+              <li class="nav-sub-item "><a href="<?= site_url('my-profile/'.$encrypted_user_id) ?>" class="nav-sub-link edit_profile">Edit Profile</a></li>
               <li class="nav-sub-item"><a href="index2.html" class="nav-sub-link">Change Password</a></li>             
               <li class="nav-sub-item"><a href="index5.html" class="nav-sub-link">KYC</a></li>
             </ul>

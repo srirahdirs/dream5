@@ -2,13 +2,12 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class UserModel extends CI_Model
-{
+class UserModel extends CI_Model {
+
     /**
      * User constructor.
      */
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
     }
 
@@ -18,18 +17,18 @@ class UserModel extends CI_Model
      * @param $id
      * @return mixed
      */
-    public function getStateList()
-    {
+    public function getStateList() {
         return $this->db->get_where("all_states")->result_array(0);
     }
-    public function getCityList($state_code)
-    {
+
+    public function getCityList($state_code) {
         return $this->db->get_where("all_cities", array("state_code" => $state_code))->result_array();
     }
-   public function findUserDetails($user_id)
-   {
-       return $this->db->select('users.*,ud.*')->join('user_details ud','ud.user_id = users.id','left')->get_where("users", array("users.id" => $user_id))->row(0);
-   }
+
+    public function findUserDetails($user_id) {
+        return $this->db->select('users.*,ud.*')->join('user_details ud', 'ud.user_id = users.id', 'left')->get_where("users", array("users.id" => $user_id))->row(0);
+    }
+
     // public function find($id)
 //    {
 //        return $this->db->get_where("users", array("id" => $id))->row(0);
@@ -98,24 +97,22 @@ class UserModel extends CI_Model
      * @param $data
      * @return mixed
      */
-    public function add($data)
-    {        
-        if(isset($data["password"])) {
-            $data["password"] = password_hash($data["password"], PASSWORD_BCRYPT);    
+    public function add($data) {
+        if (isset($data["password"])) {
+            $data["password"] = password_hash($data["password"], PASSWORD_BCRYPT);
         } else {
             $data["password"] = NULL;
-        }           
+        }
         $userTbl = $this->db->insert('users', $data);
         $user_id = $this->db->insert_id();
 
-        if($userTbl) {
+        if ($userTbl) {
             $dataUser['user_id'] = $user_id;
             return $this->db->insert('user_details', $dataUser);
-        }    
-         
+        }
     }
-    public function setPassword($data)
-    {
+
+    public function setPassword($data) {
         return password_hash($data["password"], PASSWORD_BCRYPT);
     }
 
@@ -125,34 +122,31 @@ class UserModel extends CI_Model
      * @param $data
      * @return mixed
      */
-   public function editUser($id)
-   {
-       $dataUserDetails = array(
-           'first_name' => $this->input->post('first_name'),
-           'last_name' => $this->input->post('last_name'),
-           'address' => $this->input->post('address'),            
-           'state_id' => $this->input->post('state_id'),
-           'city_id' => $this->input->post('city_id'),          
-       );
-       
-       if($id == 0){
-           return $this->db->insert('user_details',$data);
-       } else {
-           
-           $this->db->where('user_id',$id);
-           return $this->db->update('user_details',$dataUserDetails);
-       }        
+    public function updateUserDetails($user_id) {
+        $dataUserDetails = array(
+            'first_name' => $this->input->post('first_name'),
+            'last_name' => $this->input->post('last_name'),
+            'address' => $this->input->post('address'),
+            'state_id' => $this->input->post('state_id'),
+            'city_id' => $this->input->post('city_id'),
+        );
 
-   }
-//
-//    
-    public function delete($id)
-    {
-        $this->db->where('id',$id);
-        $data['status'] = 0;
-        $this->db->update('users',$data);
-       
+
+        $this->db->where('user_id', $user_id);
+        $q = $this->db->get('user_details');
+        if ($q->num_rows() > 0) {
+            $this->db->update('user_details', $dataUserDetails);
+        } else {
+            $dataUserDetails['user_id'] = $user_id;
+            $this->db->insert('user_details', $dataUserDetails);
+        }
+        return true;
     }
-    
+
+    public function delete($id) {
+        $this->db->where('id', $id);
+        $data['status'] = 0;
+        $this->db->update('users', $data);
+    }
 
 }

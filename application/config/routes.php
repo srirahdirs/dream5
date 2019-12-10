@@ -1,23 +1,23 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$route['default_controller'] = 'welcome';
+$route['default_controller'] = 'common';
 
 
-$route['register'] = 'welcome/register';
-$route['getCityList'] = 'welcome/getCityList';
+$route['register'] = 'common/register';
+$route['getCityList'] = 'common/getCityList';
+$route['getSelectedCityList'] = 'common/getSelectedCityList';
 
-$route['login'] = 'welcome/login';
-$route['logout'] = 'welcome/logout';
-$route['home'] = 'welcome/index';
+$route['login'] = 'common/login';
+$route['logout'] = 'common/logout';
+$route['home'] = 'common/index';
 
 //payments
 $route['payment-response'] = 'payments/response';
 $route['add-cash'] = 'payments/addCash';
 
 //user
-$route['my-profile'] = 'user/myProfile';
-$route['profile-update'] = 'user/updateProfile';
+$route['my-profile/(:any)'] = 'user/myProfile/$1';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

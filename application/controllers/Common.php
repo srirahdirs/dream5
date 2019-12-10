@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class Common extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -25,6 +25,27 @@ class Welcome extends CI_Controller {
         $model = new UserModel();
         $state_code = $this->input->post('state_code');
         echo json_encode($model->getCityList($state_code));
+    }
+    public function getSelectedCityList() {
+        $model = new UserModel();
+        $state_code = $this->input->post('state_code');
+        $cities = $model->getCityList($state_code);
+        $options = '';
+        $userCity = '';
+        $userDetails = $model->findUserDetails($this->session->userdata('user_id'));
+        if($userDetails){
+            $userCity = $userDetails->city_id;
+        }
+        foreach ($cities as $city):
+            if($userCity == $city['city_code']){
+                $selected = 'selected=selected';
+            } else {
+                $selected = '';
+            }
+            $options .= '<option value="' . $city['city_code'] . '"'. $selected .'>' . $city['city_name'] . '</option>';
+        endforeach;
+        echo $options;
+        
     }
     public function register() {
         $this->form_validation->set_rules('username', 'Username', 'required|is_unique[users.username]',[
