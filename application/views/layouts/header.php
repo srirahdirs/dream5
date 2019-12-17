@@ -13,6 +13,7 @@
         <link href="<?= $baseUrl ?>/lib/spectrum/css/spectrum.css" rel="stylesheet">
         <link href="<?= $baseUrl ?>/lib/jqvmap/css/jqvmap.min.css" rel="stylesheet">
         <link href="<?= $baseUrl ?>/lib/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+        <link href="<?= $baseUrl ?>/css_external/jquery-confirm.min.css" rel="stylesheet">
        
 
         <!-- Slim CSS -->

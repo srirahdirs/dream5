@@ -133,3 +133,20 @@ body{
 .error{
     color:red;
 }
+.frgt_pwd_btn{
+    padding: 6px;
+}
+.hide_form{
+    display: none;
+}
+.hide_label{
+    visibility: hidden;
+}
+.cursor_pointer{
+    cursor: pointer;
+}
+#order_amount, #bonus_code{
+    border-top: none;
+    border-right: none;
+    border-left: none;
+}

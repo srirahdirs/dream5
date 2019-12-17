@@ -1,4 +1,7 @@
-<?php $baseUrl = base_url() . 'assets'; ?>
+<?php 
+$baseUrl = base_url() . 'assets'; 
+$encrypted_user_id = encryptId($this->session->userdata('user_id'));
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -100,8 +103,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <nav class="nav">
-                                <a href="page-profile.html" class="nav-link"><i class="icon ion-person"></i> View Profile</a>
-                                <a href="page-edit-profile.html" class="nav-link"><i class="icon ion-compose"></i> Edit Profile</a>               
+                                <a href="<?= site_url('my-profile/'.$encrypted_user_id) ?>" class="nav-link"><i class="icon ion-compose"></i> Edit Profile</a>  
                                 <a href="<?= site_url('logout') ?>" class="nav-link"><i class="icon ion-forward"></i> Sign Out</a>
                             </nav>
                         </div><!-- dropdown-menu -->

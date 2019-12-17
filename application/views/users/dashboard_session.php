@@ -8,7 +8,7 @@ $this->load->view('layouts/menu_session');
     <div class="container pd-t-50">
         <div class="row">
             <div class="col-lg-6">
-                <h3 class="tx-white mg-b-15">Welcome back, <span style="color: #23BF08"><?= $this->session->userdata('username') ?></span>!</h3>
+                <h3 class="tx-white mg-b-15">Welcome, <span style="color: #23BF08"><?= $this->session->userdata('username') ?></span>!</h3>
                 <p class="mg-b-40">Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus.</p>
 
                 <h6 class="slim-card-title mg-b-15">Your Earning Summary</h6>

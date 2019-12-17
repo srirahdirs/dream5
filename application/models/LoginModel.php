@@ -46,7 +46,7 @@ class LoginModel extends CI_Model
             "username" => $this->user->username,
             "email" => $this->user->email,          
             "phone" => $this->user->mobile_number,          
-            "loginStatus" => true
+            "login_status" => true
         ));
         return 'success';
     }

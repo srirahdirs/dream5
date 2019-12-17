@@ -1,6 +1,3 @@
-
-
-
 <?php
     $this->load->view('layouts/header');
     $this->load->view('layouts/menu');

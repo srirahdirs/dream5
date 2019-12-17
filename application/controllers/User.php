@@ -8,6 +8,12 @@ class User extends CI_Controller {
         parent::__construct();
         $this->load->library(['form_validation', 'encryption']);
         $this->load->model('UserModel');
+        if (!$this->session->userdata('login_status')) {
+            $allowed = array('forgotPassword', 'resetPassword');
+            if (!in_array($this->router->fetch_method(), $allowed)) {
+                redirect('home');
+            }
+        }
     }
 
     public function myProfile($encrypted_user_id = null) {

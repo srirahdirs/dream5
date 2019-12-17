@@ -29,26 +29,28 @@ $this->load->view('layouts/menu_session');
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label class="form-control-label">Email: <span class="tx-danger">*</span></label>
-                                <input class="form-control" type="email" name="email" placeholder="Enter Email address" value="<?= $user->email ?>" disabled autocomplete="off">
+                                <input class="form-control" type="email" name="email" placeholder="Enter Email address" value="<?= $user->email ?>" disabled autocomplete="off" id="email_id">
+                                <span style="display: none">Please check your mobile.</span>
                                 <?php echo form_error('email', '<div class="error">', '</div>'); ?>
                             </div>
                         </div><!-- col-4 -->
                         <div class="col-lg-2">
                             <div class="form-group">
-                                <label class="form-control-label" style="visibility: hidden;">LABEL HIDDEN</label>
+                                <label class="form-control-label hide_label">LABEL HIDDEN</label>
                                 <button class="btn btn-primary bd-0" id="email_update">Update</button>                             
                             </div>
                         </div><!-- col 2 -->
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label class="form-control-label">Mobile Number: <span class="tx-danger">*</span></label>
-                                <input class="form-control" type="text" name="mobile_number" placeholder="Enter mobile number" value="<?= $user->mobile_number ?>" disabled autocomplete="off">
+                                <input class="form-control" type="text" name="mobile_number" placeholder="Enter mobile number" value="<?= $user->mobile_number ?>" disabled autocomplete="off" id="mobile_number">
+                                <span style="display: none">Please check your email.</span>
                                 <?php echo form_error('mobile_number', '<div class="error">', '</div>'); ?>
                             </div>
                         </div><!-- col-4 -->
                         <div class="col-lg-2">
                             <div class="form-group">
-                                <label class="form-control-label" style="visibility: hidden;">LABEL HIDDEN</label>
+                                <label class="form-control-label hide_label">LABEL HIDDEN</label>
                                 <button class="btn btn-primary bd-0" id="mobile_number_update">Update</button>                              
                             </div>
                         </div><!-- col 2 -->
@@ -159,7 +161,8 @@ $this->load->view('layouts/footer');
             content: 'Are sure you want to update ?.',
             buttons: {
                 confirm: function () {
-
+                    $("#mobile_number_update").css("display","none");                    
+                    $("#mobile_number").next( "span" ).css({display: "inline", color:"#FFB612"}).fadeOut( 5000 );
                 }, //confirm btn ends
                 cancel: function () {
 
@@ -173,8 +176,9 @@ $this->load->view('layouts/footer');
             title: 'Please Confirm',
             content: 'Are sure you want to update ?.',
             buttons: {
-                confirm: function () {
-
+                confirm: function () {                    
+                    $("#email_update").css("display","none");                    
+                    $("#email_id").next( "span" ).css({display: "inline", color:"#FFB612"}).fadeOut( 5000 );
                 }, //confirm btn ends
                 cancel: function () {
 

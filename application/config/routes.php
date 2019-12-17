@@ -14,7 +14,9 @@ $route['home'] = 'common/index';
 
 //payments
 $route['payment-response'] = 'payments/response';
+$route['payment-request'] = 'payments/request';
 $route['add-cash'] = 'payments/addCash';
+
 
 //user
 $route['my-profile/(:any)'] = 'user/myProfile/$1';
