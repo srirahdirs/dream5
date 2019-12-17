@@ -89,11 +89,16 @@ body{
 .login-box {
     margin-top: 15px;
 }
+.add_chips .cash {
+     background: #23BF08;
+     color: #FFF;
+     font-weight: bolder;
+}
 .add_chips a {
     color: black;
     text-align: center;
     padding: 6px 10px;
-    display: block;
+    display: block;   
     background: #FFB612;
 }
 .btn-primary {

@@ -1,5 +1,5 @@
-<?php 
-$baseUrl = base_url() . 'assets'; 
+<?php
+$baseUrl = base_url() . 'assets';
 $encrypted_user_id = encryptId($this->session->userdata('user_id'));
 ?>
 <!DOCTYPE html>
@@ -31,7 +31,10 @@ $encrypted_user_id = encryptId($this->session->userdata('user_id'));
                 <div class="slim-header-right">
 
                     <div class="add_chips">
-                        <a href="/rummy-cashier" class="addcash" title="Add Cash"><span>My CASH : </span><b> &#8377; 2300</b>  </a>
+                        <a href="<?= base_url() . 'add-practice-cash' ?>" class="cash" title="Practice CHIPS"><span>Practice Chips: </span><b> <?= ($this->session->userdata('practice_cash')) ? $this->session->userdata('practice_cash') : 0 ?></b>  </a>
+                    </div>
+                    <div class="add_chips">
+                        <a href="<?= base_url() . 'add-cash' ?>" class="cash" title="Add Cash"><span>CASH : </span><b> &#8377; <?= ($this->session->userdata('cash')) ? $this->session->userdata('cash') : 0 ?></b>  </a>
                     </div>
                     <div class="dropdown dropdown-a">
                         <a href="" class="header-notification" data-toggle="dropdown">
@@ -90,7 +93,7 @@ $encrypted_user_id = encryptId($this->session->userdata('user_id'));
                         </div><!-- dropdown-menu-right -->
                     </div><!-- dropdown -->
                     <div class="add_chips">
-                        <a href="/rummy-cashier" class="addcash" title="Add Cash">ADD CASH</a>
+                        <a href="<?= base_url() . 'add-cash' ?>" class="addcash" title="Add Cash">ADD CASH</a>
                     </div><!-- dropdown -->
                     <?php
 //          print_r($this->session->userdata());
@@ -103,7 +106,7 @@ $encrypted_user_id = encryptId($this->session->userdata('user_id'));
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <nav class="nav">
-                                <a href="<?= site_url('my-profile/'.$encrypted_user_id) ?>" class="nav-link"><i class="icon ion-compose"></i> Edit Profile</a>  
+                                <a href="<?= site_url('my-profile/' . $encrypted_user_id) ?>" class="nav-link"><i class="icon ion-compose"></i> Edit Profile</a>  
                                 <a href="<?= site_url('logout') ?>" class="nav-link"><i class="icon ion-forward"></i> Sign Out</a>
                             </nav>
                         </div><!-- dropdown-menu -->
@@ -111,4 +114,4 @@ $encrypted_user_id = encryptId($this->session->userdata('user_id'));
                 </div>
 
             </div><!-- container -->
-            </div><!-- slim-header -->
+        </div><!-- slim-header -->

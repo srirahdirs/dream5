@@ -29,7 +29,7 @@ class LoginModel extends CI_Model
     protected function credentials($username, $password)
     {
         $where = "((`username`='".$username."') or (`email` = '".$username."'))";
-        $user = $this->db->get_where("users",$where)->row(0);
+        $user = $this->db->select('user_wallet.cash,user_wallet.practice_cash,users.*')->join('user_wallet','user_wallet.user_id = users.id','LEFT')->get_where("users",$where)->row(0);
         if($user && password_verify($password, $user->password)) {
             return $user;
         }
@@ -46,6 +46,8 @@ class LoginModel extends CI_Model
             "username" => $this->user->username,
             "email" => $this->user->email,          
             "phone" => $this->user->mobile_number,          
+            "cash" => $this->user->cash,          
+            "practice_cash" => $this->user->practice_cash,          
             "login_status" => true
         ));
         return 'success';

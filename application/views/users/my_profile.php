@@ -89,12 +89,12 @@ $this->load->view('layouts/menu_session');
                                 <?php echo form_error('city_id', '<div class="error">', '</div>'); ?>
                             </div>
                         </div><!-- col-6 -->
-                        
+
                     </div><!-- row -->
 
                     <div class="form-layout-footer">
                         <button class="btn btn-primary bd-0">Submit</button>
-                        <a href="<?= base_url() .'home'?>" class="btn btn-secondary bd-0">Cancel</a>
+                        <a href="<?= base_url() . 'home' ?>" class="btn btn-secondary bd-0">Cancel</a>
                     </div><!-- form-layout-footer -->
                 </div><!-- form-layout -->
             </form><!-- form-layout -->
@@ -121,13 +121,13 @@ $this->load->view('layouts/footer');
         $.ajax({
             url: '<?= base_url() ?>getSelectedCityList',
             method: 'post',
-            data: {state_code: state},            
+            data: {state_code: state},
             success: function (response) {
                 console.log(response);
                 // Add options
-                $('#city_id').find('option').not(':first').remove();                
+                $('#city_id').find('option').not(':first').remove();
                 $('#city').html(response);
-                
+
             }
         });
         // state change
@@ -141,11 +141,11 @@ $this->load->view('layouts/footer');
                 data: {state_code: state},
                 dataType: 'json',
                 success: function (response) {
-                    $('#city').html('');                    
-                    $.each(response, function (index, data) {                                               
+                    $('#city').html('');
+                    $.each(response, function (index, data) {
                         $('#city').append('<option value="' + data['city_code'] + '">' + data['city_name'] + '</option>');
                     });
-                    
+
                 }
             });
         });
@@ -161,8 +161,10 @@ $this->load->view('layouts/footer');
             content: 'Are sure you want to update ?.',
             buttons: {
                 confirm: function () {
-                    $("#mobile_number_update").css("display","none");                    
-                    $("#mobile_number").next( "span" ).css({display: "inline", color:"#FFB612"}).fadeOut( 5000 );
+                    $("#mobile_number_update").css("display", "none");
+//                    $("#mobile_number").next("span").css({display: "inline", color: "#FFB612"}).fadeOut(5000);
+                    $("#mobile_number").attr("disabled",false);
+                    $("#mobile_number").focus();
                 }, //confirm btn ends
                 cancel: function () {
 
@@ -176,9 +178,10 @@ $this->load->view('layouts/footer');
             title: 'Please Confirm',
             content: 'Are sure you want to update ?.',
             buttons: {
-                confirm: function () {                    
-                    $("#email_update").css("display","none");                    
-                    $("#email_id").next( "span" ).css({display: "inline", color:"#FFB612"}).fadeOut( 5000 );
+                confirm: function () {
+                    $("#email_update").css("display", "none");
+                    $("#email_id").attr("disabled",false);
+                    $("#email_id").focus();
                 }, //confirm btn ends
                 cancel: function () {
 

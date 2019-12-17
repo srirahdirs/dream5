@@ -7,7 +7,7 @@ class Payments extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->library('form_validation');
-        $this->load->model('UserModel');
+        $this->load->model(['UserModel','Order_model']);
     }
     public function addCash(){
         $data['customerEmail'] = $this->session->userdata('email');
@@ -19,26 +19,36 @@ class Payments extends CI_Controller {
         
         $this->load->view('payments/add_cash',$data);
     }
+    public function addPracticeCash(){
+        $model = new Order_model();
+        $data['practice_chips'] = ($this->session->userdata('practice_cash')) ? $this->session->userdata('practice_cash') : 0;
+        if($this->input->post('reload_chips')){
+            $model->reloadPracticeChips($this->session->userdata('user_id'));
+            echo 'success';
+        }
+        $this->load->view('payments/add_practice_cash',$data);
+    }
 
     public function response()
     {
-        $secretkey = secretKey;
+        $model = new Order_model();
+        $secretkey = secretKey;        
+        $data['order_id'] = $_POST["orderId"];
+        $data['amount'] = $_POST["orderAmount"];
+        $data['reference_id'] = $_POST["referenceId"];
+        $data['txn_status'] = $_POST["txStatus"];
+        $data['payment_mode'] = $_POST["paymentMode"];
+        $data['txn_msg'] = $_POST["txMsg"];
+        $data['txn_time'] = $_POST["txTime"];
+        $data['signature'] = $_POST["signature"];
         
-        $orderId = $_POST["orderId"];
-        $orderAmount = $_POST["orderAmount"];
-        $referenceId = $_POST["referenceId"];
-        $txStatus = $_POST["txStatus"];
-        $paymentMode = $_POST["paymentMode"];
-        $txMsg = $_POST["txMsg"];
-        $txTime = $_POST["txTime"];
-        $signature = $_POST["signature"];
-        $data = $orderId.$orderAmount.$referenceId.$txStatus.$paymentMode.$txMsg.$txTime;
-        $hash_hmac = hash_hmac('sha256', $data, $secretkey, true) ;
-        $computedSignature = base64_encode($hash_hmac);
-        if ($signature == $computedSignature) {
-           $this->load->view('payments/response_success',$data);
+        
+        
+        
+        if ($model->saveOrder($data)) {
+            redirect('home');
         } else {
-           $this->load->view('payments/response_failure',$data);
+            redirect('add-cash');
         }
     }
     public function request()

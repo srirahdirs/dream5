@@ -143,7 +143,15 @@ class UserModel extends CI_Model {
             'state_id' => $this->input->post('state_id'),
             'city_id' => $this->input->post('city_id'),
         );
-
+        $dataU = [];
+        if($this->input->post('email')):
+            $dataU['email'] = $this->input->post('email');            
+        endif;
+        if($this->input->post('mobile_number')):
+           $dataU['mobile_number'] = $this->input->post('mobile_number');         
+        endif;        
+        $this->db->where('id', $user_id);
+        $this->db->update('users',$dataU);
 
         $this->db->where('user_id', $user_id);
         $q = $this->db->get('user_details');

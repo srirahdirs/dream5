@@ -16,6 +16,7 @@ $route['home'] = 'common/index';
 $route['payment-response'] = 'payments/response';
 $route['payment-request'] = 'payments/request';
 $route['add-cash'] = 'payments/addCash';
+$route['add-practice-cash'] = 'payments/addPracticeCash';
 
 
 //user

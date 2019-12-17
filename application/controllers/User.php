@@ -28,6 +28,9 @@ class User extends CI_Controller {
             $this->form_validation->set_rules('first_name', 'First Name', 'required');
             $this->form_validation->set_rules('state_id', 'State', 'required');
             $this->form_validation->set_rules('city_id', 'City', 'required');
+            $this->form_validation->set_rules('city_id', 'City', 'required');
+            $this->form_validation->set_rules('mobile_number', 'Mobile Number', 'min_length[3]|is_unique[users.mobile_number]|regex_match[/^[0-9]{10}$/]',array('is_unique' => 'Mobile Number already exists','regex_match'=> 'Mobile Number should contain 10 digits'));
+            $this->form_validation->set_rules('email', 'Email', 'valid_email|is_unique[users.email]',array('is_unique' => 'Email already exists'));
             if ($this->form_validation->run() == FALSE) {
                 return $this->load->view('users/my_profile', $data);
             } else {
