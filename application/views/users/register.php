@@ -84,8 +84,9 @@
                     if ($.isEmptyObject(data.error)) {
 
                         $(".alert-danger").css('display', 'none');
-
-                        alert(data.success);
+                        toastr.clear();
+                        toastr.success("Your account has been created");//                        
+                        setTimeout(function(){ location.reload(); }, 1000);
 
                     } else {
                         if (data.error['username']) {

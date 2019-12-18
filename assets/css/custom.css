@@ -155,3 +155,16 @@ body{
     border-right: none;
     border-left: none;
 }
+.toast-success {
+    background-color: #FFB612;
+}
+#toast-container>div {
+    opacity: 1;
+    box-shadow: none;
+}
+#toast-container>.toast-success{
+    background-image: none !important;
+}
+.toast-top-right {
+    right: 755px;
+}

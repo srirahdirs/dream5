@@ -48,7 +48,7 @@ class Common extends CI_Controller {
         
     }
     public function register() {
-        $this->form_validation->set_rules('username', 'Username', 'required|is_unique[users.username]',[
+        $this->form_validation->set_rules('username', 'Username', 'required|min_length[3]|is_unique[users.username]',[
             'required'      => '%s is required',
             'is_unique'     => '%s already exists.'
         ]);
@@ -58,12 +58,12 @@ class Common extends CI_Controller {
             'is_unique'     => '%s already exists.'
         ]);
 
-        $this->form_validation->set_rules('mobile_number', 'Mobile Number', 'required|min_length[3]|is_unique[users.mobile_number]|regex_match[/^[0-9]{10}$/]',[
+        $this->form_validation->set_rules('mobile_number', 'Mobile Number', 'required|min_length[10]|is_unique[users.mobile_number]|regex_match[/^[0-9]{10}$/]',[
             'required'      => '%s is required',
             'is_unique'     => '%s already exists.'
         ]);
         
-        $this->form_validation->set_rules('password', 'Password', 'required|min_length[3]',['required'=> '%s is required']);
+        $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]',['required'=> '%s is required']);
         
         if ($this->form_validation->run() == FALSE) {
             $errors = $this->form_validation->error_array();

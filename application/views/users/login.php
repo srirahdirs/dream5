@@ -53,24 +53,28 @@
                 dataType: "json",
                 data: {username_or_email: username_or_email, login_password: login_password},
                 success: function (data) {
+                    toastr.clear();
                     if ($.isEmptyObject(data.error)) {
                         $(".alert-danger").css('display', 'none');
                         location.href = "<?php echo base_url('home'); ?>";
                     } else {
                         console.log(data.error);
                         if (data.error['username_or_email']) {
-                            $(".login_form_err").css('display', 'block');
-                            $(".login_form_err").html(data.error['username_or_email']);
-                            $('.register_page').css("top", "28.9%");
+//                            $(".login_form_err").css('display', 'block');
+//                            $(".login_form_err").html(data.error['username_or_email']);
+//                            $('.register_page').css("top", "28.9%");
                             $("input[name='username_or_email']").focus();
+                            toastr.error(data.error['username_or_email']);
 
                         } else if (data.error['login_password']) {
-                            $(".login_form_err").css('display', 'block');
-                            $(".login_form_err").html(data.error['login_password']);
+//                            $(".login_form_err").css('display', 'block');
+//                            $(".login_form_err").html(data.error['login_password']);
+                            toastr.error(data.error['login_password']);
                             $("input[name='login_password']").focus();
                         } else if (data.error) {
-                            $(".login_form_err").css('display', 'block');
-                            $(".login_form_err").html(data.error);
+//                            $(".login_form_err").css('display', 'block');
+                            toastr.error(data.error);
+//                            $(".login_form_err").html(data.error);
                         } else {
                             $(".login_form_err").css('display', 'none');
                         }
@@ -83,22 +87,49 @@
         });
         $(".frgt_pwd_btn").click(function () {            
             $.confirm({
-                title: 'Forgot Password or Username?',
-                content: '<input type="text" class="form-control" name="email" id="email_id" placeholder="Enter Email or Mobile Number" required>',
+                animationSpeed: 2000,
+                title: 'Forgot Password?',
+                content: '<input type="text" class="form-control" name="email" id="email_id" placeholder="Enter Email or Mobile Number " required autocomplete="off">',
                 buttons: {
-                    confirm: function () {                    
+                    
+                    SENDMAIL: function () {                    
                         if($('#email_id').val() === '') {
                             $('#email_id').focus();
+                            toastr.error('Enter Email Or Mobile Number');
                             return false;
                         } else {
                             $.ajax({
-                                url: '',
+                                url: '<?= base_url() .'forgot-password'?>',
                                 type: 'post',
-                                data: {email: $('#email_id').val()},
-                                success: function (data) { location.reload();}
+                                data: {email_or_phonenumber: $('#email_id').val()},
+                                success: function (response) {
+                                    
+                                    toastr.clear();                                    
+                                    console.log(response);
+                                    if(response == 'invalid_mobile_or_email'){
+                                        $('#email_id').focus();
+                                        toastr.error('Invalid email or mobile number');
+                                        return false;
+                                    }
+                                    if(response == 'mobile_number_not_exists'){
+                                        $('#email_id').focus();
+                                        toastr.error('Mobile number not exists');
+                                        return false;
+                                    }
+                                    if(response == 'email_not_exists'){
+                                        $('#email_id').focus();
+                                        toastr.error('Email not exists');
+                                        return false;
+                                    }
+                                    if(response == 'mail_sent'){                                        
+                                        toastr.success('Email has been sent');  
+                                        setTimeout(function(){ location.reload(); }, 3000);
+                                    }
+                                }
                             });
 
-                        }  // else ends            
+                        }  // else ends    
+                        return false;
                     }, //confirm btn ends
                     cancel: function () {
 

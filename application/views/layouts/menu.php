@@ -72,7 +72,6 @@
     $('.login_required').click(function () {
         $(".login_form_err").css("display","none");
         $.confirm({
-            
             title: 'Login Required!',
             content: '<input type="text" class="form-control" name="username_or_email_ajax" placeholder="USERNAME or EMAIL" autocomplete="off"><br>\n\
                     <input type="password" class="form-control" name="login_password_ajax" placeholder="PASSWORD" autocomplete="off"><br>\n\

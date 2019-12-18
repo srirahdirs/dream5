@@ -17,6 +17,8 @@ $encrypted_user_id = encryptId($this->session->userdata('user_id'));
         <link href="<?= $baseUrl ?>/lib/jquery-toggles/css/toggles-full.css" rel="stylesheet">
         <link href="<?= $baseUrl ?>/css_external/jquery-confirm.min.css" rel="stylesheet">
         <link href="<?= $baseUrl ?>/lib/perfect-scrollbar/css/perfect-scrollbar.min.css" rel="stylesheet">
+        
+        <link href="<?= $baseUrl ?>/lib/toastr/toastr.min.css" rel="stylesheet">
         <!-- Slim CSS -->
         <link rel="stylesheet" href="<?= $baseUrl ?>/css/slim.css">
         <link rel="stylesheet" href="<?= $baseUrl ?>/css/slim.one.css">

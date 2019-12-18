@@ -29,13 +29,21 @@ class UserModel extends CI_Model {
         return $this->db->select('users.*,ud.*')->join('user_details ud', 'ud.user_id = users.id', 'left')->get_where("users", array("users.id" => $user_id))->row(0);
     }
 
-     public function find($id)
+    public function find($id)
     {
         return $this->db->get_where("users", array("id" => $id))->row(0);
     }
     public function findWithEmail($email)
     {
         return $this->db->get_where("users", array("email" => $email))->row(0);
+    }
+    public function findByMobileNumber($mobile_number)
+    {
+        return $this->db->get_where("users", array("mobile_number" => $mobile_number))->row(0);
+    }
+    public function findByUsername($username)
+    {
+        return $this->db->get_where("users", array("username" => $username))->row(0);
     }
     public function findWithToken($token)
     {

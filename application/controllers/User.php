@@ -68,6 +68,40 @@ class User extends CI_Controller {
         }
         $this->load->view('users/change_password', $data);
     }
+    public function forgotPassword() {
+        $data = [];
+        $model = new UserModel();
+        
+
+        if ($this->input->post()) {
+            $email_or_phonenumber = $this->input->post('email_or_phonenumber');
+            $find1 = strpos($email_or_phonenumber, '@');
+            if($find1 !== false){
+                $user = $model->findWithEmail($email_or_phonenumber);
+                if($user) {
+//                    $this->sendMail($user->email);
+                    echo 'mail_sent';
+                } else {
+                    echo 'email_not_exists';
+                }
+            } elseif(preg_match('/^\d{10}$/',$email_or_phonenumber)) {
+                    $user = $model->findByMobileNumber($email_or_phonenumber);
+                    if($user) {
+//                        $this->sendMail($user->email);
+                        echo 'mail_sent';
+                    } else {
+                        echo 'mobile_number_not_exists';
+                    }
+            } else {
+                    echo 'invalid_mobile_or_email';
+            }
+            
+        }
+        
+    }
+    public function sendMailI($email,$mobile_number){
+        
+    }
 
     public function current_password($current_password) {
         $old_password_db_hash = $this->UserModel->fetchPasswordHashFromDB();
@@ -78,67 +112,67 @@ class User extends CI_Controller {
             return FALSE;
         }
     }
-    public function forgotPassword(){
-        $email = $this->session->userdata('email');
-        $getUserData = $this->UserModel->findWithEmail($email);
-        if($this->UserModel->generateToken($getUserData->id)){
-            $this->data['data'] = $getUserData;
-                $link = 'http://localhost/dwf/resetPassword/';
-                if($_SERVER['SERVER_NAME'] == 'localhost') :
-                    $link = 'http://localhost/dwf/resetPassword/';
-                else:                   
-                    $link = 'https://projects.omgtech.in/dwf/resetPassword/';
-                endif;
-            $this->data['link'] = $link.$getUserData->password_reset_token;
-            
-            $message = $this->load->view('emailer/resetPassword', $this->data,  TRUE);
-            $this->email->from('info@leadh.co', 'DWF - Set Your Passsword');
-            $this->email->to($getUserData->email);
-            $this->email->subject('DWF - Set Password');
-            $this->email->message($message);
-
-            $this->email->send();
- 
-            $this->session->set_flashdata('success', 'Please check Mail!.');
-        }
-        
-    }
-    public function resetPassword($token){
-        $getData = $this->UserModel->findWithToken($token);
-       
-        if($getData) {
-            $data['user'] = $getData;
-            $this->session->set_flashdata('success', 'Token validated!.');    
-            
-            return $this->load->view('admin/user/set_password',$data);
-        } else {
-            $this->session->set_flashdata('error', 'Token Expired or Invalid Credentials!.');
-            return redirect('home');
-        }
-        
-    }
-    public function setPassword(){
-        
-        $this->form_validation->set_rules('password', 'Password', 'required');
-        $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[password]');
-        if($this->form_validation->run() == FALSE){  
-            $data['user'] = $this->UserModel->find($this->input->post('id'));
-            $this->load->view('admin/user/set_password',$data);
-        } else {
-            $data = array(              
-                'id'=> $this->input->post('id'),               
-                'password'=> $this->input->post('password'),               
-                'password_reset_token'=> NULL,               
-                'status'=> 1,               
-            );
-            if($this->UserModel->setPassword($data)) {
-                $this->session->set_flashdata('success', 'Password sets successfully!.');    
-                return redirect('login');
-            } else {
-                $this->session->set_flashdata('error', 'Something went wrong!, Please Try Again!.');    
-                return redirect('login');
-            }
-        }
-    }
+//    public function forgotPassword(){
+//        $email = $this->session->userdata('email');
+//        $getUserData = $this->UserModel->findWithEmail($email);
+//        if($this->UserModel->generateToken($getUserData->id)){
+//            $this->data['data'] = $getUserData;
+//                $link = 'http://localhost/dwf/resetPassword/';
+//                if($_SERVER['SERVER_NAME'] == 'localhost') :
+//                    $link = 'http://localhost/dwf/resetPassword/';
+//                else:                   
+//                    $link = 'https://projects.omgtech.in/dwf/resetPassword/';
+//                endif;
+//            $this->data['link'] = $link.$getUserData->password_reset_token;
+//            
+//            $message = $this->load->view('emailer/resetPassword', $this->data,  TRUE);
+//            $this->email->from('info@leadh.co', 'DWF - Set Your Passsword');
+//            $this->email->to($getUserData->email);
+//            $this->email->subject('DWF - Set Password');
+//            $this->email->message($message);
+//
+//            $this->email->send();
+// 
+//            $this->session->set_flashdata('success', 'Please check Mail!.');
+//        }
+//        
+//    }
+//    public function resetPassword($token){
+//        $getData = $this->UserModel->findWithToken($token);
+//       
+//        if($getData) {
+//            $data['user'] = $getData;
+//            $this->session->set_flashdata('success', 'Token validated!.');    
+//            
+//            return $this->load->view('admin/user/set_password',$data);
+//        } else {
+//            $this->session->set_flashdata('error', 'Token Expired or Invalid Credentials!.');
+//            return redirect('home');
+//        }
+//        
+//    }
+//    public function setPassword(){
+//        
+//        $this->form_validation->set_rules('password', 'Password', 'required');
+//        $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[password]');
+//        if($this->form_validation->run() == FALSE){  
+//            $data['user'] = $this->UserModel->find($this->input->post('id'));
+//            $this->load->view('admin/user/set_password',$data);
+//        } else {
+//            $data = array(              
+//                'id'=> $this->input->post('id'),               
+//                'password'=> $this->input->post('password'),               
+//                'password_reset_token'=> NULL,               
+//                'status'=> 1,               
+//            );
+//            if($this->UserModel->setPassword($data)) {
+//                $this->session->set_flashdata('success', 'Password sets successfully!.');    
+//                return redirect('login');
+//            } else {
+//                $this->session->set_flashdata('error', 'Something went wrong!, Please Try Again!.');    
+//                return redirect('login');
+//            }
+//        }
+//    }
 
 }

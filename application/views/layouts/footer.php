@@ -21,13 +21,23 @@
 <script src="<?= $baseUrl ?>/js/slim.js"></script>
 <script src="<?= $baseUrl ?>/js/ResizeSensor.js"></script>
 <script src="<?= $baseUrl ?>/js/jquery.vmap.sampledata.js"></script>
+
+<script type='text/javascript' src="<?= $baseUrl ?>/lib/toastr/toastr.init.js"></script>
+<script type='text/javascript' src="<?= $baseUrl ?>/lib/toastr/toastr.min.js"></script>
 <script>
     $(function () {
         'use strict'
-
-        
-
     });
+
+<?php if($this->session->flashdata('success')){ ?>
+        toastr.success("<?php echo $this->session->flashdata('success'); ?>");
+    <?php }else if($this->session->flashdata('error')){  ?>
+        toastr.error("<?php echo $this->session->flashdata('error'); ?>");
+    <?php }else if($this->session->flashdata('warning')){  ?>
+        toastr.warning("<?php echo $this->session->flashdata('warning'); ?>");
+    <?php }else if($this->session->flashdata('info')){  ?>
+        toastr.info("<?php echo $this->session->flashdata('info'); ?>");
+    <?php } ?>
 </script>
 </body>
 </html>

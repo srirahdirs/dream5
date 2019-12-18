@@ -22,6 +22,7 @@ $route['add-practice-cash'] = 'payments/addPracticeCash';
 //user
 $route['my-profile/(:any)'] = 'user/myProfile/$1';
 $route['change-password/(:any)'] = 'user/changePassword/$1';
+$route['forgot-password'] = 'user/forgotPassword';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
