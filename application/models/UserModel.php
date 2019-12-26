@@ -28,6 +28,9 @@ class UserModel extends CI_Model {
     public function findUserDetails($user_id) {
         return $this->db->select('users.*,ud.*')->join('user_details ud', 'ud.user_id = users.id', 'left')->get_where("users", array("users.id" => $user_id))->row(0);
     }
+    public function findUserDetailsWithWallet($user_id) {
+        return $this->db->select('users.*,uw.*,ud.*')->join('user_details ud', 'ud.user_id = users.id', 'left')->join('user_wallet uw', 'uw.user_id = users.id', 'left')->get_where("users", array("users.id" => $user_id))->row(0);
+    }
 
     public function find($id)
     {
@@ -158,8 +161,10 @@ class UserModel extends CI_Model {
         if($this->input->post('mobile_number')):
            $dataU['mobile_number'] = $this->input->post('mobile_number');         
         endif;        
-        $this->db->where('id', $user_id);
-        $this->db->update('users',$dataU);
+        if($dataU){
+            $this->db->where('id', $user_id);
+            $this->db->update('users',$dataU);
+        }
 
         $this->db->where('user_id', $user_id);
         $q = $this->db->get('user_details');
@@ -245,5 +250,43 @@ class UserModel extends CI_Model {
             //for loop
             
         } 
+    }
+    public function withdrawCash($user){
+        if($this->input->post('account_number')){
+            $dataUser['account_number'] = $this->input->post('account_number');
+        }
+        if($this->input->post('bank_name')){
+            $dataUser['bank_name'] = $this->input->post('bank_name');
+        }
+        if($this->input->post('ifsc_code')){
+            $dataUser['ifsc_code'] = $this->input->post('ifsc_code');
+        }
+        if(isset($dataUser)){
+            //user details
+            $this->db->where('user_id', $this->session->userdata('user_id'));
+            $this->db->update('user_details', $dataUser);
+        }
+        
+        
+        $walletBalance = $user->cash - $this->input->post('amount');
+        
+        //user withdrawal history
+        
+        $dataUserWHistory['wallet_old_cash'] = $user->cash;
+        $dataUserWHistory['withdrawal_amount'] = $this->input->post('amount');
+        date_default_timezone_set("Asia/Kolkata");
+        $dataUserWHistory['withdrawal_date'] = date('Y-m-d h:i:s');
+        $dataUserWHistory['wallet_balance'] = $walletBalance;
+        $dataUserWHistory['status'] = 'requested';        
+        $dataUserWHistory['user_id'] = $this->session->userdata('user_id');
+        $this->db->insert('withdrawal_history', $dataUserWHistory);
+        
+        
+         //user wallet
+        $dataUserWallet['cash'] = $walletBalance;
+        $this->db->where('user_id', $this->session->userdata('user_id'));
+        $this->db->update('user_wallet', $dataUserWallet);
+        
+        $this->session->set_userdata('cash',$walletBalance);
     }
 }

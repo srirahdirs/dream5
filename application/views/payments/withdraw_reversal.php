@@ -106,10 +106,7 @@ $this->load->view('layouts/footer');
 
 <script type="text/javascript">
     $(".sidebar-nav-item").removeClass('active');
-    $(".sidebar-nav-item .add_cash").addClass('active');    
-    //main menu
-    $(".nav-item").removeClass('active');
-    $(".add_cash_main_menu").addClass('active');    
+    $(".sidebar-nav-item .add_cash").addClass('active');
     
     $('.cursor_pointer').on("click",function(){
         $('.cursor_pointer').css('background','none');

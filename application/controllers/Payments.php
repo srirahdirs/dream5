@@ -19,6 +19,31 @@ class Payments extends CI_Controller {
         
         $this->load->view('payments/add_cash',$data);
     }
+    public function withdrawCash(){
+        $model = new UserModel();
+        $data['user'] = $model->findUserDetailsWithWallet($this->session->userdata('user_id'));
+        if($this->input->post()){
+            $this->form_validation->set_rules('amount', 'amount', 'greater_than[199]|less_than['.$data['user']->cash.']',array('less_than' => 'Please enter amount below '. $data['user']->cash,'greater_than' => 'Please enter amount above 200'));
+            if($data['user']->is_bank_account_verified != 'Yes') {
+                $this->form_validation->set_rules('account_number', 'Account Number', 'required|min_length[8]|integer');
+                $this->form_validation->set_rules('confirm_account_number', 'Confirm A/C Number', 'matches[account_number]',array('matches' => 'Account Number does not match'));
+                $this->form_validation->set_rules('bank_name', 'Bank Name', 'required|min_length[5]');
+                $this->form_validation->set_rules('ifsc_code', 'IFSC CODE', 'required|min_length[8]');
+            }
+            if ($this->form_validation->run() == FALSE) {
+                return $this->load->view('payments/withdraw_cash',$data);
+            } else {
+                $model = new UserModel();
+                $model->withdrawCash($data['user']);
+                $this->session->set_flashdata('success', 'Amount Withdrawal successfully!.'); 
+                redirect('withdraw-cash');
+            }
+            
+        }
+        
+        
+        $this->load->view('payments/withdraw_cash',$data);
+    }
     public function addPracticeCash(){
         $model = new Order_model();
         $data['practice_chips'] = ($this->session->userdata('practice_cash')) ? $this->session->userdata('practice_cash') : 0;

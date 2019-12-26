@@ -7,37 +7,37 @@
 $encrypted_user_id = encryptId($this->session->userdata('user_id'));
 ?>
 <div class="slim-body">
-     
-<div class="slim-sidebar">
+
+    <div class="slim-sidebar">
         <!--<label class="sidebar-label">Navigation</label>-->
-        
+
         <ul class="nav nav-sidebar">
-          
-          <li class="sidebar-nav-item with-sub">
-            <a href="" class="sidebar-nav-link my_profile"><i class="icon ion-ios-contact "></i> My Profile</a>
-            <ul class="nav sidebar-nav-sub">
-              <li class="nav-sub-item "><a href="<?= site_url('my-profile/'.$encrypted_user_id) ?>" class="nav-sub-link edit_profile">Edit Profile</a></li>
-              <li class="nav-sub-item"><a href="<?= site_url('change-password/'.$encrypted_user_id) ?>" class="nav-sub-link change_password">Change Password</a></li>             
-              <li class="nav-sub-item"><a href="<?= site_url('user/kyc') ?>" class="nav-sub-link kyc">KYC</a></li>
-            </ul>
-          </li>
-          <li class="sidebar-nav-item">
-            <a href="<?= base_url() .'add-cash'?>" class="sidebar-nav-link add_cash"><i class="icon ion-cash"></i> ADD CASH</a>
-          </li>
-          <li class="sidebar-nav-item with-sub">
-            <a href="" class="sidebar-nav-link"><i class="fa fa-money" aria-hidden="true"></i>  Withdraw </a>
-            <ul class="nav sidebar-nav-sub">
-              <li class="nav-sub-item"><a href="page-profile.html" class="nav-sub-link">Withdraw Cash</a></li>
-              <li class="nav-sub-item"><a href="page-invoice.html" class="nav-sub-link">Withdrawal Reversal</a></li>
-              <li class="nav-sub-item"><a href="page-contact.html" class="nav-sub-link">Withdrawal History</a></li>
-            </ul>
-          </li>
-         
-          <li class="sidebar-nav-item">
-            <a href="widgets.html" class="sidebar-nav-link"><i class="fa fa-exchange" aria-hidden="true"></i> Transactions </a>
-          </li>
-          <li class="sidebar-nav-item">
-            <a href="widgets.html" class="sidebar-nav-link"><i class="fa fa-gift"></i>  My Bonus </a>
-          </li>
+
+            <li class="sidebar-nav-item with-sub">
+                <a href="" class="sidebar-nav-link my_profile"><i class="icon ion-ios-contact "></i> My Profile</a>
+                <ul class="nav sidebar-nav-sub">
+                    <li class="nav-sub-item "><a href="<?= site_url('my-profile/' . $encrypted_user_id) ?>" class="nav-sub-link edit_profile">Edit Profile</a></li>
+                    <li class="nav-sub-item"><a href="<?= site_url('change-password/' . $encrypted_user_id) ?>" class="nav-sub-link change_password">Change Password</a></li>             
+                    <li class="nav-sub-item"><a href="<?= site_url('user/kyc') ?>" class="nav-sub-link kyc">KYC</a></li>
+                </ul>
+            </li>
+            <li class="sidebar-nav-item">
+                <a href="<?= base_url() . 'add-cash' ?>" class="sidebar-nav-link add_cash"><i class="icon ion-cash"></i> ADD CASH</a>
+            </li>
+            <li class="sidebar-nav-item with-sub">
+                <a href="" class="sidebar-nav-link withdraw_cash_side_menu"><i class="fa fa-money" aria-hidden="true"></i>  Withdraw </a>
+                <ul class="nav sidebar-nav-sub">
+                    <li class="nav-sub-item"><a href="<?= base_url() . 'withdraw-cash' ?>" class="nav-sub-link withdraw_cash">Withdraw Cash</a></li>
+                    <li class="nav-sub-item"><a href="<?= base_url() . 'withdraw-reversal' ?>" class="nav-sub-link withdraw_reversal">Withdrawal Reversal</a></li>
+                    <li class="nav-sub-item"><a href="<?= base_url() . 'withdraw-history'?>" class="nav-sub-link withdraw_history">Withdrawal History</a></li>
+                </ul>
+            </li>
+
+            <li class="sidebar-nav-item">
+                <a href="<?= base_url() . 'transactions'?>" class="sidebar-nav-link"><i class="fa fa-exchange" aria-hidden="true"></i> Transactions </a>
+            </li>
+            <li class="sidebar-nav-item">
+                <a href="<?= base_url() . 'bonus'?>" class="sidebar-nav-link"><i class="fa fa-gift"></i>  My Bonus </a>
+            </li>
         </ul>
-      </div>
+    </div>

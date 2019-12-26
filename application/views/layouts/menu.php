@@ -10,7 +10,7 @@
     <div class="container">
         <div class="alert alert-danger login_form_err" style="display:none"></div>
         <ul class="nav">
-            <li class="nav-item active">
+            <li class="nav-item home_main_menu">
                 <a class="nav-link" href="<?= site_url('home') ?>">
                     <i class="icon ion-home"></i>
                     <span>Home</span>
@@ -21,7 +21,7 @@
                     $class_name = '';
                     $href_play_game = site_url('home');
                     $href_add_cash = site_url('add-cash');
-                    $href_withdraw = site_url('home');                    
+                    $href_withdraw = site_url('withdraw-cash');                    
                     $href_support = site_url('home');
                 } else {
                     $class_name = 'login_required';
@@ -38,13 +38,13 @@
                 </a>    
                 
             </li>
-            <li class="nav-item">
+            <li class="nav-item add_cash_main_menu">
                 <a class="nav-link add_cash <?= $class_name ?>" href="<?= $href_add_cash ?>">
                     <i class="icon ion-cash"></i>
                     <span>ADD CASH</span>
                 </a>            
             </li>
-            <li class="nav-item">
+            <li class="nav-item withdraw_main_menu">
                 <a class="nav-link withdraw <?= $class_name ?>" href="<?= $href_withdraw ?>">
                     <i class="icon ion-briefcase"></i>
                     <span>WITHDRAW</span>
