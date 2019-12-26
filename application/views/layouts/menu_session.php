@@ -18,7 +18,7 @@ $encrypted_user_id = encryptId($this->session->userdata('user_id'));
             <ul class="nav sidebar-nav-sub">
               <li class="nav-sub-item "><a href="<?= site_url('my-profile/'.$encrypted_user_id) ?>" class="nav-sub-link edit_profile">Edit Profile</a></li>
               <li class="nav-sub-item"><a href="<?= site_url('change-password/'.$encrypted_user_id) ?>" class="nav-sub-link change_password">Change Password</a></li>             
-              <li class="nav-sub-item"><a href="index5.html" class="nav-sub-link">KYC</a></li>
+              <li class="nav-sub-item"><a href="<?= site_url('user/kyc') ?>" class="nav-sub-link kyc">KYC</a></li>
             </ul>
           </li>
           <li class="sidebar-nav-item">

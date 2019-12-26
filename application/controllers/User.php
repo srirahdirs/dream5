@@ -174,5 +174,27 @@ class User extends CI_Controller {
 //            }
 //        }
 //    }
+    public function kyc(){
+        $model = new UserModel();
+        $data = [];
+        if ($this->input->post()) {
 
+            $this->form_validation->set_rules('current_password', 'Current Password', 'required|callback_current_password');
+            $this->form_validation->set_rules('new_password', 'New Password', 'required|min_length[3]');
+            $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[new_password]|min_length[3]');
+            if ($this->form_validation->run() == FALSE) {
+                return $this->load->view('users/kyc', $data);
+            } else {
+
+//                $data = array(
+//                    'id' => $this->session->userdata('user_id'),
+//                    'password' => $this->input->post('confirm_password'),
+//                    'password_reset_token' => NULL
+//                );
+//                $model->changePassword($data);
+//                redirect('my-profile/' . $encrypted_user_id);
+            }
+        }
+        $this->load->view('users/kyc', $data);
+    }
 }
