@@ -78,11 +78,12 @@
                         } else {
                             $(".login_form_err").css('display', 'none');
                         }
-                    }
+                    } //else
 
-                }
+                } //success
 
             });
+            return false; //confirm popup willnot close
 
         });
         $(".frgt_pwd_btn").click(function () {            

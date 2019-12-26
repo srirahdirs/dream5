@@ -138,6 +138,9 @@ body{
 .error{
     color:red;
 }
+.success {
+    color: #23BF08;
+}
 .frgt_pwd_btn{
     padding: 6px;
 }

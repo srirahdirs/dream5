@@ -7,57 +7,114 @@ $this->load->view('layouts/menu_session');
 <div class="slim-mainpanel myprofile">
     <div class="container pd-t-50">
         <div class="section-wrapper">
-            <form id="redirectForm" method="post" action="<?= base_url() . 'user/kyc' ?>">
+            <form id="redirectForm" method="post" action="<?= base_url() . 'user/kyc' ?>" enctype="multipart/form-data">
                 <div class="row">                    
                     <div class="table-responsive">
-                        <table class="table table-bordered table-colored table-success">
+                        <table class="table table-bordered table-colored table-success1">
                             <thead>
                                 <tr>
-                                    <th class="wd-30p">Information</th>
-                                    <th class="wd-30p">Details</th>
+                                    <th class="wd-25p">Information</th>
+                                    <th class="wd-25p">Details</th>
                                     <th class="wd-20p">Status</th>
-                                    <th class="wd-20p">Action</th>
+                                    <th class="wd-30p">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>                                    
-                                    <td>Email ID</td>
-                                    <td>sri.rahdirs@gmail.com</td>
-                                    <td>Verified</td>
-                                    <td>Update</td>
+                                    <td>EMAIL ID</td>
+                                    <td><?= $user->email ?></td>
+                                    <td><?= ($user->email_verified == 1 ) ? '<span class="success">Verified</span>' : '<span class="error">Not verified</span>' ?></td>
+                                    <td style="text-align:center;"><a class="btn btn-primary" href="<?= base_url() . 'my-profile/' . $encrypted_user_id ?>">UPDATE</a></td>
                                 </tr>
                                 <tr>
-                                    
-                                    <td>Mobile Number</td>
-                                    <td>Accountant</td>
-                                    <td>$170,750</td>
-                                    <td>$170,750</td>
+
+                                    <td>MOBILE NUMBER</td>
+                                    <td><?= $user->mobile_number ?></td>
+                                    <td><?= ($user->mobile_number == 1 ) ? '<span class="success">Verified</span>' : '<span class="error">Not verified</span>' ?></td>
+                                    <td  style="text-align:center;"><a class="btn btn-primary" href="<?= base_url() . 'my-profile/' . $encrypted_user_id ?>">UPDATE</a></td>
                                 </tr>
-                                <tr>
-                                    
-                                    <td>ID PROOF</td>
-                                    <td>Junior Technical Author</td>
-                                    <td>$86,000</td>
-                                    <td>$86,000</td>
-                                </tr>
-                                <tr>
-                                   
+                                <tr>                                   
                                     <td>PAN CARD</td>
-                                    <td>Senior Javascript Developer</td>
-                                    <td>$433,060</td>
-                                    <td>$433,060</td>
+                                    <td>
+                                        <?=
+                                        ($user->pan_card != '' ) ? '<input type="text" name="pan_card" value="' . $user->pan_card . '" class="form-control" disabled>' :
+                                                '<span class="error"><input type="text" name="pan_card" placeholder="PANCARD NUMBER" class="form-control" required onkeyup="this.value = this.value.toUpperCase();" autocomplete="off"></span>'
+                                        ?>
+                                        <?php echo form_error('pan_card', '<div class="error">', '</div>'); ?>
+                                    </td>
+                                    <td><?= ($user->is_pan_verified != '' ) ? '<span class="success">Verified</span>' : '<span class="error">Not verified</span>' ?></td>
+                                    <td>
+                                        <?php
+                                        if ($user->pan_card_file != '') {
+                                            echo '<p class="uploaded">uploaded</p>';
+                                        } else {
+                                            ?>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" name="pan_card_file" required="">
+                                                <label class="custom-file-label custom-file-label-primary pan_card_file" for="customFile">Upload</label>
+                                            </div><!-- custom-file -->
+                                        <?php } ?>
+                                    </td>
                                 </tr>
+                                <tr>                                    
+                                    <td>ADDRESS PROOF</td>
+                                    <td>
+                                        <select class="form-control select2 select2-hidden-accessible" name="address_proof" <?php if($user->address_proof != '') { echo 'disabled'; } ?>> 
+                                            <option value="aadhar_card" <?php if($user->address_proof == 'aadhar_card'){ echo 'selected';} ?>>Aadhar Card</option>
+                                            <option value="passport" <?php if($user->address_proof == 'passport'){ echo 'selected';} ?>>Passport</option>
+                                            <option value="driving_license" <?php if($user->address_proof == 'driving_license'){ echo 'selected';} ?>>Driving License</option>
+                                            <option value="voter_id" <?php if($user->address_proof == 'voter_id'){ echo 'selected';} ?>>Voter ID</option>
+                                        </select>
+                                    </td>
+                                    <td><?= ($user->is_address_proof_verified != '' ) ? '<span class="success">Verified</span>' : '<span class="error">Not verified</span>' ?></td>
+                                    <td>
+                                        <?php
+                                        if ($user->address_proof_file_1 != '') {
+                                            echo '<p class="uploaded">uploaded</p>';
+                                        } else {
+                                            ?>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" name="address_proof_file[]" multiple="">
+                                                <label class="custom-file-label custom-file-label-primary address_proof_file" for="customFile">Front & Back</label>
+                                            </div><!-- custom-file -->
+                                        <?php } ?>
+                                    </td>
+                                </tr>                                
                                 <tr>
                                     <td>BANK ACCOUNT</td>
-                                    <td>Accountant</td>
-                                    <td>$162,700</td>
-                                    <td>$162,700</td>
+                                    <td><select class="form-control select2 select2-hidden-accessible" name="bank_proof" <?php if($user->bank_proof != '') { echo 'disabled'; } ?>> 
+                                            <option value="passbook" <?php if($user->bank_proof == 'passbook'){ echo 'selected';} ?>>Passbook</option>
+                                            <option value="cheque" <?php if($user->bank_proof == 'cheque'){ echo 'selected';} ?>>Cheque</option>
+                                            <option value="account_statement" <?php if($user->bank_proof == 'account_statement'){ echo 'selected';} ?>>Account Statement</option>
+                                        </select>
+                                    </td>
+                                    <td><?= ($user->is_bank_account_verified != '' ) ? '<span class="success">Verified</span>' : '<span class="error">Not verified</span>' ?></td>
+                                    <td>
+                                        <?php
+                                        if ($user->bank_proof_file != '') {
+                                            echo '<p class="uploaded">uploaded</p>';
+                                        } else {
+                                            ?>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" name="bank_proof_file">
+                                                <label class="custom-file-label custom-file-label-primary bank_proof_file" for="customFile">Upload</label>
+                                            </div><!-- custom-file -->
+                                        <?php } ?>
+                                    </td>
                                 </tr>
                             </tbody>
-                        </table>
-                    </div>
-                </div>                
-            </form>
+                            <tfoot>
+                                <tr>
+                                    <?php if(($user->pan_card_file == '') || ($user->address_proof_file_1 == '') || ($user->bank_proof_file == '')) {?>
+                                        <td colspan="3"></td><td style="text-align:center"><button class="btn btn-success bd-0">SAVE</button></td>
+                                    <?php } ?>
+                                </tr>
+                            </tfoot>
+                        </table>                        
+                    </div>                    
+                </div>                 
+            </form> 
+            <label class="section-title" style="font-size: 12px;text-align: center">Note: Once the documents are uploaded, KYC verification will be completed within 24 hours.</label>
         </div>
         <div class="section-wrapper" style="margin-top:20px">
             <div class="bc_bg_main">
@@ -76,7 +133,7 @@ $this->load->view('layouts/menu_session');
             <div class="">
                 <label class="section-title">Know Your Customer</label>
                 <div class="pri_pol_content" id="ContentId">
-                  <p>We at <b>DREAM5</b> strive to maintain the integrity and transparency of our system, which includes being able to positively identify our customers. This process is called as<strong> Know Your Customer</strong>.
+                    <p>We at <b>DREAM5</b> strive to maintain the integrity and transparency of our system, which includes being able to positively identify our customers. This process is called as<strong> Know Your Customer</strong>.
                     </p>
                     <div class="promo_inner_con" style="padding-top:10px;">
                         <ul class="mid_sub_text" style="padding-left: 30px;">
@@ -88,7 +145,7 @@ $this->load->view('layouts/menu_session');
                             <li>Submission of bank statements can be requested in case of suspicious transactions.  </li>
                         </ul>
                     </div>
-              </div>
+                </div>
             </div>
         </div>
     </div>
@@ -106,16 +163,56 @@ $this->load->view('layouts/footer');
     $(".my_profile").addClass('active');
     $(".kyc").addClass('active');
 
+    $('input[name="pan_card_file"]').change(function (e) {
+        $('.pan_card_file').html('pancard attached');
+    });
+    $('input[name="address_proof_file[]"]').change(function (e) {
+
+        if (parseInt($('input[name="address_proof_file[]"]').get(0).files.length) > 2) {
+            toastr.error("You can upload maximum 2 files");
+            $('input[name="address_proof_file[]"]').val('');
+            $(this).val('');
+        } else {
+            $('.address_proof_file').html('address proofs attached');
+        }
+    });
+    $('input[name="bank_proof_file"]').change(function (e) {
+        $('.bank_proof_file').html('bank proof attached');
+    });
 </script>
 <style>
-    .table.table-success{
+    .table.table-success1 thead > tr > th, .table.table-success1 thead > tr > td, .table.table-success1 tfoot > tr > th, .table.table-success1 tfoot > tr > td{
+        background-color: #23BF08;
+    }
+    .table.table-success1{
         background-color: #282D31;
     }
     .table td{
         color: #868ba1;
+        vertical-align: middle;
     }
     .table td:first-child{
-        color: #fff;
+        /*color: #fff;*/
     }
-
+    .btn-primary {
+        padding: 4px 12px;
+    }
+    select.form-control.select2.select2-hidden-accessible{
+        color: #868ba1;
+    }
+    input.form-control{
+        color: #868ba1 !important;
+    }
+    .table.table-success1    tfoot > tr > td{
+        background-color:#343a40;
+        border: 0; 
+    }
+    .btn-success { padding: 10px 44px;}
+    .uploaded {
+        text-align: center;
+        color: #FFB612;
+        font-style: italic;
+        vertical-align: middle;
+        margin-bottom: 0;
+    }
 </style>

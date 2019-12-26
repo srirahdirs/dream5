@@ -177,5 +177,73 @@ class UserModel extends CI_Model {
         $data['status'] = 0;
         $this->db->update('users', $data);
     }
+    public function saveFiles(){
+        $userFile['address_proof'] = $this->input->post('address_proof');
+        $userFile['pan_card'] = $this->input->post('pan_card');
+        $userFile['bank_proof'] = $this->input->post('bank_proof');
+        if ($_FILES) {
+            $uploadFolder = FCPATH . 'assets/user_documents' . DIRECTORY_SEPARATOR;
+            if (!file_exists($uploadFolder. $this->session->userdata('user_id') . DIRECTORY_SEPARATOR)) {
+                mkdir($uploadFolder . DIRECTORY_SEPARATOR . $this->session->userdata('user_id') . DIRECTORY_SEPARATOR, 0777);
+            }
+            $uploadFolder = $uploadFolder . DIRECTORY_SEPARATOR . $this->session->userdata('user_id') . DIRECTORY_SEPARATOR;
+            
+            if( count($_FILES["address_proof_file"]["tmp_name"]) > 0 ) {
+            //saving address_proof files
+                for ($i = 0; $i <= 1; $i++) {
+                        $j = $i + 1;
+                        $path[] = $_FILES['address_proof_file']['tmp_name'][$i];
+                        $type[] = $_FILES['address_proof_file']['type'][$i];
 
+                        $str = rand();
+                        $result = md5($str);
+                        $fileNameRep = $result . '_' . $_FILES['address_proof_file']['name'][$i];
+                        $target = $uploadFolder . $fileNameRep;
+                        $temp_name = $_FILES["address_proof_file"]["tmp_name"][$i];
+                        $move = move_uploaded_file($temp_name, $target);
+                        if ($move) {
+                            $userFile['address_proof_file_'.$j] = $fileNameRep;                        
+                        }
+
+                }
+            }
+            if(isset($_FILES['pan_card_file'])):
+                //saving pancard files            
+                $path[] = $_FILES['pan_card_file']['tmp_name'];
+                $type[] = $_FILES['pan_card_file']['type'];
+
+                $str = rand();
+                $result = md5($str);
+                $fileNameRep = $result . '_' . $_FILES['pan_card_file']['name'];
+                $target = $uploadFolder . $fileNameRep;
+                $temp_name = $_FILES["pan_card_file"]["tmp_name"];
+                $move = move_uploaded_file($temp_name, $target);
+                if ($move) {
+                    $userFile['pan_card_file'] = $fileNameRep;                        
+                }
+            endif;
+            if(isset($_FILES['bank_proof_file'])):
+            //saving bank_proof files            
+                $path[] = $_FILES['bank_proof_file']['tmp_name'];
+                $type[] = $_FILES['bank_proof_file']['type'];
+
+                $str = rand();
+                $result = md5($str);
+                $fileNameRep = $result . '_' . $_FILES['bank_proof_file']['name'];
+                $target = $uploadFolder . $fileNameRep;
+                $temp_name = $_FILES["bank_proof_file"]["tmp_name"];
+                $move = move_uploaded_file($temp_name, $target);
+                if ($move) {
+                    $userFile['bank_proof_file'] = $fileNameRep;                        
+                }
+            endif;
+                    
+            
+            $this->db->where('user_id', $this->session->userdata('user_id'));
+            $this->db->update('user_details', $userFile);
+            
+            //for loop
+            
+        } 
+    }
 }

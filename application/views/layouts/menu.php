@@ -12,7 +12,7 @@
         <ul class="nav">
             <li class="nav-item active">
                 <a class="nav-link" href="<?= site_url('home') ?>">
-                    <i class="icon ion-ios-home-outline"></i>
+                    <i class="icon ion-home"></i>
                     <span>Home</span>
                 </a>            
             </li>
@@ -46,7 +46,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link withdraw <?= $class_name ?>" href="<?= $href_withdraw ?>">
-                    <i class="icon ion-waterdrop"></i>
+                    <i class="icon ion-briefcase"></i>
                     <span>WITHDRAW</span>
                 </a>            
             </li>
@@ -58,7 +58,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link support <?= $class_name ?>" href="<?= $href_support ?>">
-                    <i class="icon ion-ios-chatboxes-outline"></i>
+                    <i class="icon ion-chatboxes"></i>
                     <span>SUPPORT</span>
                     <span class="square-8"></span>
                 </a>
@@ -100,35 +100,31 @@
                             dataType: "json",
                             data: {username_or_email: username_or_email, login_password: login_password},
                             success: function (data) {
+                                toastr.clear();
                                 if ($.isEmptyObject(data.error)) {
                                     $(".alert-danger").css('display', 'none');
                                     location.href = "<?php echo base_url('home'); ?>";
                                 } else {
                                     console.log(data.error);
                                     if (data.error['username_or_email']) {
-                                        $(".login_form_err").css('display', 'block');
-                                        $(".login_form_err").html(data.error['username_or_email']);
-                                        $('.register_page').css("top", "28.9%");
                                         $("input[name='username_or_email']").focus();
-
+                                        toastr.error(data.error['username_or_email']);
+                                        return false;
                                     } else if (data.error['login_password']) {
-                                        $(".login_form_err").css('display', 'block');
-                                        $(".login_form_err").html(data.error['login_password']);
+                                        toastr.error(data.error['login_password']);
                                         $("input[name='login_password']").focus();
                                     } else if (data.error) {
-                                        $(".login_form_err").css('display', 'block');
-                                        $(".login_form_err").html(data.error);
+                                        toastr.error(data.error);
+                                        return false;
                                     } else {
                                         $(".login_form_err").css('display', 'none');
                                     }
-                                }
-
-                            }
-
+                                } //else                                
+                            } //success                            
                         });
+                        return false; //confirm popup willnot close
                     }
                 },
-
                 cancel: function () {
 
                 },
