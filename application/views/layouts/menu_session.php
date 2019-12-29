@@ -29,7 +29,7 @@ $encrypted_user_id = encryptId($this->session->userdata('user_id'));
                 <ul class="nav sidebar-nav-sub">
                     <li class="nav-sub-item"><a href="<?= base_url() . 'withdraw-cash' ?>" class="nav-sub-link withdraw_cash">Withdraw Cash</a></li>
                     <li class="nav-sub-item"><a href="<?= base_url() . 'withdraw-reversal' ?>" class="nav-sub-link withdraw_reversal">Withdrawal Reversal</a></li>
-                    <li class="nav-sub-item"><a href="<?= base_url() . 'withdraw-history'?>" class="nav-sub-link withdraw_history">Withdrawal History</a></li>
+                    <li class="nav-sub-item"><a href="<?= base_url() . 'payments/withdrawHistory'?>" class="nav-sub-link withdraw_history">Withdrawal History</a></li>
                 </ul>
             </li>
 

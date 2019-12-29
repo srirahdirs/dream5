@@ -17,6 +17,8 @@ $route['payment-response'] = 'payments/response';
 $route['payment-request'] = 'payments/request';
 $route['add-cash'] = 'payments/addCash';
 $route['withdraw-cash'] = 'payments/withdrawCash';
+$route['withdraw-reversal'] = 'payments/withdrawReversal';
+$route['payments/withdrawHistory/(:num)'] = 'payments/withdrawHistory';
 $route['add-practice-cash'] = 'payments/addPracticeCash';
 
 

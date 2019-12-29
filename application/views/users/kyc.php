@@ -24,14 +24,14 @@ $this->load->view('layouts/menu_session');
                                     <td>EMAIL ID</td>
                                     <td><?= $user->email ?></td>
                                     <td><?= ($user->email_verified == 1 ) ? '<span class="success">Verified</span>' : '<span class="error">Not verified</span>' ?></td>
-                                    <td style="text-align:center;"><a class="btn btn-primary" href="<?= base_url() . 'my-profile/' . $encrypted_user_id ?>">UPDATE</a></td>
+                                    <td style="text-align:center;"><a class="kyc_page btn btn-primary" href="<?= base_url() . 'my-profile/' . $encrypted_user_id ?>">UPDATE</a></td>
                                 </tr>
                                 <tr>
 
                                     <td>MOBILE NUMBER</td>
                                     <td><?= $user->mobile_number ?></td>
                                     <td><?= ($user->mobile_number == 1 ) ? '<span class="success">Verified</span>' : '<span class="error">Not verified</span>' ?></td>
-                                    <td  style="text-align:center;"><a class="btn btn-primary" href="<?= base_url() . 'my-profile/' . $encrypted_user_id ?>">UPDATE</a></td>
+                                    <td  style="text-align:center;"><a class="kyc_page btn btn-primary" href="<?= base_url() . 'my-profile/' . $encrypted_user_id ?>">UPDATE</a></td>
                                 </tr>
                                 <tr>                                   
                                     <td>PAN CARD</td>
@@ -180,39 +180,3 @@ $this->load->view('layouts/footer');
         $('.bank_proof_file').html('bank proof attached');
     });
 </script>
-<style>
-    .table.table-success1 thead > tr > th, .table.table-success1 thead > tr > td, .table.table-success1 tfoot > tr > th, .table.table-success1 tfoot > tr > td{
-        background-color: #23BF08;
-    }
-    .table.table-success1{
-        background-color: #282D31;
-    }
-    .table td{
-        color: #868ba1;
-        vertical-align: middle;
-    }
-    .table td:first-child{
-        /*color: #fff;*/
-    }
-    .btn-primary {
-        padding: 4px 12px;
-    }
-    select.form-control.select2.select2-hidden-accessible{
-        color: #868ba1;
-    }
-    input.form-control{
-        color: #868ba1 !important;
-    }
-    .table.table-success1    tfoot > tr > td{
-        background-color:#343a40;
-        border: 0; 
-    }
-    .btn-success { padding: 10px 44px;}
-    .uploaded {
-        text-align: center;
-        color: #FFB612;
-        font-style: italic;
-        vertical-align: middle;
-        margin-bottom: 0;
-    }
-</style>

@@ -31,6 +31,16 @@ class UserModel extends CI_Model {
     public function findUserDetailsWithWallet($user_id) {
         return $this->db->select('users.*,uw.*,ud.*')->join('user_details ud', 'ud.user_id = users.id', 'left')->join('user_wallet uw', 'uw.user_id = users.id', 'left')->get_where("users", array("users.id" => $user_id))->row(0);
     }
+    public function findUserWithdrawals($user_id) {
+        return $this->db->order_by('id desc')->get_where("withdrawal_history", array("user_id" => $user_id,'status' => 'requested'))->result_array(0);
+    }
+    public function findUserWithdrawalHistory($limit, $start,$user_id) {
+        return $this->db->order_by('id desc')->limit($limit, $start)->get_where("withdrawal_history", array("user_id" => $user_id))->result_array(0);
+    }
+    public function findCount() {
+        return $this->db->count_all('withdrawal_history');
+    }
+    
 
     public function find($id)
     {
@@ -280,6 +290,28 @@ class UserModel extends CI_Model {
         $dataUserWHistory['status'] = 'requested';        
         $dataUserWHistory['user_id'] = $this->session->userdata('user_id');
         $this->db->insert('withdrawal_history', $dataUserWHistory);
+        
+        
+         //user wallet
+        $dataUserWallet['cash'] = $walletBalance;
+        $this->db->where('user_id', $this->session->userdata('user_id'));
+        $this->db->update('user_wallet', $dataUserWallet);
+        
+        $this->session->set_userdata('cash',$walletBalance);
+    }
+    public function withdrawReversal($withdraw_history_id){
+        
+        $db = $this->db->get_where("withdrawal_history", array("id" => $withdraw_history_id))->row(0);
+        if($db){
+            $amount = $db->withdrawal_amount;
+        }
+        //user details
+        $this->db->where('id', $withdraw_history_id);
+        $data['status'] = 'reversed';
+        $this->db->update('withdrawal_history', $data);
+        
+        $user = $this->findUserDetailsWithWallet($this->session->userdata('user_id'));
+        $walletBalance = $user->cash + $amount;
         
         
          //user wallet
