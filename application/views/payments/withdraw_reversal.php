@@ -9,7 +9,7 @@ $this->load->view('layouts/menu_session');
         <div class="section-wrapper">
             <div class="row">                    
                 <div class="table-responsive">
-                    <table class="table table-bordered table-colored table-success1">
+                    <table class="table mg-b-0 tx-13">
                         <thead>
                             <tr>
                                 <th class="wd-25p">Amount</th>
@@ -26,7 +26,7 @@ $this->load->view('layouts/menu_session');
                                 <td><?= $row['withdrawal_amount']?></td>
                                 <td><?= date('Y-m-d', strtotime($row['created_at'])) ?></td>
                                 <td><?= ucfirst($row['status']); ?></td>
-                                <td style="text-align:center;"><a class="btn btn-primary" href="javascript:void(0)" onclick="reverse(<?= $row['id']?>)">REVERSE</a></td>
+                                <td style="text-align:center;"><a class="small_btn btn btn-primary" href="javascript:void(0)" onclick="reverse(<?= $row['id']?>)">REVERSE</a></td>
                             </tr>
                             <?php endforeach; ?>
                         </tbody>

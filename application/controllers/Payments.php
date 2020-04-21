@@ -65,38 +65,46 @@ class Payments extends CI_Controller {
     public function withdrawHistory() {
         $model = new UserModel();
         $config["base_url"] = base_url() . "payments/withdrawHistory";
-        $config["total_rows"] = $this->UserModel->findCount();
-        $config["per_page"] = 5;
+        $config["total_rows"] = $this->UserModel->findCount($this->session->userdata('user_id'));
+        $config["per_page"] = 9;
         $config["uri_segment"] = 3;
-        
+
         $config['full_tag_open'] = "<div clas='pagination-wrapper'><ul class='pagination pagination-success mg-b-0'>";
         $config['full_tag_close'] = '</ul></div>';
-       // Use pagination number for anchor URL.
-        $config['use_page_numbers'] = TRUE;
-
-        //Set that how many number of pages you want to view.
-        $config['num_links'] = 2;
-
-        // Open tag for CURRENT link.
         $config['cur_tag_open'] = '&nbsp;<a class="current">';
-
-        // Close tag for CURRENT link.
         $config['cur_tag_close'] = '</a>';
-
-        // By clicking on performing NEXT pagination.
         $config['next_link'] = '>';
-
-        // By clicking on performing PREVIOUS pagination.
         $config['prev_link'] = '<';
+        $this->pagination->initialize($config);
 
-        $this->pagination->initialize($config); 
-       
         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
         $data["links"] = $this->pagination->create_links();
 
-        $data['withdrawal_history'] = $model->findUserWithdrawalHistory($config["per_page"], $page, $this->session->userdata('user_id'));
+        $data['withdrawal_history'] = $this->UserModel->findUserWithdrawalHistory($config["per_page"], $page , $this->session->userdata('user_id'));
         $this->load->view('payments/withdraw_history', $data);
+    }
+    public function Transactions() {
+        
+        $config["base_url"] = base_url() . "payments/transactions";
+        $config["total_rows"] = $this->Order_model->findCount($this->session->userdata('user_id'));
+        $config["per_page"] = 9;
+        $config["uri_segment"] = 3;
+
+        $config['full_tag_open'] = "<div clas='pagination-wrapper'><ul class='pagination pagination-success mg-b-0'>";
+        $config['full_tag_close'] = '</ul></div>';
+        $config['cur_tag_open'] = '&nbsp;<a class="current">';
+        $config['cur_tag_close'] = '</a>';
+        $config['next_link'] = '>';
+        $config['prev_link'] = '<';
+        $this->pagination->initialize($config);
+
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+        $data["links"] = $this->pagination->create_links();
+
+        $data['transactions_history'] = $this->Order_model->findUserPurchasedHistory($config["per_page"], $page , $this->session->userdata('user_id'));
+        $this->load->view('payments/transactions', $data);
     }
 
     public function addPracticeCash() {
@@ -120,8 +128,6 @@ class Payments extends CI_Controller {
         $data['txn_msg'] = $_POST["txMsg"];
         $data['txn_time'] = $_POST["txTime"];
         $data['signature'] = $_POST["signature"];
-
-
 
 
         if ($model->saveOrder($data)) {

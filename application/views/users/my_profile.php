@@ -7,7 +7,7 @@ $this->load->view('layouts/menu_session');
 <div class="slim-mainpanel myprofile">
     <div class="container pd-t-50">
         <div class="section-wrapper">
-            <label class="section-title">Profile UPDATE</label>
+            <label class="section-title">Profile Update</label>
             <p class="mg-b-20 mg-sm-b-40">update your personal details</p>
             <form action="<?= base_url() . 'my-profile/' . $encrypted_user_id ?>" method="POST">
                 <div class="form-layout">
@@ -19,11 +19,22 @@ $this->load->view('layouts/menu_session');
                                 <?php echo form_error('first_name', '<div class="error">', '</div>'); ?>
                             </div>
                         </div><!-- col-4 -->
-                        <div class="col-lg-6">
+                        <div class="col-lg-3">
                             <div class="form-group">
                                 <label class="form-control-label">Last Name: </label>
                                 <input class="form-control" type="text" name="last_name" placeholder="Enter Lastname" value="<?= $user->last_name ?>" autocomplete="off">
                                 <?php echo form_error('last_name', '<div class="error">', '</div>'); ?>
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-3">
+                            <div class="form-group mg-b-10-force">
+                                <label class="form-control-label">Gender: <span class="tx-danger">*</span></label>
+                                <select class="form-control select2 select2-hidden-accessible" data-placeholder="Select state" name="gender">
+                                    <option value="">Select Gender</option>                                    
+                                    <option value="Male" <?php if($user->gender == 'Male'){    echo 'selected'; }?>>Male</option>
+                                    <option value="Female" <?php if($user->gender == 'Female'){    echo 'selected'; }?>>Female</option>                                                             
+                                </select> 
+                                <?php echo form_error('gender', '<div class="error">', '</div>'); ?>
                             </div>
                         </div><!-- col-4 -->
                         <div class="col-lg-4">
@@ -114,6 +125,7 @@ $this->load->view('layouts/footer');
     $(".nav-sub-item").removeClass('active');
     $(".my_profile").addClass('active');
     $(".edit_profile").addClass('active');
+    $(".home_main_menu").addClass('active');
     $(document).ready(function () {
         var state = $('#state_id').val();
 

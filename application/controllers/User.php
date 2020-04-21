@@ -7,9 +7,9 @@ class User extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->library(['form_validation', 'encryption']);
-        $this->load->model('UserModel');
+        $this->load->model(['UserModel','Mail_model']);
         if (!$this->session->userdata('login_status')) {
-            $allowed = array('forgotPassword', 'resetPassword');
+            $allowed = array('forgotPassword', 'resetPassword','setNewPassword');
             if (!in_array($this->router->fetch_method(), $allowed)) {
                 redirect('home');
             }
@@ -27,6 +27,7 @@ class User extends CI_Controller {
             $user_id = $this->encryption->decrypt(base64_decode($encrypted_user_id));
             $this->form_validation->set_rules('first_name', 'First Name', 'required|alpha');
             $this->form_validation->set_rules('state_id', 'State', 'required');
+            $this->form_validation->set_rules('gender', 'Gender', 'required');
             $this->form_validation->set_rules('city_id', 'City', 'required');
             $this->form_validation->set_rules('city_id', 'City', 'required');
             $this->form_validation->set_rules('mobile_number', 'Mobile Number', 'integer|min_length[3]|is_unique[users.mobile_number]|regex_match[/^[0-9]{10}$/]',array('is_unique' => 'Mobile Number already exists','regex_match'=> 'Mobile Number should contain 10 digits'));
@@ -43,6 +44,7 @@ class User extends CI_Controller {
     }
 
     public function changePassword($encrypted_user_id = null) {
+
         $data = [];
         $model = new UserModel();
         $data['user'] = $model->findUserDetails($this->session->userdata('user_id'));
@@ -71,15 +73,16 @@ class User extends CI_Controller {
     public function forgotPassword() {
         $data = [];
         $model = new UserModel();
+        $mailModel = new Mail_model();
         
 
         if ($this->input->post()) {
             $email_or_phonenumber = $this->input->post('email_or_phonenumber');
             $find1 = strpos($email_or_phonenumber, '@');
             if($find1 !== false){
-                $user = $model->findWithEmail($email_or_phonenumber);
+                $user = $model->forgotPasswordMail($email_or_phonenumber);
                 if($user) {
-//                    $this->sendMail($user->email);
+                   $mailModel->sendMail($user->email);
                     echo 'mail_sent';
                 } else {
                     echo 'email_not_exists';
@@ -87,7 +90,7 @@ class User extends CI_Controller {
             } elseif(preg_match('/^\d{10}$/',$email_or_phonenumber)) {
                     $user = $model->findByMobileNumber($email_or_phonenumber);
                     if($user) {
-//                        $this->sendMail($user->email);
+                       $mailModel->forgotPasswordMail($user->email);
                         echo 'mail_sent';
                     } else {
                         echo 'mobile_number_not_exists';
@@ -99,10 +102,42 @@ class User extends CI_Controller {
         }
         
     }
-    public function sendMailI($email,$mobile_number){
-        
+    public function setNewPassword($token) {        
+        $validateToken = $this->Mail_model->findWithToken($token); 
+        $data['token'] = $token;
+        if($validateToken) {           
+            
+            if($this->input->post()){
+                $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]');
+                $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[password]');
+                
+                if($this->form_validation->run() == FALSE){  
+                    $err = validation_errors();
+                    $this->session->set_flashdata('error', $err);
+                    return $this->load->view('users/set_new_password',$data);
+                } else {
+                        $data = array(              
+                        'password' => $this->input->post('confirm_password'),               
+                        'password_reset_token'=> NULL,               
+                        'status'=> 1,               
+                        'id' => $validateToken->id,              
+                        );
+                        if($this->UserModel->changePassword($data)) {
+                            $this->session->set_flashdata('success', 'Password sets successfully!.');    
+                            return redirect('home');
+                        } else {
+                            $this->session->set_flashdata('error', 'Something went wrong!, Please Try Again!.');    
+                            return redirect('home');
+                        }
+                    }
+            }
+            $this->session->set_flashdata('success', 'Token validated');
+            return $this->load->view('users/set_new_password',$data);
+        } else {
+            $this->session->set_flashdata('error','Token expired or invalid');                    
+        }
+        $this->load->view('users/set_new_password',$data);
     }
-
     public function current_password($current_password) {
         $old_password_db_hash = $this->UserModel->fetchPasswordHashFromDB();
         if (password_verify($current_password, $old_password_db_hash)) {
@@ -112,6 +147,9 @@ class User extends CI_Controller {
             return FALSE;
         }
     }
+
+
+
 //    public function forgotPassword(){
 //        $email = $this->session->userdata('email');
 //        $getUserData = $this->UserModel->findWithEmail($email);

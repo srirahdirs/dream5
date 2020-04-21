@@ -86,3 +86,5 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 define('secretKey','2de7819ab2a586bee6b28fe0d7d4ed2a432d7691');
 define('appId','10674f2d1ad1f3824b363dadb47601');
+
+define('email_from','no-reply@tandem.network');

@@ -52,6 +52,14 @@ class Order_model extends CI_Model {
         }
         $this->session->set_userdata('practice_cash',$data['practice_cash']);
     }
+    
+    //transactions
+    public function findUserPurchasedHistory($limit, $start,$user_id) {
+        return $this->db->order_by('id desc')->limit($limit, $start)->get_where("orders", array("user_id" => $user_id))->result_array(0);
+    }
+    public function findCount($user_id) {
+        return $this->db->where('user_id',$user_id)->from("orders")->count_all_results();
+    }
 
 }
 

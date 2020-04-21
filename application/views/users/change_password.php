@@ -59,5 +59,6 @@ $this->load->view('layouts/footer');
     $(".nav-sub-item").removeClass('active');
     $(".my_profile").addClass('active');
     $(".change_password").addClass('active');
+    $(".home_main_menu").addClass('active');
     
 </script>

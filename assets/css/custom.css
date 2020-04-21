@@ -1,9 +1,13 @@
 body{
+    /*background: #212529;*/
     background: #282d31;
 }
 .slim-header {
-    background-color: #282d31;
+    background-color: #212529;
     border-bottom-width: 0;
+}
+.slim-header .container {
+    padding-left: 0;
 }
 .slim-footer {
     margin-top: 0;
@@ -173,21 +177,8 @@ body{
 }
 
 
-/*table*/
-.table.table-success1 thead > tr > th, .table.table-success1 thead > tr > td, .table.table-success1 tfoot > tr > th, .table.table-success1 tfoot > tr > td{
-    background-color: #23BF08;
-}
-.table.table-success1{
-    background-color: #282D31;
-}
-.table td{
-    color: #868ba1;
-    vertical-align: middle;
-}
-.table td:first-child{
-    /*color: #fff;*/
-}
-.kyc_page.btn-primary {
+
+.small_btn.btn-primary {
     padding: 4px 12px;
 }
 select.form-control.select2.select2-hidden-accessible{
@@ -235,4 +226,42 @@ input.form-control{
 }
 .pagination {
     margin-top: 20px;
+}
+.slim-navbar .nav-link .icon {
+    color: #868ba1;
+}
+.slim-navbar .nav-item.active .nav-link .icon{
+    color: #868ba1;
+}
+.slim-navbar .nav-link .square-8 {
+    color: #FFB612;
+    background-color: #FFB612;
+}
+.tx-primary,.tx-success,.tx-purple,.tx-danger{
+    color: #FFB612;
+}
+a {
+    color: #FFB612;
+}
+.sidebar-nav-link i {
+    color: #FFB612;
+}
+.dashboard-4 .card-table .card-header .nav-link.active {
+    color: #FFB612;
+}
+.sidebar-nav-sub .nav-sub-link.active,.sidebar-nav-link.active,.sidebar-nav-link.active i {
+     color: #FFB612;
+}
+.sidebar-nav-sub .nav-sub-link:hover, .sidebar-nav-sub .nav-sub-link:focus {
+    color: #FFB612;
+}
+.btn-primary:hover ,.btn-primary:not(:disabled):not(.disabled):active, 
+.btn-primary:not(:disabled):not(.disabled).active,
+ .show > .btn-primary.dropdown-toggle,.btn-primary:focus, .btn-primary.focus,
+ .btn-primary:not(:disabled):not(.disabled):active:focus, 
+ .btn-primary:not(:disabled):not(.disabled).active:focus,
+  .show > .btn-primary.dropdown-toggle:focus {
+    background-color: #FFB612;
+    border-color: #FFB612;
+    box-shadow: 0 0 0 0.2rem #FFB612;
 }

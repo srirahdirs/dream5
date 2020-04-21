@@ -76,7 +76,7 @@ $this->load->view('layouts/menu_session');
                         <div class="row mg-t-30">
                             <div class="col-sm-7 mg-l-auto">
                                 <div class="form-layout-footer">
-                                    <button class="btn btn-primary bd-0">Withdraw</button>
+                                    <button class="btn btn-primary bd-0" id="withdraw">Withdraw</button>
                                     <a href="<?= base_url() . 'home' ?>" class="btn btn-secondary bd-0">Cancel</a>
                                 </div><!-- form-layout-footer -->
                             </div><!-- col-8 -->
@@ -108,6 +108,21 @@ $this->load->view('layouts/footer');
         $(this).css('background', '#FFB612');
         $('#order_amount').val($(this).val());
     });
+    // $('#withdraw').click(function (e) {
+    //     e.preventDefault();
+    //     $.confirm({
+    //         title: 'Please Confirm',
+    //         content: 'Are sure you want to withdraw?',
+    //         buttons: {
+    //             confirm: function () {
+    //                 $("#redirectForm").submit();
+    //             }, //confirm btn ends
+    //             cancel: function () {
+
+    //             },
+    //         },
+    //     }); //confirm e
+    // });
 </script>
 <style>
     span.primary {

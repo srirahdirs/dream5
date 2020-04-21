@@ -1,0 +1,61 @@
+.signin-title-secondary{
+    margin-bottom: 30px;
+}
+.btn-signin {  
+    background-image: linear-gradient(to right, #FFDD00 0%, #FFDD00 100%);
+    color: black;
+}
+.slim-logo a{
+    color: #FFDD00;
+    font-weight: 900;
+}
+.slim-logo a img {
+    max-width: 150px;
+}
+.signin-box {
+    background-color: #2D2F4E;
+}
+.container{
+    max-width: 1140px !important;
+}
+.slim-sidebar{
+    padding: 0;
+    min-height: 710px;
+}
+.slim-header, .slim-footer {
+    background: #1b84e7;
+    border: none;
+    color: #fff;
+}
+.by a,.add_chips a {
+    color: white;
+}
+.pagination_list a {
+    margin: 10px;
+    border: 1px solid #333;
+    padding: 10px 15px;
+}
+.pagination_list strong {
+    margin: 10px;
+    border: 1px solid #1a7ee4;
+    padding: 10px 15px;
+    color: #fff;
+    background: #1a7ee4;
+}
+.slim-footer {
+    margin-top: 0;
+}
+@media (min-width: 1200px) {
+    .slim-body {
+        display: flex;
+        min-height: calc(89.5vh - 75px);
+    }   
+}
+@media (min-width: 768px) {
+    .slim-body .slim-mainpanel .container {
+        padding: 25px 25px 16px 25px;
+    }
+}
+.form-control::placeholder{
+    color: #e1e8ed;
+}

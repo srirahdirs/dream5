@@ -10,13 +10,13 @@ $this->load->view('layouts/menu_session');
             <form id="redirectForm" method="post" action="<?= base_url() . 'user/kyc' ?>" enctype="multipart/form-data">
                 <div class="row">                    
                     <div class="table-responsive">
-                        <table class="table table-bordered table-colored table-success1">
+                        <table class="table mg-b-0 tx-13">
                             <thead>
                                 <tr>
                                     <th class="wd-25p">Information</th>
                                     <th class="wd-25p">Details</th>
                                     <th class="wd-20p">Status</th>
-                                    <th class="wd-30p">Action</th>
+                                    <th class="wd-30p" style="text-align: center;">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -24,14 +24,14 @@ $this->load->view('layouts/menu_session');
                                     <td>EMAIL ID</td>
                                     <td><?= $user->email ?></td>
                                     <td><?= ($user->email_verified == 1 ) ? '<span class="success">Verified</span>' : '<span class="error">Not verified</span>' ?></td>
-                                    <td style="text-align:center;"><a class="kyc_page btn btn-primary" href="<?= base_url() . 'my-profile/' . $encrypted_user_id ?>">UPDATE</a></td>
+                                    <td style="text-align:center;"><a class="small_btn btn btn-primary" href="<?= base_url() . 'my-profile/' . $encrypted_user_id ?>">UPDATE</a></td>
                                 </tr>
                                 <tr>
 
                                     <td>MOBILE NUMBER</td>
                                     <td><?= $user->mobile_number ?></td>
-                                    <td><?= ($user->mobile_number == 1 ) ? '<span class="success">Verified</span>' : '<span class="error">Not verified</span>' ?></td>
-                                    <td  style="text-align:center;"><a class="kyc_page btn btn-primary" href="<?= base_url() . 'my-profile/' . $encrypted_user_id ?>">UPDATE</a></td>
+                                    <td><?= ($user->otp_verified == 1 ) ? '<span class="success">Verified</span>' : '<span class="error">Not verified</span>' ?></td>
+                                    <td  style="text-align:center;"><a class="small_btn btn btn-primary" href="<?= base_url() . 'my-profile/' . $encrypted_user_id ?>">UPDATE</a></td>
                                 </tr>
                                 <tr>                                   
                                     <td>PAN CARD</td>
@@ -121,7 +121,7 @@ $this->load->view('layouts/menu_session');
                 <label class="section-title">What is KYC?</label>
 
                 <div class="aboutrummy_inner_con">
-                    <p>We at <b>DREAM5</b> strive to maintain the integrity and transparency of our system, which includes being able to positively identify our customers.This process is called as <a href="#" onclick="dispLightBox('know-your-customer.html')">"Know Your Customer" </a>(KYC).</p>
+                    <p>We at <span style="color:#FFDD00;">DREAM5</span> strive to maintain the integrity and transparency of our system, which includes being able to positively identify our customers.This process is called as <a href="#" onclick="dispLightBox('know-your-customer.html')">"Know Your Customer" </a>(KYC).</p>
                 </div>
                 <div class="aboutrummy_inner_con">
                     <p>This is not only important for legal compliance, but also helps to ensure full security of accounts as well as better service to our players.</p>
@@ -133,8 +133,8 @@ $this->load->view('layouts/menu_session');
             <div class="">
                 <label class="section-title">Know Your Customer</label>
                 <div class="pri_pol_content" id="ContentId">
-                    <p>We at <b>DREAM5</b> strive to maintain the integrity and transparency of our system, which includes being able to positively identify our customers. This process is called as<strong> Know Your Customer</strong>.
-                    </p>
+                    <!-- <p>We at <b>DREAM5</b> strive to maintain the integrity and transparency of our system, which includes being able to positively identify our customers. This process is called as<strong> Know Your Customer</strong>.
+                    </p> -->
                     <div class="promo_inner_con" style="padding-top:10px;">
                         <ul class="mid_sub_text" style="padding-left: 30px;">
                             <li>We are very vigilant about our customer base, right from the ‘Sign up’ stage. Only the players who meet our age criteria (18+) and agree to our terms and conditions get access to our website.</li>
@@ -162,6 +162,7 @@ $this->load->view('layouts/footer');
     $(".nav-sub-item").removeClass('active');
     $(".my_profile").addClass('active');
     $(".kyc").addClass('active');
+    $(".home_main_menu").addClass('active');
 
     $('input[name="pan_card_file"]').change(function (e) {
         $('.pan_card_file').html('pancard attached');

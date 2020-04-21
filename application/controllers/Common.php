@@ -5,15 +5,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Common extends CI_Controller {
 
     public function __construct() {
+                
         parent::__construct();
         $this->load->library('form_validation');
-        $this->load->model('UserModel');
-        $this->load->model('LoginModel');
+        $this->load->model(['UserModel','Order_model','LoginModel','Mail_model']);
     }
 
     public function index() {
         if ($this->session->userdata('username')) {
-            $this->load->view('users/dashboard_session');
+            $data['transactions_history'] = $this->Order_model->findUserPurchasedHistory(10, 0 , $this->session->userdata('user_id'));
+            $data['withdrawal_history'] = $this->UserModel->findUserWithdrawalHistory(10, 0 , $this->session->userdata('user_id'));
+            $data['orders'] = $this->load->view('payments/transactions', $data,TRUE);
+            $this->load->view('users/dashboard_session',$data);
         } else {
             $this->load->view('users/dashboard');
         }
@@ -68,13 +71,18 @@ class Common extends CI_Controller {
             $errors = $this->form_validation->error_array();
             echo json_encode(['error' => $errors]);
         } else {
-            $data['username'] = $this->input->post('username');
-            $data['email'] = $this->input->post('email');
-            $data['mobile_number'] = $this->input->post('mobile_number');
-            $data['password'] = $this->input->post('password');
+            $data['username'] = $this->input->post('username',TRUE);
+            $data['email'] = $this->input->post('email',TRUE);
+            $data['mobile_number'] = $this->input->post('mobile_number',TRUE);
+            $data['password'] = $this->input->post('password',TRUE);
             $model = new UserModel();
-            $model->add($data);
-            echo json_encode(['success' => 'Form submitted successfully.']);
+            $mailModel = new Mail_model();
+            if($model->add($data)){
+                $mailModel->sendVerifyMail($data['email']);
+                echo json_encode(['success' => 'Form submitted successfully.']);
+            } else {
+                echo json_encode(['error' => 'Failed.']);
+            }
         }
     }
 
@@ -90,8 +98,8 @@ class Common extends CI_Controller {
             echo json_encode(['error' => $errors]);
         } else {
 
-            $data['username'] = $this->input->post('username_or_email');
-            $data['password'] = $this->input->post('login_password');
+            $data['username'] = $this->input->post('username_or_email',TRUE);
+            $data['password'] = $this->input->post('login_password',TRUE);
             $loginModel = new LoginModel();
             $result = $loginModel->login($data);
             if (isset($result['failed'])) {

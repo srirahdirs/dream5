@@ -37,8 +37,8 @@ class UserModel extends CI_Model {
     public function findUserWithdrawalHistory($limit, $start,$user_id) {
         return $this->db->order_by('id desc')->limit($limit, $start)->get_where("withdrawal_history", array("user_id" => $user_id))->result_array(0);
     }
-    public function findCount() {
-        return $this->db->count_all('withdrawal_history');
+    public function findCount($user_id) {
+         return $this->db->where('user_id',$user_id)->from("withdrawal_history")->count_all_results();
     }
     
 
@@ -158,18 +158,21 @@ class UserModel extends CI_Model {
      */
     public function updateUserDetails($user_id) {
         $dataUserDetails = array(
-            'first_name' => $this->input->post('first_name'),
-            'last_name' => $this->input->post('last_name'),
-            'address' => $this->input->post('address'),
-            'state_id' => $this->input->post('state_id'),
-            'city_id' => $this->input->post('city_id'),
+            'first_name' => $this->input->post('first_name',TRUE),
+            'last_name' => $this->input->post('last_name',TRUE),
+            'address' => $this->input->post('address',TRUE),
+            'state_id' => $this->input->post('state_id',TRUE),
+            'city_id' => $this->input->post('city_id',TRUE),            
         );
         $dataU = [];
         if($this->input->post('email')):
-            $dataU['email'] = $this->input->post('email');            
+            $dataU['email'] = $this->input->post('email',TRUE);            
         endif;
         if($this->input->post('mobile_number')):
-           $dataU['mobile_number'] = $this->input->post('mobile_number');         
+           $dataU['mobile_number'] = $this->input->post('mobile_number',TRUE);         
+        endif;        
+        if($this->input->post('gender')):
+           $dataU['gender'] = $this->input->post('gender',TRUE);         
         endif;        
         if($dataU){
             $this->db->where('id', $user_id);
@@ -193,9 +196,9 @@ class UserModel extends CI_Model {
         $this->db->update('users', $data);
     }
     public function saveFiles(){
-        $userFile['address_proof'] = $this->input->post('address_proof');
-        $userFile['pan_card'] = $this->input->post('pan_card');
-        $userFile['bank_proof'] = $this->input->post('bank_proof');
+        $userFile['address_proof'] = $this->input->post('address_proof',TRUE);
+        $userFile['pan_card'] = $this->input->post('pan_card',TRUE);
+        $userFile['bank_proof'] = $this->input->post('bank_proof',TRUE);
         if ($_FILES) {
             $uploadFolder = FCPATH . 'assets/user_documents' . DIRECTORY_SEPARATOR;
             if (!file_exists($uploadFolder. $this->session->userdata('user_id') . DIRECTORY_SEPARATOR)) {
@@ -263,13 +266,13 @@ class UserModel extends CI_Model {
     }
     public function withdrawCash($user){
         if($this->input->post('account_number')){
-            $dataUser['account_number'] = $this->input->post('account_number');
+            $dataUser['account_number'] = $this->input->post('account_number',TRUE);
         }
         if($this->input->post('bank_name')){
-            $dataUser['bank_name'] = $this->input->post('bank_name');
+            $dataUser['bank_name'] = $this->input->post('bank_name',TRUE);
         }
         if($this->input->post('ifsc_code')){
-            $dataUser['ifsc_code'] = $this->input->post('ifsc_code');
+            $dataUser['ifsc_code'] = $this->input->post('ifsc_code',TRUE);
         }
         if(isset($dataUser)){
             //user details
@@ -278,12 +281,12 @@ class UserModel extends CI_Model {
         }
         
         
-        $walletBalance = $user->cash - $this->input->post('amount');
+        $walletBalance = $user->cash - $this->input->post('amount',TRUE);
         
         //user withdrawal history
         
         $dataUserWHistory['wallet_old_cash'] = $user->cash;
-        $dataUserWHistory['withdrawal_amount'] = $this->input->post('amount');
+        $dataUserWHistory['withdrawal_amount'] = $this->input->post('amount',TRUE);
         date_default_timezone_set("Asia/Kolkata");
         $dataUserWHistory['withdrawal_date'] = date('Y-m-d h:i:s');
         $dataUserWHistory['wallet_balance'] = $walletBalance;

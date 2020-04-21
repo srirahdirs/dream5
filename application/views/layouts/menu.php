@@ -79,7 +79,7 @@
             buttons: {
                 somethingElse: {
                     text: 'Login',
-                    btnClass: 'btn-blue',
+                    btnClass: 'btn-default',
                     keys: ['enter', 'shift'],
                     action: function () {
 

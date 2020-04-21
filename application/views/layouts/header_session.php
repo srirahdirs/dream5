@@ -29,7 +29,7 @@ $encrypted_user_id = encryptId($this->session->userdata('user_id'));
         <div class="slim-header with-sidebar">
             <div class="container">
                 <!--<div class="slim-header-left">-->
-                <h2 class="slim-logo"><a href="<?= base_url() ?>home"><img src="<?= $baseUrl ?>/img/logo1.png"></a></h2>
+                <h2 class="slim-logo"><a href="<?= base_url() ?>home"><img src="<?= $baseUrl ?>/img/logo/logo_dark.png" height="95"></a></h2>
                 <div class="slim-header-right">
 
                     <div class="add_chips">

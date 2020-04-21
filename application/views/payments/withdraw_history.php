@@ -9,7 +9,7 @@ $this->load->view('layouts/menu_session');
         <div class="section-wrapper">
             <div class="row">                    
                 <div class="table-responsive">
-                    <table class="table table-bordered table-colored table-success1">
+                    <table class="table mg-b-0 tx-13">
                         <thead>
                             <tr>
                                 <th class="wd-25p">#</th>
@@ -34,7 +34,7 @@ $this->load->view('layouts/menu_session');
                     </table>                        
                 </div>                    
             </div>  
-            <?php echo $this->pagination->create_links(); ?>
+            <?php echo $links; ?>
         </div>
     </div>
 </div> <!-- slim panel -->
