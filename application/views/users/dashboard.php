@@ -3,8 +3,8 @@
     $this->load->view('layouts/menu');
 ?>
 <?php
-$this->load->view('layouts/homeSlider');
-$this->load->view('layouts/homeSliderBottom');
+$this->load->view('layouts/home_slider');
+$this->load->view('layouts/home_slider_bottom');
 ?>
 
 <?php

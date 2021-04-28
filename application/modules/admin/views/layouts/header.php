@@ -1,4 +1,7 @@
-<?php $baseUrl = base_url() . 'assets/admin'; ?>
+<?php
+ $baseUrl = base_url() . 'assets/admin'; 
+ $baseUrlFrontend = base_url() . 'assets'; 
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -24,7 +27,7 @@
         <div class="slim-header with-sidebar">
             <div class="container">
                 <!--<div class="slim-header-left">-->
-                <h2 class="slim-logo"><a href="<?= base_url() ?>home"><img src="<?= $baseUrl ?>/img/tandem.png"></a></h2>
+                <h2 class="slim-logo"><a href="<?= base_url() ?>admin/home"><img src="<?= $baseUrlFrontend ?>/img/logo/logo_white.png" height="95"></h2>
                 <div class="slim-header-right">
 
                     <div class="add_chips">

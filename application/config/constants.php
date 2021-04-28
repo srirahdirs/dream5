@@ -88,3 +88,9 @@ define('secretKey','2de7819ab2a586bee6b28fe0d7d4ed2a432d7691');
 define('appId','10674f2d1ad1f3824b363dadb47601');
 
 define('email_from','no-reply@tandem.network');
+
+define('RAZOR_PAY_KEY_ID', 'rzp_live_bPYM890XEMEsjo');
+define('RAZOR_PAY_SECRET', 'M1W4w1zxGopKqU3sfVrHsE9R');
+
+define('RAZOR_PAY_KEY_ID_TEST', 'rzp_test_a48zLIZs22FofS');
+define('RAZOR_PAY_SECRET_TEST', 'DT9fAqsZWw1a8L02hqYHaGVf');

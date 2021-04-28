@@ -60,6 +60,58 @@ class Order_model extends CI_Model {
     public function findCount($user_id) {
         return $this->db->where('user_id',$user_id)->from("orders")->count_all_results();
     }
+    public function getGameDetails($game_id) {
+        return $this->db->order_by('id desc')->get_where("games", array("id" => $game_id))->result();
+    }
+    public function getUserBalance($user_id) {
+        return $this->db->select('cash')->get_where("user_wallet", array("user_id" => $user_id))->result();
+    }
+    public function getUserBettingDetails($game_id) {
+        $this->db->select('*');
+        $this->db->from('user_games');
+        $this->db->where('user_id', $this->session->userdata('user_id'));
+        $this->db->where('game_id', $game_id);
+        $res = $this->db->get();
+        return $res->result_array();
+    }
+    public function viewUserBets($user_id) {
+        $this->db->select('*');
+        $this->db->order_by('id desc');
+        $this->db->from('user_games');
+        $this->db->where('user_id', $user_id);
+        $res = $this->db->get();
+        return $res->result_array();
+    }
+    public function saveBet($data){
+        $this->cashOut($data);
+        if($this->db->insert('user_games',$data)) {
+            return true;
+        } else {
+            return false;
+        }        
+    }
+    public function cashOut($data){
+        $dataC['user_id'] = $data['user_id'];
+        $dataC['game_id'] = $data['game_id'];
+        $dataC['cash_out'] = $data['betting_amount'];
+        $getCash = $this->getUserBalance($this->session->userdata('user_id'));
+        $totalCash = $getCash[0]->cash;
+        $dataC['updated_wallet_balance'] = $totalCash - $data['betting_amount'];
+        $this->session->set_userdata('cash',$dataC['updated_wallet_balance']);
+        $dataW['cash'] = $dataC['updated_wallet_balance'];
+        $dataW['user_id'] = $data['user_id'];
+        $dataW['updated_at'] = date('Y-m-d h:i:s');
+        $this->updateUserWallet($dataW);
+        if($this->db->insert('cash_out',$dataC)) {
+            return true;
+        } else {
+            return false;
+        }        
+    }
+    public function updateUserWallet($data){
+        $this->db->where('user_id', $data['user_id']);           
+        $this->db->update('user_wallet', $data);
+    }
 
 }
 

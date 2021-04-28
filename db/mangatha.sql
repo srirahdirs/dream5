@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.1
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2020 at 06:35 AM
--- Server version: 10.1.33-MariaDB
--- PHP Version: 7.2.6
+-- Generation Time: Apr 28, 2021 at 09:34 PM
+-- Server version: 10.4.16-MariaDB
+-- PHP Version: 7.4.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -33,7 +32,7 @@ CREATE TABLE `admin` (
   `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `password_reset_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `status` smallint(6) NOT NULL DEFAULT '1',
+  `status` smallint(6) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -55,8 +54,8 @@ INSERT INTO `admin` (`id`, `email`, `password`, `password_reset_token`, `status`
 
 CREATE TABLE `all_cities` (
   `city_code` int(22) NOT NULL,
-  `city_name` text COLLATE utf8mb4_unicode_ci,
-  `state_code` text COLLATE utf8mb4_unicode_ci
+  `city_name` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `state_code` text COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -828,8 +827,8 @@ INSERT INTO `all_cities` (`city_code`, `city_name`, `state_code`) VALUES
 
 CREATE TABLE `all_states` (
   `state_code` int(11) NOT NULL,
-  `state_name` text COLLATE utf8mb4_unicode_ci,
-  `country_code` text COLLATE utf8mb4_unicode_ci
+  `state_name` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `country_code` text COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -876,6 +875,36 @@ INSERT INTO `all_states` (`state_code`, `state_name`, `country_code`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `cash_out`
+--
+
+CREATE TABLE `cash_out` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `game_id` int(11) NOT NULL,
+  `cash_out` float NOT NULL,
+  `updated_wallet_balance` float NOT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `cash_out`
+--
+
+INSERT INTO `cash_out` (`id`, `user_id`, `game_id`, `cash_out`, `updated_wallet_balance`, `created_at`, `updated_at`) VALUES
+(1, 1, 5, 888, 3001, '2021-03-29 16:30:48', NULL),
+(2, 1, 2, 100, 2901, '2021-03-29 16:32:30', NULL),
+(3, 1, 4, 111, 2790, '2021-03-29 16:33:44', NULL),
+(4, 1, 4, 90, 2700, '2021-03-29 16:34:06', NULL),
+(5, 1, 6, 280, 2420, '2021-03-29 16:34:27', NULL),
+(6, 1, 4, 20, 2400, '2021-03-29 16:34:40', NULL),
+(7, 1, 6, 250, 1950, '2021-04-03 14:07:37', NULL),
+(8, 1, 6, 351, 1599, '2021-04-03 14:08:02', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `countries`
 --
 
@@ -886,10 +915,10 @@ CREATE TABLE `countries` (
   `webCode` varchar(2) NOT NULL,
   `region` varchar(26) NOT NULL,
   `continent` enum('Asia','Europe','North America','Africa','Oceania','Antarctica','South America') NOT NULL,
-  `latitude` double NOT NULL DEFAULT '0',
-  `longitude` double NOT NULL DEFAULT '0',
-  `surfaceArea` float(10,2) NOT NULL DEFAULT '0.00',
-  `population` int(11) NOT NULL DEFAULT '0'
+  `latitude` double NOT NULL DEFAULT 0,
+  `longitude` double NOT NULL DEFAULT 0,
+  `surfaceArea` float(10,2) NOT NULL DEFAULT 0.00,
+  `population` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
@@ -902,6 +931,32 @@ INSERT INTO `countries` (`countryID`, `countryName`, `localName`, `webCode`, `re
 ('FRA', 'France', '', 'FR', 'Western Europe', 'Europe', 47, 2, 551500.00, 59225700),
 ('IND', 'India', 'Bharat/India', 'IN', 'Southern and Central Asia', 'Asia', 28.47, 77.03, 3287263.00, 1013662000),
 ('USA', 'USA', 'United States', 'US', 'North America', 'North America', 38, -97, 9363520.00, 278357000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `games`
+--
+
+CREATE TABLE `games` (
+  `id` int(11) NOT NULL,
+  `category` varchar(55) DEFAULT NULL,
+  `game_type` varchar(255) DEFAULT NULL,
+  `team_a` varchar(255) DEFAULT NULL,
+  `team_b` varchar(255) DEFAULT NULL,
+  `match_date_time` datetime DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT current_timestamp(),
+  `status` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `games`
+--
+
+INSERT INTO `games` (`id`, `category`, `game_type`, `team_a`, `team_b`, `match_date_time`, `created_at`, `updated_at`, `deleted_at`, `status`) VALUES
+(1, 'Cricket', 'T30', 'KKR', 'RCB', '2021-04-26 22:27:00', '2021-04-26 16:57:09', NULL, '2021-04-26 16:57:09', 'Completed');
 
 -- --------------------------------------------------------
 
@@ -937,7 +992,7 @@ CREATE TABLE `orders` (
   `reference_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `payment_mode` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `txn_msg` varchar(55) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ordered_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ordered_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `txn_status` varchar(55) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `txn_time` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `signature` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
@@ -948,20 +1003,30 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `user_id`, `order_id`, `amount`, `reference_id`, `payment_mode`, `txn_msg`, `ordered_at`, `txn_status`, `txn_time`, `signature`) VALUES
-(1, 1, 'order23232', '1500.00', '213396', 'CREDIT_CARD', 'Transaction Successful', '0000-00-00 00:00:00', 'SUCCESS', '2019-12-17 22:42:45', 'mXmoxgGz1P9LsFkuPn1XgQ9wY/AxZvvc2gEcja45GCs='),
-(2, 1, 'order23232', '1500.00', '213396', 'CREDIT_CARD', 'Transaction Successful', '0000-00-00 00:00:00', 'SUCCESS', '2019-12-17 22:42:45', 'mXmoxgGz1P9LsFkuPn1XgQ9wY/AxZvvc2gEcja45GCs='),
-(3, 1, 'order23232', '1500.00', '213396', 'CREDIT_CARD', 'Transaction Successful', '0000-00-00 00:00:00', 'SUCCESS', '2019-12-17 22:42:37', 'eiMhqYHXHV6MJMO+hcgpuAOibYrgsAWZNggRWywGcn4='),
-(4, 1, 'order23232', '1500.00', '213396', 'CREDIT_CARD', 'Transaction Successful', '0000-00-00 00:00:00', 'SUCCESS', '2019-12-17 22:42:37', 'eiMhqYHXHV6MJMO+hcgpuAOibYrgsAWZNggRWywGcn4='),
-(5, 1, 'order23232', '1500.00', '213396', 'CREDIT_CARD', 'Transaction Successful', '0000-00-00 00:00:00', 'SUCCESS', '2019-12-17 22:42:37', 'eiMhqYHXHV6MJMO+hcgpuAOibYrgsAWZNggRWywGcn4='),
-(6, 1, 'order23232', '1500.00', '213396', 'CREDIT_CARD', 'Transaction Successful', '0000-00-00 00:00:00', 'SUCCESS', '2019-12-17 22:42:37', 'eiMhqYHXHV6MJMO+hcgpuAOibYrgsAWZNggRWywGcn4='),
-(7, 1, 'order23232', '1500.00', '213396', 'CREDIT_CARD', 'Transaction Successful', '0000-00-00 00:00:00', 'SUCCESS', '2019-12-17 22:42:37', 'eiMhqYHXHV6MJMO+hcgpuAOibYrgsAWZNggRWywGcn4='),
-(8, 1, 'order23232', '1500.00', '213396', 'CREDIT_CARD', 'Transaction Successful', '0000-00-00 00:00:00', 'SUCCESS', '2019-12-17 22:42:37', 'eiMhqYHXHV6MJMO+hcgpuAOibYrgsAWZNggRWywGcn4='),
-(9, 1, 'order23232', '1500.00', '213396', 'CREDIT_CARD', 'Transaction Successful', '0000-00-00 00:00:00', 'SUCCESS', '2019-12-17 22:42:37', 'eiMhqYHXHV6MJMO+hcgpuAOibYrgsAWZNggRWywGcn4='),
-(10, 1, 'ORD_906656631_5_MAN', '5000.00', '213415', 'CREDIT_CARD', 'Transaction Successful', '2019-12-17 19:08:25', 'SUCCESS', '2019-12-18 00:40:35', 'l+ZYNTdw8DR5Bse8wp4vy6aTJy+wj4dCzYwNMK7I6a8='),
-(11, 1, 'ORD_1353104882_5_MAN', '700.00', '213417', 'CREDIT_CARD', 'Transaction Successful', '2019-12-17 19:23:57', 'SUCCESS', '2019-12-18 00:56:07', 'Plz3GzS26eyrniyBfDvolrreUcuHrGti1WHOQ1741cA='),
-(12, 1, 'ORD_140129553_5_MAN', '300.00', '213418', 'CREDIT_CARD', 'Transaction Successful', '2019-12-17 19:26:20', 'SUCCESS', '2019-12-18 00:58:29', 'QKe7RJauc77d0qSzpq8O1mpcGvuuaf2h5gAByTUO708='),
-(13, 1, 'ORD_1052203728_1_MAN', '1000.00', '218436', 'CREDIT_CARD', 'Transaction Successful', '2019-12-26 06:16:55', 'SUCCESS', '2019-12-26 11:49:20', 'qlnM65y6IqWs3HOWxi27CH5IODNXCkh6qGpuPHE6K2k='),
-(14, 1, 'ORD_316889745_1_MAN', '5000.00', '220923', 'CREDIT_CARD', 'Transaction Successful', '2019-12-30 02:52:08', 'SUCCESS', '2019-12-30 08:22:10', 'YItgTJfTE/Vzcz6rvx805Lqelgo38s8+3yFdNPCNLKA=');
+(15, 15, '', '1000', '123456789521', 'dharshinisathya@okaxis', '', '2021-04-28 03:59:50', 'deposited', NULL, 'not_verified');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `upi`
+--
+
+CREATE TABLE `upi` (
+  `id` int(11) NOT NULL,
+  `upi_id` text NOT NULL,
+  `upi_method` varchar(255) NOT NULL,
+  `status` varchar(55) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `upi`
+--
+
+INSERT INTO `upi` (`id`, `upi_id`, `upi_method`, `status`) VALUES
+(1, '9789253515@upi', 'Phonepe', 'Active'),
+(2, 'dharshinisathya@okaxis', 'Gpay', 'Active'),
+(3, 'test@okaxis', 'Paytm', 'Active'),
+(4, '9789253515@upi', 'Bhim', 'Active');
 
 -- --------------------------------------------------------
 
@@ -978,12 +1043,12 @@ CREATE TABLE `users` (
   `password_reset_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `gender` enum('Male','Female') COLLATE utf8_unicode_ci DEFAULT NULL,
   `otp` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `otp_verified` smallint(6) DEFAULT '0',
-  `email_verified` smallint(6) DEFAULT '0',
-  `admin_verified` smallint(6) DEFAULT '0',
-  `status` smallint(6) NOT NULL DEFAULT '10',
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `otp_verified` smallint(6) DEFAULT 0,
+  `email_verified` smallint(6) DEFAULT 0,
+  `admin_verified` smallint(6) DEFAULT 0,
+  `status` smallint(6) NOT NULL DEFAULT 10,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
   `verification_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -992,17 +1057,14 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `mobile_number`, `password`, `password_reset_token`, `gender`, `otp`, `otp_verified`, `email_verified`, `admin_verified`, `status`, `created_at`, `updated_at`, `verification_token`) VALUES
-(1, 'smssri', 'sri.rahdirs@gmail.com', '9789253515', '$2y$10$xl39OBtB3kDP2xkr9noOkeCeKXG1gYZ90GdE.sdOt70khtVsRz.16', 'DXecJHkZR3Bwr6u1KV4jM2Csim0q9bLI7STFtn8AGgNaOoYQyd', 'Female', NULL, 1, 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
-(2, 'ragu', 'sri.rahdirs@gmail.com1', '9789253516', '$2y$10$MX3LceTvKvnuOmc/cRMepuQWymMQG69T8bfW1Qk/y9EGQAywiZHoO', NULL, NULL, NULL, 0, 0, 0, 10, '2019-06-15 13:39:05', '2019-06-15 13:39:05', NULL),
-(3, 'smsri', 'sri.rahdirs@gmail.com2', '6381566734', '$2y$10$Ymjk8jcLYhUPAgp4AVXQn.gBUIh47hxr8FbAIP3uACkyKzBYokOFG', NULL, NULL, NULL, 0, 0, 0, 10, '2019-06-22 17:18:49', '2019-06-22 17:18:49', NULL),
-(4, 'srisathy', 'dhar@gma.com', '9789253518', '$2y$10$Ga86pMAARt/5shzL.8SUNOAqegvQjZpgY2hFToM6WB4aJt0FewO2C', NULL, NULL, NULL, 0, 0, 0, 10, '2019-12-05 19:08:30', '2019-12-05 19:08:30', NULL),
-(5, 'sathyasriathulya', 'dharshinisathya@gmail.com', '9500371721', '$2y$10$3I0mvIjfBQeJqJlhNMpO/.mjLhyDU4AYEDMvjbABnvJu69sJErLsq', NULL, NULL, NULL, 0, 0, 0, 10, '2019-12-17 17:04:01', '2019-12-17 17:04:01', NULL),
-(6, '234234', '34234@sd.co', '9789253513', '$2y$10$LvA/DZYiNkbjO7rP93tSmeWo9x62FmticmZy7MoVTyQ3fDnJ7dtV.', NULL, NULL, NULL, 0, 0, 0, 10, '2019-12-18 19:11:00', '2019-12-18 19:11:00', NULL),
-(7, 'sssd', 'asd@sad.com', '2345678922', '$2y$10$gkGbkFxgp.xY/soUdzfdEeJqRgRBPQ0t2Kvxh5Jx9DsgNf6yMAKrG', NULL, NULL, NULL, 0, 0, 0, 10, '2019-12-18 19:14:33', '2019-12-18 19:14:33', NULL),
-(8, '343', 'asd32@sds.c', '3987898581', '$2y$10$eEAQ8WUhz1wFuwcxeavA3uH6MyGEZ2zZIG.VoMmCJMEXf/uHc2tVm', NULL, NULL, NULL, 0, 0, 0, 10, '2019-12-18 19:15:08', '2019-12-18 19:15:08', NULL),
-(9, 'sdsd', 'sdsd@sdsd.com', '2334344334', '$2y$10$0GNmrTKe8eb4wFJQu67gkuYT/FBbUpPIZMg9h5Ow6JMO1fACnvcP2', NULL, NULL, NULL, 1, 1, 0, 10, '2019-12-18 19:16:10', '2019-12-18 19:16:10', NULL),
-(10, 'smssri9', 'ss@dssd.cii', '2342342344', '$2y$10$6uGNGf4i/tQAbonVgmIKrOrM1dGJ6amiQgkSYEr5xBpq6cmsSBDRy', NULL, NULL, NULL, 0, 0, 0, 10, '2019-12-18 19:17:31', '2019-12-18 19:17:31', NULL),
-(11, '233', '332@sd.cpo', '3434433443', '$2y$10$ReeFhsSesdhlyrXuLod6ouwm0qqHBebIVoEtwsOBWhh5AGEfIeiHm', NULL, NULL, NULL, 0, 0, 0, 10, '2019-12-18 19:17:54', '2019-12-18 19:17:54', NULL);
+(14, 'srirahdirs@gmail.com', 'srirahdcirxs@gmail.com', '6546546446', '$2y$10$YP6LHkD.tKcoUeHP3lFuEe4vMVSTuIb1QV9piLvMHpFiQj3r7UaFi', 'g50dTSFpn6ReEZmGz3hcqJtxYi9XHaVyDjKPb7OU1Q4fl8BvuL', NULL, NULL, 0, 0, 0, 10, '2021-04-27 16:17:33', '2021-04-27 16:17:33', NULL),
+(15, 'sri.rahdirs@gmail.com', 'sri.rahdirs@gmail.com', '9789253516', '$2y$10$StiYFezFIWCMJWPwZ7h4NuzxYH3T0r/2.02h23miR/AEFzKw7WkcW', 'VhzOARC2mKHxfBSvw8UYDQjpgi09JXI7a3FLseZGT1k56bWyMP', NULL, NULL, 0, 0, 0, 10, '2021-04-27 16:26:52', '2021-04-27 16:26:52', NULL),
+(16, 'sriahdirs@gmail.com', 'srihdirs@gmail.com', '9789253517', '$2y$10$sF6wTvTxL6MFzjO/JT0B7eiH57AMvpcKwqQ/G/osEZGQT5H26kPMG', 'SxamJUDXoe5uFqV6bZrBpw7I80WHENn9jMdtiY3GcykPlOfvT4', NULL, NULL, 0, 0, 0, 10, '2021-04-28 15:26:17', '2021-04-28 15:26:17', NULL),
+(17, 'srahdirs@gmail.com', 'sri.rahdfddirs@gmail.com', '9789253515', '$2y$10$7S43HETdc08G1sQRoCt8oeD1j6FJi8yyHfPnEt5.HkqENZBFIa/jK', '2exzq6FRZXjy3JWDMvwKpI80549AOrHmbla1iBUhNVfkt7TLcu', NULL, NULL, 0, 0, 0, 10, '2021-04-28 15:33:22', '2021-04-28 15:33:22', NULL),
+(18, 'sriahdis@gmail.com', 'sriahdirs@gmail.com', '9789255515', '$2y$10$DtBt2NlmQ2qiwmPDL8tI9Ox10hREDsURflgVlVOJD.3D7bJQF.76C', '6Fr0P9g1aYjofIOH2qeRMdpJXQsSlvwWx5LK3GVtTkmZCBU8h4', NULL, NULL, 0, 0, 0, 10, '2021-04-28 15:38:12', '2021-04-28 15:38:12', NULL),
+(19, 's52iahdis@gmail.com', 'sriahdi5s@gmail.com', '9789555515', '$2y$10$hQewkTNjxrWCKpoicYef4.7vsT5rFs2mKUqVXvtCyzNAjM3xBmCeC', '368NBcMgTJZkhpXLtmbaYIEWfijzSs5CGD09eU2OruRlxoqy7K', NULL, NULL, 0, 0, 0, 10, '2021-04-28 15:39:14', '2021-04-28 15:39:14', NULL),
+(20, 's5iahdis@gmail.com', 'srxiahdi5s@gmail.com', '9784555515', '$2y$10$jInCzoyHXLOgV61GYt43Yehd9g5g5rz0VBmTgPWhzse4G6XNQ5.CC', 'S9Y5I3f6ULwvKxEBVQPD7M4N1luiFjCoOWsHZmeang0qk2X8Jd', NULL, NULL, 0, 0, 0, 10, '2021-04-28 15:40:40', '2021-04-28 15:40:40', NULL),
+(21, 'sathya', 'dharshinisathya@gmail.com', '9500371723', '$2y$10$uP57O53OEBIpq24guVe7YuiTu4T1imkSUsbty.HWLHgzSMWocRRpK', 'pkgjuCSKoBJ69cNAP8UtT7Y1wsn2fHIDRy3rbhGOQa5vViZqmL', NULL, NULL, 0, 0, 0, 10, '2021-04-28 15:42:59', '2021-04-28 15:42:59', NULL);
 
 -- --------------------------------------------------------
 
@@ -1015,24 +1077,24 @@ CREATE TABLE `user_details` (
   `user_id` int(11) NOT NULL,
   `first_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_name` varchar(55) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` text COLLATE utf8mb4_unicode_ci,
+  `address` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `state_id` int(11) DEFAULT NULL,
   `city_id` int(11) DEFAULT NULL,
   `pan_card` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `pan_card_file` text COLLATE utf8mb4_unicode_ci,
+  `pan_card_file` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `address_proof` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address_proof_file_1` text COLLATE utf8mb4_unicode_ci,
+  `address_proof_file_1` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `address_proof_file_2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `account_number` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `ifsc_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `bank_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `bank_proof` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'cheque,passbook,statement',
-  `bank_proof_file` text COLLATE utf8mb4_unicode_ci,
+  `bank_proof_file` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `is_pan_verified` enum('Yes','Rejected') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `is_address_proof_verified` enum('Yes','Rejected') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `is_bank_account_verified` enum('Yes','Rejected') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1040,17 +1102,47 @@ CREATE TABLE `user_details` (
 --
 
 INSERT INTO `user_details` (`id`, `user_id`, `first_name`, `last_name`, `address`, `state_id`, `city_id`, `pan_card`, `pan_card_file`, `address_proof`, `address_proof_file_1`, `address_proof_file_2`, `account_number`, `ifsc_code`, `bank_name`, `bank_proof`, `bank_proof_file`, `is_pan_verified`, `is_address_proof_verified`, `is_bank_account_verified`, `created_at`, `updated_at`) VALUES
-(1, 2, 'sridhar', 'vellingiri', 've', 16, 1601, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-06-15 13:39:05', '2019-12-26 18:54:29'),
-(2, 3, 'sridhar', 'vellingiri', 've', 16, 1601, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-06-22 17:18:49', '2019-12-26 18:54:29'),
-(3, 4, 'sridhar', 'vellingiri', 've', 16, 1601, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-12-05 19:08:30', '2019-12-26 18:54:29'),
-(4, 10, 'sridhar', 'vellingiri', 've', 16, 1601, 'EOEPSDS3434', 'd5e01d2a27bad4a0d6cdcc5d7f5903ee_3e90a1439ad40b6402c3e23baa56522f_loader_new.gif', 'aadhar_card', '743f5d730a802f9b91a136713f5c5b5b_3e90a1439ad40b6402c3e23baa56522f_loader_new.gif', NULL, NULL, NULL, NULL, 'passbook', '4ed82c221fbc3da0d2307897bb0cfa73_18Stinger_receive_updates_1680.jpg', NULL, NULL, NULL, '2019-12-10 10:38:50', '2019-12-26 18:54:29'),
-(5, 5, 'sridhar', 'vellingiri', 've', 16, 1601, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-12-17 17:04:01', '2019-12-26 18:54:29'),
-(6, 6, 'sridhar', 'vellingiri', 've', 16, 1601, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-12-18 19:11:00', '2019-12-26 18:54:29'),
-(7, 7, 'sridhar', 'vellingiri', 've', 16, 1601, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-12-18 19:14:33', '2019-12-26 18:54:29'),
-(8, 8, 'sridhar', 'vellingiri', 've', 16, 1601, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-12-18 19:15:08', '2019-12-26 18:54:29'),
-(9, 1, 'sridhar', 'vellingiri', 've', 16, 1601, 'EOEPS7619M', '0ac53e603c3869f2fddc08bd457ba623_avatar_placeholder.jpg', 'voter_id', 'fe56a5ff3f9c019d32c5ba909eda06d9_1400X400.jpg', '548f93b4afe7987ef7fefe214eee0bb8_application-structure.png', '3081565955', 'sbin000333', 'state bamk', 'cheque', '666d2700f4a99f7f3a8f7ed7b00167de_18Stinger_receive_updates_1680.jpg', 'Yes', 'Rejected', 'Yes', '2019-12-18 19:16:10', '2019-12-31 20:33:22'),
-(10, 11, 'sridhar', 'vellingiri', 've', 16, 1601, 'EOEPS3DSD', 'cfeb16992f5a2147b9596499790fc7e1_1j+ojl1FOMkX9WypfBe43D6kiPaDqhJLnxnNwXs1M3EMoAJtlSYtg.jpg', 'aadhar_card', 'af1695984ca3666f5b8248cf8b4383be_3e90a1439ad40b6402c3e23baa56522f_loader_new.gif', NULL, NULL, NULL, NULL, 'passbook', '142e30b0b1481bb8fce4121ca69a6258_bg_slider_12.jpg', NULL, NULL, NULL, '2019-12-18 19:17:31', '2019-12-26 18:54:29'),
-(11, 9, 'sridhar', 'vellingiri', 've', 16, 1601, 'EOEPS7772M', 'e272e1956fe3680846e574a227d7e7b9_ecommerce-1.jpg', 'aadhar_card', NULL, 'a7d2d69573065baa2f7639faee5031b5_halo5.jpg', NULL, NULL, NULL, 'passbook', '4c97b35b49f181cc04c219b9e71822ba_world_map.jpg', NULL, NULL, NULL, '2019-12-18 19:17:54', '2019-12-26 18:54:29');
+(14, 14, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-04-27 16:17:33', '2021-04-27 16:17:33'),
+(15, 15, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-04-27 16:26:52', '2021-04-27 16:26:52'),
+(16, 16, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-04-28 15:26:17', '2021-04-28 15:26:17'),
+(17, 17, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-04-28 15:33:23', '2021-04-28 15:33:23'),
+(18, 18, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-04-28 15:38:12', '2021-04-28 15:38:12'),
+(19, 19, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-04-28 15:39:14', '2021-04-28 15:39:14'),
+(20, 20, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-04-28 15:40:40', '2021-04-28 15:40:40'),
+(21, 21, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-04-28 15:42:59', '2021-04-28 15:42:59');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_games`
+--
+
+CREATE TABLE `user_games` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `game_id` int(11) NOT NULL,
+  `betting_team` varchar(255) NOT NULL,
+  `betting_amount` float NOT NULL,
+  `final_amount` float NOT NULL,
+  `status` varchar(55) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user_games`
+--
+
+INSERT INTO `user_games` (`id`, `user_id`, `game_id`, `betting_team`, `betting_amount`, `final_amount`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 6, 'Eng', 150, 270, 'placed', '2021-03-29 16:28:09', NULL),
+(2, 1, 5, 'AUS', 888, 1598.4, 'placed', '2021-03-29 16:30:48', NULL),
+(3, 1, 2, 'Afganistan', 100, 180, 'placed', '2021-03-29 16:32:30', NULL),
+(4, 1, 4, 'IND W', 111, 199.8, 'placed', '2021-03-29 16:33:44', NULL),
+(5, 1, 4, 'IND W', 90, 162, 'placed', '2021-03-29 16:34:06', NULL),
+(6, 1, 6, 'Ind', 280, 504, 'placed', '2021-03-29 16:34:27', NULL),
+(7, 1, 4, 'IND W', 20, 36, 'placed', '2021-03-29 16:34:40', NULL),
+(8, 1, 6, 'Eng', 250, 450, 'placed', '2021-04-03 14:07:37', NULL),
+(9, 1, 6, 'Eng', 351, 631.8, 'placed', '2021-04-03 14:08:02', NULL);
 
 -- --------------------------------------------------------
 
@@ -1063,17 +1155,9 @@ CREATE TABLE `user_wallet` (
   `user_id` int(11) NOT NULL,
   `cash` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `practice_cash` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `user_wallet`
---
-
-INSERT INTO `user_wallet` (`id`, `user_id`, `cash`, `practice_cash`, `created_at`, `updated_at`) VALUES
-(1, 5, '6000', '10000', '2019-12-17 02:38:25', '2019-12-17 20:24:07'),
-(2, 1, '7500', '10000', '2019-12-26 01:45:56', '2020-04-13 03:48:32');
 
 -- --------------------------------------------------------
 
@@ -1089,8 +1173,8 @@ CREATE TABLE `withdrawal_history` (
   `wallet_balance` float DEFAULT NULL,
   `withdrawal_date` datetime DEFAULT NULL,
   `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1112,7 +1196,10 @@ INSERT INTO `withdrawal_history` (`id`, `user_id`, `wallet_old_cash`, `withdrawa
 (12, 1, 8400, 500, 7900, '2020-04-13 09:12:47', 'requested', '2020-04-13 03:42:47', '2020-04-13 03:42:47'),
 (13, 1, 7900, 200, 7700, '2020-04-13 09:12:54', 'requested', '2020-04-13 03:42:54', '2020-04-13 03:42:54'),
 (14, 1, 7700, 200, 7500, '2020-04-13 09:17:47', 'reversed', '2020-04-13 03:47:47', '2020-04-13 03:48:32'),
-(15, 1, 7500, 200, 7300, '2020-04-13 09:18:11', 'requested', '2020-04-13 03:48:11', '2020-04-13 03:48:11');
+(15, 1, 7500, 200, 7300, '2020-04-13 09:18:11', 'requested', '2020-04-13 03:48:11', '2020-04-13 03:48:11'),
+(16, 1, 7500, 3500, 4000, '2021-03-28 09:16:08', 'requested', '2021-03-28 15:46:08', '2021-03-28 15:46:08'),
+(17, 1, 2400, 200, 2200, '2021-03-29 10:05:47', 'requested', '2021-03-29 16:35:47', '2021-03-29 16:35:47'),
+(18, 1, 1599, 200, 1399, '2021-04-03 07:44:51', 'requested', '2021-04-03 14:14:51', '2021-04-03 14:14:51');
 
 --
 -- Indexes for dumped tables
@@ -1137,6 +1224,12 @@ ALTER TABLE `all_states`
   ADD PRIMARY KEY (`state_code`);
 
 --
+-- Indexes for table `cash_out`
+--
+ALTER TABLE `cash_out`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `countries`
 --
 ALTER TABLE `countries`
@@ -1147,6 +1240,12 @@ ALTER TABLE `countries`
   ADD KEY `continent` (`continent`),
   ADD KEY `population` (`population`),
   ADD KEY `surfaceArea` (`surfaceArea`);
+
+--
+-- Indexes for table `games`
+--
+ALTER TABLE `games`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `migration`
@@ -1160,6 +1259,12 @@ ALTER TABLE `migration`
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `upi`
+--
+ALTER TABLE `upi`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -1178,6 +1283,12 @@ ALTER TABLE `users`
 ALTER TABLE `user_details`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `user_games`
+--
+ALTER TABLE `user_games`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `user_wallet`
@@ -1215,22 +1326,46 @@ ALTER TABLE `all_states`
   MODIFY `state_code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
+-- AUTO_INCREMENT for table `cash_out`
+--
+ALTER TABLE `cash_out`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `games`
+--
+ALTER TABLE `games`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `upi`
+--
+ALTER TABLE `upi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `user_details`
 --
 ALTER TABLE `user_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `user_games`
+--
+ALTER TABLE `user_games`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `user_wallet`
@@ -1242,7 +1377,7 @@ ALTER TABLE `user_wallet`
 -- AUTO_INCREMENT for table `withdrawal_history`
 --
 ALTER TABLE `withdrawal_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Constraints for dumped tables

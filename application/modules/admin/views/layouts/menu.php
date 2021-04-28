@@ -18,6 +18,12 @@
         <li class="sidebar-nav-item">
             <a href="<?= site_url('admin/users') ?>" class="sidebar-nav-link users"><i class="icon ion-ios-contact"></i> &nbsp; Users</a>
         </li>
+        <li class="sidebar-nav-item">
+            <a href="<?= site_url('admin/games') ?>" class="sidebar-nav-link games"><i class="icon ion-ios-game-controller-b"></i> &nbsp; Games</a>
+        </li>
+        <li class="sidebar-nav-item">
+            <a href="<?= site_url('admin/upi') ?>" class="sidebar-nav-link games"><i class="icon ion-ios-baseball"></i> &nbsp; UPI</a>
+        </li>
         <li class="sidebar-nav-item with-sub">
             <a href="" class="sidebar-nav-link approvals"><i class="fa fa-check" aria-hidden="true"></i> &nbsp; Admin Approvals </a>
             <ul class="nav sidebar-nav-sub" >

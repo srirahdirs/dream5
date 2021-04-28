@@ -1,6 +1,7 @@
 
 <?php $baseUrlFrAssets = base_url() .'assets'; ?>
-<div class="slider">
+<div class="slider hm-slider">
+
     <div id="carousel1" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner" role="listbox">
             <div class="carousel-item active">
@@ -22,7 +23,9 @@
             <span class="sr-only">Next</span>
         </a>
     </div><!-- carousel -->
+	
+	<?php
+		$this->load->view('users/register');
+	?>
+
 </div>
-<?php
-  $this->load->view('users/register');
-?>

@@ -102,12 +102,14 @@ $this->load->view('layouts/footer');
     //main menu
     $(".nav-item").removeClass('active');
     $(".withdraw_main_menu").addClass('active');
+    
     $('.cursor_pointer').on("click", function () {
         $('.cursor_pointer').css('background', 'none');
         $(this).blur();
         $(this).css('background', '#FFB612');
         $('#order_amount').val($(this).val());
     });
+
     // $('#withdraw').click(function (e) {
     //     e.preventDefault();
     //     $.confirm({
@@ -118,7 +120,6 @@ $this->load->view('layouts/footer');
     //                 $("#redirectForm").submit();
     //             }, //confirm btn ends
     //             cancel: function () {
-
     //             },
     //         },
     //     }); //confirm e

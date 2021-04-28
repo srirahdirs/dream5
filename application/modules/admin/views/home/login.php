@@ -1,10 +1,11 @@
 <?php $this->load->view('layouts/login_header'); ?>
+<?php $baseUrl = base_url() . 'assets/'; ?>
 <div class="signin-wrapper">
 
     <div class="signin-box">
-        <h2 class="slim-logo"><a href="" target="_blank"><img src="<?= base_url() .'assets/a1dmin/img/tandem.png'?>" alt="logo"></a></h2>
-        <h2 class="">Welcome back <span style="color:#FFDD00 ">Admin!</span></h2>
-        <h3 class="signin-title-secondary"><b style="color:white">Login</b> to continue.</h3>
+        <h2 class="slim-logo"><a href="" target="_blank"><img src="<?= $baseUrl ?>/img/logo/logo_white.png" height="105" style="margin-left: 0px;"></a></h2>
+        <!-- <h2 class="">Welcome back <span style="color:#FFDD00 ">Admin!</span></h2> -->
+        <h3 class="signin-title-secondary"></h3>
         <?php if ($this->session->flashdata('success')) { ?>
             <div class="notification success"><?= $this->session->flashdata('success') ?></div>
         <?php } else ?>

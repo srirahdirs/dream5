@@ -59,7 +59,10 @@
         $(".btn-submit").click(function (e) {
 
             e.preventDefault();
-
+            $(".err_password").css('display', 'none');
+            $(".err_username").css('display', 'none');
+            $(".err_mobile_number").css('display', 'none');
+            $(".err_email").css('display', 'none');
             var username = $("input[name='username']").val();
 
             var email = $("input[name='email']").val();

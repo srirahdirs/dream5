@@ -9,10 +9,12 @@ $encrypted_user_id = encryptId($this->session->userdata('user_id'));
 <div class="slim-body">
 
     <div class="slim-sidebar">
-        <!--<label class="sidebar-label">Navigation</label>-->
+        <label class="sidebar-label">Navigation</label>
 
         <ul class="nav nav-sidebar">
-
+            <li class="sidebar-nav-item">
+                <a href="<?= base_url() . 'payments/game'?>" class="sidebar-nav-link play_game"><i class="fa fa-gamepad" aria-hidden="true"></i> Play Game </a>
+            </li>
             <li class="sidebar-nav-item with-sub">
                 <a href="" class="sidebar-nav-link my_profile"><i class="icon ion-ios-contact "></i> My Profile</a>
                 <ul class="nav sidebar-nav-sub">

@@ -10,7 +10,7 @@
     font-weight: 900;
 }
 .slim-logo a img {
-    max-width: 150px;
+    /*max-width: 150px;*/
 }
 .signin-box {
     background-color: #2D2F4E;

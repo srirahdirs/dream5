@@ -11,16 +11,22 @@ $route['getSelectedCityList'] = 'common/getSelectedCityList';
 $route['login'] = 'common/login';
 $route['logout'] = 'common/logout';
 $route['home'] = 'common/index';
+$route['refund_policy'] = 'common/refund_policy';
 
 //payments
 $route['payment-response'] = 'payments/response';
 $route['payment-request'] = 'payments/request';
 $route['add-cash'] = 'payments/addCash';
+//$route['depositAmount/(:num)/{:any}'] = 'payments/depositAmount/$1/$2';
 $route['withdraw-cash'] = 'payments/withdrawCash';
 $route['withdraw-reversal'] = 'payments/withdrawReversal';
 $route['payments/withdrawHistory/(:num)'] = 'payments/withdrawHistory';
 $route['payments/transactions/(:num)'] = 'payments/transactions';
 $route['add-practice-cash'] = 'payments/addPracticeCash';
+$route['saveBet'] = 'payments/saveBet';
+$route['viewUserBets'] = 'payments/viewUserBets';
+$route['checkUserBalance/(:num)'] = 'payments/checkUserBalance/$1';
+$route['get-game-details'] = 'payments/getGameDetails';
 
 
 //user

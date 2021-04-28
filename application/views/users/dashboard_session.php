@@ -66,22 +66,22 @@ $this->load->view('layouts/menu_session');
                             <th class="wd-20p">Status</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody> 
                         <?php
                         $i = 1;
                         foreach ($transactions_history as $row):
                             ?>
                             <tr>                                    
                                 <td><?= $i ?></td>
-                                <td><?= $row['order_id'] ?></td>
+                                <td><?= $row['razorpay_payment_id'] ?></td>
                                 <td><?= $row['amount'] ?></td>
-                                <td><?= $row['payment_mode'] ?></td>
-                                <td><?= date('Y-m-d', strtotime($row['txn_time'])) ?></td>
+                                <td><?= $row['entity'] ?></td>
+                                <td><?= date('Y-m-d', strtotime($row['ordered_at'])) ?></td>
                                 <td><?php
-                                    if ($row['txn_status'] != 'SUCCESS') {
-                                        echo '<strike>' . ucfirst($row['txn_status']) . '</strike>';
+                                    if ($row['status'] != 'authorized') {
+                                        echo '<strike>' . $row['status'] . '</strike>';
                                     } else {
-                                        echo '<span style="color:#23BF08">'. ucfirst($row['txn_status']) .'</span>';
+                                        echo '<span style="color:#23BF08">'. ucfirst('Success') .'</span>';
                                     }
                                     ?></td>
                             </tr>

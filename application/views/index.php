@@ -5,9 +5,9 @@
 
 <div class="slim-mainpanel">
 <?php
-    $this->load->view('layouts/homeSlider');
-    $this->load->view('layouts/homeSliderBottom');
-    $this->load->view('layouts/homePricing');
+    $this->load->view('layouts/home_slider');
+    $this->load->view('layouts/home_slider_bottom');
+    $this->load->view('layouts/home_pricing');
 ?>
 </div><!-- slim-mainpanel -->
 <?php

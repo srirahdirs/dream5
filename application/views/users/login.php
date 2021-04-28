@@ -3,20 +3,20 @@
 
     <?php echo form_open('login', ['class' => 'login_form']); ?>
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-4 col-sm-4">
             <div class="form-group">             
                 <input type="text" class="form-control" name="username_or_email" placeholder="USERNAME or EMAIL" autocomplete="off">                
             </div>
         </div>
 
 
-        <div class="col-lg-4">
+        <div class="col-lg-4 col-sm-4">
             <div class="form-group">
                 <input type="password" class="form-control" name="login_password" placeholder="PASSWORD" autocomplete="off">
             </div>
         </div><!-- row -->
 
-        <div class="col-lg-1 mg-t-20 mg-lg-t-0">
+        <div class="col-lg-1 mg-t-20 mg-lg-t-0 col-sm-1">
             <div class="btn-group" role="group" aria-label="Basic example">                  
                 <button type="button" class="btn btn-secondary active frgt_pwd_btn">
                     <span class="fa-passwd-reset fa-stack">
@@ -26,7 +26,7 @@
                 </button>
             </div>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-3 col-sm-3">
             <button class="btn btn-primary btn-block btn-login">Login</button>
         </div>
     </div>

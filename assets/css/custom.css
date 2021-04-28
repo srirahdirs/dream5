@@ -265,3 +265,92 @@ a {
     border-color: #FFB612;
     box-shadow: 0 0 0 0.2rem #FFB612;
 }
+
+
+
+/*my custom*/
+.hm-slider{
+	position:relative;
+}
+.register_page{
+	top:0;
+}
+
+
+
+
+/* Responsive */
+@media only screen and (max-width: 767px) {
+	.slim-header {
+    width: 100%;
+    height: auto;
+    display: block;
+    align-items: unset;
+	}
+	.slim-header .container{
+		display: block;
+	}
+	.slim-logo{
+		text-align:center;
+	}
+	.register_page {
+		display: block;
+	}
+	.register_page{
+		right: 8%;
+	}
+    .login-box {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+	
+}
+
+@media only screen and (max-width: 480px) {
+}
+
+@media ( min-width: 576px ) and (max-width: 768px) {
+	.login-box .mg-t-20 {
+		margin-top: 0;
+	}
+}
+
+@media ( min-width: 768px ) and (max-width: 991px){
+	.register_page {
+		display: block;
+	}
+	.login-box .mg-t-20 {
+		margin-top: 0;
+	}
+}
+
+@media ( min-width: 992px ) and (max-width: 1199px){
+	.register_page {
+		display: block;
+	}
+	
+}
+.bg_clr_yel{
+    background-color: #FFB612 !important;
+    color: white !important;
+}
+.bet_result{
+    width:100%;
+}
+.p_label,.p_value,.p_label_1,.p_value_1{
+    width: 50%;
+    float: left;
+    text-align: right;
+}
+.final_amount_user{
+    font-weight: 900;
+    font-size: large;
+    color: #1C9A06;
+}
+.check_balance_btn{
+    cursor: not-allowed;
+    pointer-events:none;
+    opacity: 0.5;
+}

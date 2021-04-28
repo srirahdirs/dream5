@@ -49,9 +49,8 @@ class Mail_model extends CI_Model {
                 $this->session->set_flashdata('success', 'Please check mail.');
             } else {
                 $this->session->set_flashdata('error', 'Failed to send email.');
-            }
+            }           
             
-            return 1;
         }
         
     }

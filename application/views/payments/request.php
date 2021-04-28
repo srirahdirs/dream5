@@ -37,7 +37,8 @@ $signature = base64_encode($signature);
 if ($mode == "PROD") {
   $url = "https://www.cashfree.com/checkout/post/submit";
 } else {
-  $url = "https://test.cashfree.com/billpay/checkout/post/submit";
+  // $url = "https://test.cashfree.com/billpay/checkout/post/submit";
+  $url = "https://www.cashfree.com/checkout/post/submit";
 }
 
 ?>

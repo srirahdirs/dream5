@@ -16,10 +16,10 @@
                     <span>Home</span>
                 </a>            
             </li>
-            <li class="nav-item">
+            <li class="nav-item play_game_main_menu">
                 <?php if ($this->session->userdata('login_status')) { 
                     $class_name = '';
-                    $href_play_game = site_url('home');
+                    $href_play_game = site_url('payments/game');
                     $href_add_cash = site_url('add-cash');
                     $href_withdraw = site_url('withdraw-cash');                    
                     $href_support = site_url('home');
@@ -32,7 +32,7 @@
                 }
                 ?>
                 
-                <a class="nav-link play_game <?= $class_name ?>" href="<?= $href_play_game ?>">
+                <a class="nav-link  <?= $class_name ?>" href="<?= $href_play_game ?>">
                     <i class="icon ion-ios-game-controller-b"></i>
                     <span>PLAY GAME</span>
                 </a>    

@@ -1,7 +1,7 @@
 <?php
  
-$config['protocol'] = 'smtp';
-$config['smtp_host'] = 'ssl://smtp.googlemail.com';
+$config['protocol'] = 'ssmtp';
+$config['smtp_host'] = 'ssl://ssmtp.googlemail.com';
 $config['smtp_port'] = '465';
 $config['smtp_user'] = 'no-reply@tandem.network';
 $config['smtp_pass'] = 'Totem2018';

@@ -1,6 +1,8 @@
 <?php
 
 defined('BASEPATH') OR exit('No direct script access allowed');
+require_once APPPATH."third_party/razorpay/Razorpay.php";
+include(APPPATH."third_party/razorpay/src/Api.php");
 
 class Payments extends CI_Controller {
 
@@ -25,6 +27,22 @@ class Payments extends CI_Controller {
         $data['orderId'] = 'ORD_' . rand() . '_' . $this->session->userdata('user_id') . '_MAN';
 
         $this->load->view('payments/add_cash', $data);
+    }
+    public function depositAmount() {
+        $this->load->model('../../modules/admin/models/Upi_model');
+        $data['payment_type'] = $this->input->get('payment_type');
+        $data['amount'] = $this->input->get('amount');
+        $data['user_id'] = $this->session->userdata('user_id');
+        $payment_type = $this->Upi_model->findByUpiMethod($data['payment_type']);
+        $data['upi_id']= $payment_type->upi_id;
+        $this->load->view('payments/add_cash_upi', $data);
+    }
+    public function saveReferenceNumber() {
+        $this->load->model('../../modules/admin/models/Upi_model');        
+        
+        $this->Upi_model->saveUserRefNumber();
+        $this->session->set_flashdata('success', 'Amount will be added with in 5-15 minutes');
+        redirect('home');
     }
 
     public function withdrawCash() {
@@ -116,20 +134,53 @@ class Payments extends CI_Controller {
         }
         $this->load->view('payments/add_practice_cash', $data);
     }
-
+    public function getPaymentDetails($payment_id){
+        
+//        $payment_id = 'pay_H238utBQQ5D5fr';
+        $url = 'https://api.razorpay.com/v1/payments/'.$payment_id;
+        $api = new \Razorpay\Api\Api(RAZOR_PAY_KEY_ID_TEST,RAZOR_PAY_SECRET_TEST);
+       
+        /* Array Parameter Data */
+        
+//  Initiate curl
+        $ch = curl_init();
+        // Disable SSL verification
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        // Will return the response, if false it print the response
+        
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_USERPWD, RAZOR_PAY_KEY_ID_TEST.":".RAZOR_PAY_SECRET_TEST);
+        
+        // Set the url
+        curl_setopt($ch, CURLOPT_URL,$url);
+        // Execute
+        $result_curl = curl_exec($ch);
+        // Closing
+        curl_close($ch);
+        // Print the return data
+        $result = json_decode($result_curl, true);
+        return $result;
+    }
     public function response() {
         $model = new Order_model();
-        $secretkey = secretKey;
-        $data['order_id'] = $_POST["orderId"];
-        $data['amount'] = $_POST["orderAmount"];
-        $data['reference_id'] = $_POST["referenceId"];
-        $data['txn_status'] = $_POST["txStatus"];
-        $data['payment_mode'] = $_POST["paymentMode"];
-        $data['txn_msg'] = $_POST["txMsg"];
-        $data['txn_time'] = $_POST["txTime"];
-        $data['signature'] = $_POST["signature"];
-
-
+        
+        $data['razorpay_payment_id'] = $_POST["razorpay_payment_id"];
+        $result = $this->getPaymentDetails($data['razorpay_payment_id']);
+        $data['razorpay_payment_id'] = $result['id'];
+        $data['entity'] = $result['entity'];
+        $data['amount'] = $result['amount'] / 100;
+        $data['currency'] = $result['currency'];
+        $data['status'] = $result['status'];
+        $data['order_id'] = $result['order_id'];
+        $data['description'] = $result['description'];
+        $data['email'] = $result['email'];
+        $data['mobile_no'] = $result['contact'];
+        $data['error_code'] = $result['error_code'];
+        $data['error_description'] = $result['error_description'];
+        $data['error_source'] = $result['error_source'];
+        $data['error_reason'] = $result['error_reason'];
+        $data['created_at'] = $result['created_at'];
+        $model = new Order_model();
         if ($model->saveOrder($data)) {
             redirect('home');
         } else {
@@ -149,6 +200,110 @@ class Payments extends CI_Controller {
         $data['returnUrl'] = $this->input->post("returnUrl");
         $data['notifyUrl'] = $this->input->post("notifyUrl");
         $this->load->view('payments/request', $data);
+    }
+    public function Game() {
+        //admin model
+        $this->load->model('../../modules/admin/models/Games_model');
+        
+        $config["base_url"] = base_url() . "payments/game";
+        $config["total_rows"] = $this->Games_model->findCount();
+        $config["per_page"] = 9;
+        $config["uri_segment"] = 3;
+
+        $config['full_tag_open'] = "<div clas='pagination-wrapper'><ul class='pagination pagination-success mg-b-0'>";
+        $config['full_tag_close'] = '</ul></div>';
+        $config['cur_tag_open'] = '&nbsp;<a class="current">';
+        $config['cur_tag_close'] = '</a>';
+        $config['next_link'] = '>';
+        $config['prev_link'] = '<';
+        $this->pagination->initialize($config);
+
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+        $data["links"] = $this->pagination->create_links();
+
+        $data['games'] = $this->Games_model->findAllGames($config["per_page"], $page);
+        $model = new Order_model();        
+        foreach ($data['games'] as $key => $value) {
+            $userDetails = $model->getUserBettingDetails($value['id']);
+            if($userDetails){
+                $data['games'][$key]['bet_placed'] = 'Yes';
+            } else {
+                $data['games'][$key]['bet_placed'] = 'No';
+            }
+            
+        }
+        $this->load->view('payments/game', $data);
+    }
+    public function saveBet(){
+        $data['game_id'] = $this->input->post('game_id');
+        $data['betting_team'] = $this->input->post('betting_team');
+        $data['betting_amount'] = $this->input->post('amount');
+        $data['final_amount'] = $this->getFinalBetAmount($this->input->post('amount'));
+        $data['user_id'] =  $this->session->userdata('user_id');
+        $data['status'] = 'placed';
+        $model = new Order_model();
+        $getCash = $model->getUserBalance($this->session->userdata('user_id'));
+        $totalCash = $getCash[0]->cash;
+        if($totalCash < $data['betting_amount']){
+            echo "low_balance";
+        } else{            
+            $model->saveBet($data);
+            echo "can_bet";
+
+        }
+        
+    }
+    public function viewUserBets(){
+        $model = new Order_model();
+        $userDetails = $model->viewUserBets($this->session->userdata('user_id'));
+        $table = '<div class="table-responsive">
+                    <table class="table mg-b-0 tx-13">
+                        <thead>
+                            <tr>
+                                <th class="wd-5p bg_clr_yel">Team</th>
+                                <th class="wd-5p bg_clr_yel">Amount</th>
+                                <th class="wd-20p bg_clr_yel">Final Amount</th>
+                                <th class="wd-5p bg_clr_yel">Status</th>
+                                <th class="wd-15p bg_clr_yel">Placed At</th>
+                            </tr>
+                        </thead>
+                        <tbody>';
+        foreach ($userDetails as $row):
+                $table .= '<tr>';                                    
+                $table .= '<td>'.$row['betting_team'] .'</td>';
+                $table .= '<td>'.$row['betting_amount'] .'</td>';
+                $table .= '<td>'.$row['final_amount'] .'</td>';
+                $table .= '<td>'.$row['status'] .'</td>';
+                $table .= '<td>'.$row['created_at'] .'</td>';
+                $table .= '</tr>';
+        endforeach;
+        $table .= '</tbody>';
+        $table .= '</table>';
+        echo $table;
+    }
+    public function getFinalBetAmount($amount){
+        $doubleAmount = $amount * 2;
+        $dream5percentage = 10;
+        $percentageAmount = ($dream5percentage / 100) * $doubleAmount;
+        $finalAmount = $doubleAmount - $percentageAmount;
+        return $finalAmount;
+    }
+    public function getGameDetails(){
+        $game_id = $this->input->post('game_id');
+        $model = new Order_model();
+        $result = $model->getGameDetails($game_id);
+        echo json_encode($result); 
+    }
+    public function checkUserBalance($bet_amount){
+        $model = new Order_model();
+        $getCash = $model->getUserBalance($this->session->userdata('user_id'));
+        $totalCash = $getCash[0]->cash;
+        if($totalCash < $bet_amount){
+            echo "low_balance";
+        } else{
+            echo "can_bet";
+        }
     }
 
 }

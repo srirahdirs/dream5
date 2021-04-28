@@ -1,7 +1,13 @@
 <?php $baseUrl = base_url().'assets';?>
 <div class="slim-footer">
-    <div class="container">
+    <div class="container" style="max-width: 100%">
         <p>Copyright <a href=""><?= date('Y')?> &copy;</a> All Rights Reserved. </p>
+        <p> <a href="">About Us</a> </p>
+        <p> <a href="">Contact Us</a> </p>
+        <p> <a href="">Pricing</a> </p>
+        <p> <a href="">Privacy Policy</a> </p>
+        <p> <a href="">Terms & Conditions</a> </p>
+        <p> <a href="">Cancellation/Refund Policy</a> </p>
         <p>By: <a href="http://www.youngzen.in/" target="_blank">YoungZen Technologies</a></p>
     </div><!-- container -->
 </div><!-- slim-footer -->
