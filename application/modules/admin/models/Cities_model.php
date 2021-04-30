@@ -28,7 +28,7 @@ class Cities_model extends CI_Model {
     //****************  for pagination
     public function get($limit, $start) {
         $this->db->limit($limit, $start);
-        $this->db->select('cities.*,countries.country');
+        $this->db->select('all_cities.*,countries.country');
         $this->db->join('countries','countries.id = cities.country_id');
         $this->db->order_by('id asc');
         $query = $this->db->get($this->table);

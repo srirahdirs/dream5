@@ -118,10 +118,10 @@ $this->load->view('layouts/footer');
             '<div class="form-group">' +
             '<label>Payment Method</label>' +
             '<select class="form-control" required id="payment_type">' +
-            '<option value="gpay">Gpay</option>' +
-            '<option value="paytm">Paytm</option>' +
-            '<option value="phonepe">Phonepe</option>' +
-            '<option value="bhim">BHIM</option>' +
+            '<option value="Gpay">Gpay</option>' +
+            '<option value="Paytm">Paytm</option>' +
+            '<option value="Phonepe">Phonepe</option>' +
+            '<option value="BHIM">BHIM</option>' +
             '</select>' +
             '<label>Enter the amount</label>' +
             '<input type="number" placeholder="Rs.100 - Rs.10000" min="1" max="10000" class="deposit_amount form-control" required id="amount" value="'+ $("#order_amount").val()+'"/>' +

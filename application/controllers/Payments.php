@@ -41,7 +41,7 @@ class Payments extends CI_Controller {
         $this->load->model('../../modules/admin/models/Upi_model');        
         
         $this->Upi_model->saveUserRefNumber();
-        $this->session->set_flashdata('success', 'Amount will be added with in 5-15 minutes');
+        $this->session->set_flashdata('success', 'Amount will be added with in 5 - 15 minutes');
         redirect('home');
     }
 
