@@ -357,3 +357,12 @@ a {
 .logged-user img {
 	border:0px !important;
 }
+#games_tbl tbody tr td {
+    vertical-align: middle;
+}
+.team_name .badge,.view_bet .badge{
+    padding:10px 15px;
+}
+.disabled_bet .badge{
+    padding:5px 10px;
+}

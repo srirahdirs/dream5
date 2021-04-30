@@ -48,13 +48,13 @@ $this->load->view('layouts/menu_session');
                         <a href="javascript:void(0)" class="btn btn-primary btn-block">APPLY</a>
                     </div>
                     <!-- <div class="hide_form"> -->
-                    <div class="col-3">
+<!--                    <div class="col-3">
                         <label class="hide_label">Pay</label><br>
                         <button id="rzp-button1" class="btn btn-primary btn-block">Pay</button>
-                    </div>
+                    </div>-->
                     <div class="col-2">
                         <label class="hide_label">UPI</label><br>
-                        <button id="upi" class="btn btn-primary btn-block">UPI</button>
+                        <button id="upi" class="btn btn-success">DEPOSIT</button>
                     </div>
                     <script src="https://checkout.razorpay.com/v1/checkout.js"></script><script>var options = {    "key": 'rzp_test_a48zLIZs22FofS',    
                                 "amount": "100",   

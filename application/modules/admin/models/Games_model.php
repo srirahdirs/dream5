@@ -77,7 +77,12 @@ class Games_model extends CI_Model {
    
     //all games
     public function findAllGames($limit, $start) {
-        return $this->db->order_by('id desc')->limit($limit, $start)->get_where($this->table)->result_array(0);
+        return $this->db->order_by('
+    CASE 
+      WHEN DATE(match_date_time) = DATE(NOW()) THEN 0
+      WHEN DATE(match_date_time) > DATE(NOW()) THEN 1
+      ELSE 2
+    END , DATE(match_date_time) ASC')->limit($limit, $start)->get_where($this->table)->result_array(0);
     }
 
 }
