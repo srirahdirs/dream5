@@ -48,11 +48,11 @@ $this->load->view('layouts/menu_session');
                         <a href="javascript:void(0)" class="btn btn-primary btn-block">APPLY</a>
                     </div>
                     <!-- <div class="hide_form"> -->
-                    <div class="col-lg-3">
+<!--                    <div class="col-lg-3">
                         <label class="hide_label">Pay</label><br>
                         <button id="rzp-button1" class="btn btn-primary btn-block">Pay</button>
-                    </div>
-                    <div class="col-lg-2"></div>
+                    </div>-->
+                    <!--<div class="col-lg-2"></div>-->
 <!--                    <div class="col-3">
                         <label class="hide_label">Pay</label><br>
                         <button id="rzp-button1" class="btn btn-primary btn-block">Pay</button>
@@ -92,7 +92,7 @@ $this->load->view('layouts/menu_session');
                     </div> 
                 </div>                
                 <br>
-                <p class="mg-b-20 mg-sm-b-40"> By clicking confirm, you agree that you are 18+, resident of India and not playing from Assam, Orissa and Telangana.</p>
+                <p class="mg-b-20 mg-sm-b-40"> By clicking confirm, you agree that you are 18+, resident of India and not playing from Assam, Orissa, Telangana and Tamilnadu.</p>
             </form>
         </div>
     </div>
