@@ -41,6 +41,8 @@ $route['set-new-password/(:any)'] = 'user/setNewPassword/$1';
 $route['admin/home'] = 'admin/home/index';
 $route['admin/login'] = 'admin/home/login';
 $route['admin/logout'] = 'admin/home/logout';
+$route['admin/upi-payments'] = 'admin/approvals/UpiPayments';
+$route['admin/confirm-upi-payment/(:num)'] = 'admin/approvals/confirmUpiPayment/$1';
 /**************ADMIN users**************/
 $route['admin/users/(:num)'] = 'admin/users/index';
 $route['admin/users/delete/(:any)'] = 'admin/users/delete/$1';

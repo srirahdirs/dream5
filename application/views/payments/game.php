@@ -10,7 +10,7 @@ $this->load->view('layouts/menu_session');
         <div class="section-wrapper">
             <div class="row">                    
                 <div class="table-responsive">
-                    <table class="table mg-b-0 tx-13">
+                    <table class="table mg-b-0 tx-13" id="games_tbl">
                         <thead>
                             <tr>
                                 <th class="wd-5p bg_clr_yel">Category</th>
@@ -31,25 +31,26 @@ $this->load->view('layouts/menu_session');
                                     <td><?= $row['category']; ?></td>
                                     <td><?= $row['game_type']; ?></td>
                                     <td>
-                                        <?php if($row['status'] != 'Disabled') { ?>
+                                        <?php if($row['status'] == 'Upcoming') { ?>
                                             <a href="javascript:void(0)" class="team_name" data-id="<?= $row['id']?>" data-team="<?= $row['team_a']?>"><span data-toggle="tooltip" title="Click to bet on - <?= $row['team_a']; ?>"<span class="badge badge-success"><?= $row['team_a']; ?></span></span></a>
                                         <?php } else { ?>
-                                            <a href="javascript:void(0)" class="" data-id="<?= $row['id']?>" data-team="<?= $row['team_a']?>"><span data-toggle="tooltip" title="Bets currently disabled"<span class="badge badge-success"><?= $row['team_a']; ?></span></span></a>
+                                            <a href="javascript:void(0)" class="disabled_bet" data-id="<?= $row['id']?>" data-team="<?= $row['team_a']?>"><span data-toggle="tooltip" title="Bets currently disabled"<span class="badge badge-success"><?= $row['team_a']; ?></span></span></a>
                                         <?php } ?>
                                     </td>
                                     <td>
-                                        <?php if($row['status'] != 'Disabled') { ?>
-                                            <a href="javascript:void(0)" class="team_name" data-id="<?= $row['id']?>" data-team="<?= $row['team_b']?>"><span data-toggle="tooltip" title="Click to bet on - <?= $row['team_b']; ?>"<span class="badge badge-warning"><?= $row['team_b']; ?></span></span></a></td>
+                                        <?php if($row['status'] == 'Upcoming') { ?>
+                                            <a href="javascript:void(0)" class="team_name" data-id="<?= $row['id']?>" data-team="<?= $row['team_b']?>"><span data-toggle="tooltip" title="Click to bet on - <?= $row['team_b']; ?>"<span class="badge badge-warning"><?= $row['team_b']; ?></span></span></a>
                                         <?php } else { ?>
-                                            <a href="javascript:void(0)" class="" data-id="<?= $row['id']?>" data-team="<?= $row['team_b']?>"><span data-toggle="tooltip" title="Bets currently disabled"<span class="badge badge-warning"><?= $row['team_b']; ?></span></span></a></td>
+                                            <a href="javascript:void(0)" class="disabled_bet" data-id="<?= $row['id']?>" data-team="<?= $row['team_b']?>"><span data-toggle="tooltip" title="Bets currently disabled"<span class="badge badge-warning"><?= $row['team_b']; ?></span></span></a>
                                         <?php } ?>
+                                    </td>
                                     <td><?= $row['match_date_time']; ?></td>
                                     <td><?= $row['status']; ?></td>
                                     <td>
                                         <?php if($row['bet_placed'] == 'Yes') { ?>
                                             <a href="javascript:void(0)" class="view_bet"><span class="badge badge-primary">View</span></a>
                                         <?php } else { ?>
-                                            <?php if($row['status'] != 'Disabled') { ?>
+                                            <?php if($row['status'] == 'Upcoming') {?>
                                             <a href="javascript:void(0)" class="team_name" data-id="<?= $row['id']?>" data-team="<?= $row['team_a']?>"><span data-toggle="tooltip" title="Click to bet on - <?= $row['team_a']; ?>"<span class="badge badge-success"><?= $row['team_a']; ?></span></span></a> - 
                                             <a href="javascript:void(0)" class="team_name" data-id="<?= $row['id']?>" data-team="<?= $row['team_b']?>"><span data-toggle="tooltip" title="Click to bet on - <?= $row['team_b']; ?>"<span class="badge badge-warning"><?= $row['team_b']; ?></span></span></a>
                                             <?php } else { echo 'Bets disabled';} ?>

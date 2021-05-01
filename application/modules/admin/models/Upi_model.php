@@ -56,13 +56,13 @@ class Upi_model extends CI_Model {
     }
     public function saveUserRefNumber() {
         $data = [];
-        $data['payment_mode'] = $this->input->post('upi_id');
+        $data['payment_mode'] = $this->input->post('payment_mode');
         $data['amount'] = $this->input->post('deposit_amount');
         $data['reference_id'] = $this->input->post('reference_number');
         $data['user_id'] = $this->session->userdata('user_id');
         $data['ordered_at'] = date('Y-m-d h:i:s');
-        $data['txn_status'] = 'deposited';
-        $data['signature'] = 'not_verified';
+        $data['status'] = 'deposited';
+        $data['upi_id'] = $this->input->post('upi_id');
         return $this->db->insert('orders',$data);
     }
 }

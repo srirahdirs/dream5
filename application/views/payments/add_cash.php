@@ -53,8 +53,13 @@ $this->load->view('layouts/menu_session');
                         <button id="rzp-button1" class="btn btn-primary btn-block">Pay</button>
                     </div>
                     <div class="col-lg-2">
+<!--                    <div class="col-3">
+                        <label class="hide_label">Pay</label><br>
+                        <button id="rzp-button1" class="btn btn-primary btn-block">Pay</button>
+                    </div>-->
+                    <div class="col-2">
                         <label class="hide_label">UPI</label><br>
-                        <button id="upi" class="btn btn-primary btn-block">UPI</button>
+                        <button id="upi" class="btn btn-success">DEPOSIT</button>
                     </div>
                     <script src="https://checkout.razorpay.com/v1/checkout.js"></script><script>var options = {    "key": 'rzp_test_a48zLIZs22FofS',    
                                 "amount": "100",   
@@ -118,10 +123,10 @@ $this->load->view('layouts/footer');
             '<div class="form-group">' +
             '<label>Payment Method</label>' +
             '<select class="form-control" required id="payment_type">' +
-            '<option value="gpay">Gpay</option>' +
-            '<option value="paytm">Paytm</option>' +
-            '<option value="phonepe">Phonepe</option>' +
-            '<option value="bhim">BHIM</option>' +
+            '<option value="Gpay">Gpay</option>' +
+            '<option value="Paytm">Paytm</option>' +
+            '<option value="Phonepe">Phonepe</option>' +
+            '<option value="BHIM">BHIM</option>' +
             '</select>' +
             '<label>Enter the amount</label>' +
             '<input type="number" placeholder="Rs.100 - Rs.10000" min="1" max="10000" class="deposit_amount form-control" required id="amount" value="'+ $("#order_amount").val()+'"/>' +

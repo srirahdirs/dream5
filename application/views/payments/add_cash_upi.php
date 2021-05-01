@@ -25,7 +25,8 @@ $this->load->view('layouts/menu_session');
                         <div class="form-group">
                             <label>STEP 2 : After completing the FUNDS TRANSFER,<br>
                             Fill out the REFERENCE NUMBER below</label><br>
-                            <input class="form-control" name="reference_number" placeholder="12 DIGIT REFERENCE NUMBER" type="text" maxlength="12"/>
+                            <input class="form-control" name="reference_number" placeholder="12 DIGIT REFERENCE NUMBER" type="number" maxlength="22"/>
+                            <input name="payment_mode" type="hidden" value="<?= $payment_type ?>"/>
                         </div>
                     </div>
                     <div class="col-12" style="margin-bottom:20px;"></div>

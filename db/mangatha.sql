@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2021 at 09:34 PM
+-- Generation Time: Apr 30, 2021 at 09:07 PM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -940,23 +940,77 @@ INSERT INTO `countries` (`countryID`, `countryName`, `localName`, `webCode`, `re
 
 CREATE TABLE `games` (
   `id` int(11) NOT NULL,
-  `category` varchar(55) DEFAULT NULL,
-  `game_type` varchar(255) DEFAULT NULL,
-  `team_a` varchar(255) DEFAULT NULL,
-  `team_b` varchar(255) DEFAULT NULL,
-  `match_date_time` datetime DEFAULT NULL,
+  `category` varchar(55) NOT NULL,
+  `game_type` varchar(255) NOT NULL,
+  `team_a` varchar(255) NOT NULL,
+  `team_b` varchar(255) NOT NULL,
+  `match_date_time` datetime NOT NULL,
+  `status` varchar(55) NOT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT current_timestamp(),
-  `status` text DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `games`
 --
 
-INSERT INTO `games` (`id`, `category`, `game_type`, `team_a`, `team_b`, `match_date_time`, `created_at`, `updated_at`, `deleted_at`, `status`) VALUES
-(1, 'Cricket', 'T30', 'KKR', 'RCB', '2021-04-26 22:27:00', '2021-04-26 16:57:09', NULL, '2021-04-26 16:57:09', 'Completed');
+INSERT INTO `games` (`id`, `category`, `game_type`, `team_a`, `team_b`, `match_date_time`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(5, 'Cricket', 'T20', 'CSK', 'SRH', '2021-04-28 19:30:00', 'Completed', '2021-04-27 09:06:32', '2021-04-30 18:50:54', NULL),
+(6, 'Cricket', 'T20', 'MI', 'RR', '2021-04-29 15:30:00', 'Completed', '2021-04-27 09:08:16', '2021-04-30 18:50:54', NULL),
+(7, 'Cricket', 'T20', 'DC', 'KKR', '2021-04-29 19:30:00', 'Completed', '2021-04-27 09:09:28', '2021-04-30 18:50:54', NULL),
+(8, 'Cricket', 'T20', 'PBKS', 'RCB', '2021-04-30 19:30:00', 'Completed', '2021-04-27 09:10:51', '2021-04-30 18:50:55', NULL),
+(9, 'Cricket', 'T20', 'MI', 'CSK', '2021-05-01 19:30:00', 'Upcoming', '2021-04-27 09:12:32', '2021-04-30 18:48:02', NULL),
+(10, 'Cricket', 'T20', 'RR', 'SRH', '2021-05-02 15:30:00', 'Upcoming', '2021-04-27 09:15:47', '2021-04-30 18:48:02', NULL),
+(11, 'Cricket', 'T20', 'PBKS', 'DC', '2021-05-02 19:30:00', 'Upcoming', '2021-04-27 09:16:39', '2021-04-30 18:48:02', NULL),
+(12, 'Cricket', 'T20', 'KKR', 'RCB', '2021-05-03 19:30:00', 'Upcoming', '2021-04-27 09:18:14', '2021-04-30 18:48:02', NULL),
+(13, 'Cricket', 'T20', 'SRH', 'MI', '2021-05-04 19:30:00', 'Upcoming', '2021-04-27 09:18:59', '2021-04-30 18:48:02', NULL),
+(14, 'Cricket', 'T20', 'RR', 'CSK', '2021-05-05 19:30:00', 'Upcoming', '2021-04-27 09:20:39', '2021-04-30 18:48:02', NULL),
+(15, 'Cricket', 'T20', 'RCB', 'PBKS', '2021-05-06 19:30:00', 'Upcoming', '2021-04-27 09:21:53', '2021-04-30 18:48:02', NULL),
+(16, 'Cricket', 'T20', 'SRH', 'CSK', '2021-05-07 19:30:00', 'Upcoming', '2021-04-27 09:23:18', '2021-04-30 18:48:02', NULL),
+(17, 'Cricket', 'T20', 'KKR', 'DC', '2021-05-08 15:30:00', 'Upcoming', '2021-04-27 09:23:57', '2021-04-30 18:48:02', NULL),
+(18, 'Cricket', 'T20', 'RR', 'MI', '2021-05-08 19:30:00', 'Upcoming', '2021-04-27 09:24:26', '2021-04-30 18:48:02', NULL),
+(19, 'Cricket', 'T20', 'CSK', 'PBKS', '2021-05-09 15:30:00', 'Upcoming', '2021-04-27 09:25:33', '2021-04-30 18:48:02', NULL),
+(20, 'Cricket', 'T20', 'RCB', 'SRHS', '2021-05-09 19:30:00', 'Upcoming', '2021-04-27 09:26:12', '2021-04-30 18:48:02', NULL),
+(21, 'Cricket', 'T20', 'MI', 'KKR', '2021-05-10 19:30:00', 'Upcoming', '2021-04-27 09:26:58', '2021-04-30 18:48:02', NULL),
+(22, 'Cricket', 'T20', 'DC', 'RR', '2021-05-11 19:30:00', 'Upcoming', '2021-04-27 09:27:40', '2021-04-30 18:48:02', NULL),
+(23, 'Cricket', 'T20', 'CSK', 'KKR', '2021-05-12 19:30:00', 'Upcoming', '2021-04-27 09:28:17', '2021-04-30 18:48:02', NULL),
+(24, 'Cricket', 'T20', 'MI', 'PBKS', '2021-05-13 15:30:00', 'Upcoming', '2021-04-27 09:29:08', '2021-04-30 18:48:02', NULL),
+(25, 'Cricket', 'T20', 'SRH', 'RR', '2021-05-13 19:30:00', 'Upcoming', '2021-04-27 09:58:08', '2021-04-30 18:48:02', NULL),
+(26, 'Cricket', 'T20', 'RCB', 'DC', '2021-05-14 19:30:00', 'Upcoming', '2021-04-27 09:58:40', '2021-04-30 18:48:02', NULL),
+(27, 'Cricket', 'T20', 'KKR', 'PBKS', '2021-05-15 19:30:00', 'Upcoming', '2021-04-27 09:59:19', '2021-04-30 18:48:02', NULL),
+(28, 'Cricket', 'T20', 'RR', 'RCB', '2021-05-16 15:30:00', 'Upcoming', '2021-04-27 09:59:54', '2021-04-30 18:48:02', NULL),
+(29, 'Cricket', 'T20', 'CSK', 'MI', '2021-05-16 19:30:00', 'Upcoming', '2021-04-27 10:00:24', '2021-04-30 18:48:02', NULL),
+(30, 'Cricket', 'T20', 'DC', 'SRH', '2021-05-17 19:30:00', 'Upcoming', '2021-04-27 10:00:59', '2021-04-30 18:48:02', NULL),
+(31, 'Cricket', 'T20', 'KKR', 'RR', '2021-05-18 19:30:00', 'Upcoming', '2021-04-27 10:01:37', '2021-04-30 18:48:02', NULL),
+(32, 'Cricket', 'T20', 'SRH', 'PBKS', '2021-05-19 19:30:00', 'Upcoming', '2021-04-27 10:02:17', '2021-04-30 18:48:02', NULL),
+(33, 'Cricket', 'T20', 'RCB', 'MI', '2021-05-20 19:30:00', 'Upcoming', '2021-04-27 10:02:52', '2021-04-30 18:48:02', NULL),
+(34, 'Cricket', 'T20', 'KKR', 'SRH', '2021-05-21 15:30:00', 'Upcoming', '2021-04-27 10:03:25', '2021-04-30 18:48:02', NULL),
+(35, 'Cricket', 'T20', 'DC', 'CSK', '2021-05-21 19:30:00', 'Upcoming', '2021-04-27 10:04:07', '2021-04-30 18:48:02', NULL),
+(36, 'Cricket', 'T20', 'PBKS', 'RR', '2021-05-22 19:30:00', 'Upcoming', '2021-04-27 10:04:52', '2021-04-30 18:48:02', NULL),
+(37, 'Cricket', 'T20', 'MI', 'DC', '2021-05-23 15:30:00', 'Upcoming', '2021-04-27 10:05:28', '2021-04-30 18:48:02', NULL),
+(38, 'Cricket', 'T20', 'RCB', 'CSK', '2021-05-23 19:30:00', 'Upcoming', '2021-04-27 10:05:59', '2021-04-30 18:48:02', NULL),
+(39, 'Cricket', 'T20', 'MI', 'RCB', '2021-04-09 19:30:00', 'Completed', '2021-04-27 10:08:48', '2021-04-30 18:48:02', NULL),
+(40, 'Cricket', 'T20', 'CSK', 'DC', '2021-04-10 19:30:00', 'Completed', '2021-04-27 10:13:32', '2021-04-30 18:48:02', NULL),
+(41, 'Cricket', 'T20', 'KKR', 'SRH', '2021-04-11 19:30:00', 'Completed', '2021-04-27 10:14:34', '2021-04-30 18:48:02', NULL),
+(42, 'Cricket', 'T20', 'PBKS', 'RR', '2021-04-12 19:30:00', 'Completed', '2021-04-27 10:15:21', '2021-04-30 18:48:02', NULL),
+(43, 'Cricket', 'T20', 'MI', 'KKR', '2021-04-13 19:30:00', 'Completed', '2021-04-27 10:16:07', '2021-04-30 18:48:02', NULL),
+(44, 'Cricket', 'T20', 'RCB', 'SRH', '2021-04-14 19:30:00', 'Completed', '2021-04-27 10:17:19', '2021-04-30 18:48:02', NULL),
+(45, 'Cricket', 'T20', 'DC', 'RR', '2021-04-15 19:30:00', 'Completed', '2021-04-27 10:18:14', '2021-04-30 18:48:02', NULL),
+(46, 'Cricket', 'T20', 'PBKS', 'CSK', '2021-04-16 19:30:00', 'Completed', '2021-04-27 10:19:03', '2021-04-30 18:48:02', NULL),
+(47, 'Cricket', 'T20', 'MI', 'SRH', '2021-04-17 19:30:00', 'Completed', '2021-04-27 10:20:19', '2021-04-30 18:48:02', NULL),
+(48, 'Cricket', 'T20', 'RCB', 'KKR', '2021-04-18 15:30:00', 'Completed', '2021-04-27 10:21:26', '2021-04-30 18:48:02', NULL),
+(49, 'Cricket', 'T20', 'PBKS', 'DC', '2021-04-18 19:30:00', 'Completed', '2021-04-27 10:22:11', '2021-04-30 18:48:02', NULL),
+(50, 'Cricket', 'T20', 'CSK', 'RR', '2021-04-19 19:30:00', 'Completed', '2021-04-27 10:22:55', '2021-04-30 18:48:02', NULL),
+(51, 'Cricket', 'T20', 'MI', 'DC', '2021-04-20 19:30:00', 'Completed', '2021-04-27 10:23:51', '2021-04-30 18:48:02', NULL),
+(52, 'Cricket', 'T20', 'PBKS', 'SRH', '2021-04-21 15:30:00', 'Completed', '2021-04-27 10:24:45', '2021-04-30 18:48:02', NULL),
+(53, 'Cricket', 'T20', 'CSK', 'KKR', '2021-04-21 19:30:00', 'Completed', '2021-04-27 10:25:35', '2021-04-30 18:48:02', NULL),
+(54, 'Cricket', 'T20', 'RR', 'RCB', '2021-04-22 19:30:00', 'Completed', '2021-04-27 10:26:39', '2021-04-30 18:48:02', NULL),
+(55, 'Cricket', 'T20', 'MI', 'PBKS', '2021-04-23 19:30:00', 'Completed', '2021-04-27 10:27:18', '2021-04-30 18:48:02', NULL),
+(56, 'Cricket', 'T20', 'KKR', 'RR', '2021-04-24 19:30:00', 'Completed', '2021-04-27 10:28:03', '2021-04-30 18:48:02', NULL),
+(57, 'Cricket', 'T20', 'CSK', 'RCB', '2021-04-25 15:30:00', 'Completed', '2021-04-27 10:28:46', '2021-04-30 18:48:02', NULL),
+(58, 'Cricket', 'T20', 'DC', 'SRH', '2021-04-25 19:30:00', 'Completed', '2021-04-27 10:29:50', '2021-04-30 18:48:02', NULL),
+(59, 'Cricket', 'T20', 'PBKS', 'KKR', '2021-04-26 19:30:00', 'Completed', '2021-04-27 10:30:47', '2021-04-30 18:48:02', NULL);
 
 -- --------------------------------------------------------
 
@@ -987,23 +1041,20 @@ INSERT INTO `migration` (`version`, `apply_time`) VALUES
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `order_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `amount` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `reference_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `payment_mode` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `txn_msg` varchar(55) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `upi_id` varchar(55) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ordered_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `txn_status` varchar(55) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `txn_time` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `signature` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `status` varchar(55) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `user_id`, `order_id`, `amount`, `reference_id`, `payment_mode`, `txn_msg`, `ordered_at`, `txn_status`, `txn_time`, `signature`) VALUES
-(15, 15, '', '1000', '123456789521', 'dharshinisathya@okaxis', '', '2021-04-28 03:59:50', 'deposited', NULL, 'not_verified');
+INSERT INTO `orders` (`id`, `user_id`, `amount`, `reference_id`, `payment_mode`, `upi_id`, `ordered_at`, `status`) VALUES
+(1, 15, '1000', '1234567891011', 'Phonepe', '9789253515@upi', '2021-04-29 03:14:12', 'Approved');
 
 -- --------------------------------------------------------
 
@@ -1023,9 +1074,9 @@ CREATE TABLE `upi` (
 --
 
 INSERT INTO `upi` (`id`, `upi_id`, `upi_method`, `status`) VALUES
-(1, '9789253515@upi', 'Phonepe', 'Active'),
-(2, 'dharshinisathya@okaxis', 'Gpay', 'Active'),
-(3, 'test@okaxis', 'Paytm', 'Active'),
+(1, '9789253515@ybl', 'Phonepe', 'Active'),
+(2, 'sri.rahdirs@oksbi', 'Gpay', 'Active'),
+(3, '9789253515@paytm', 'Paytm', 'Active'),
 (4, '9789253515@upi', 'Bhim', 'Active');
 
 -- --------------------------------------------------------
@@ -1158,6 +1209,13 @@ CREATE TABLE `user_wallet` (
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `user_wallet`
+--
+
+INSERT INTO `user_wallet` (`id`, `user_id`, `cash`, `practice_cash`, `created_at`, `updated_at`) VALUES
+(3, 15, '2000', NULL, '2021-04-29 03:12:45', '2021-04-29 18:45:54');
 
 -- --------------------------------------------------------
 
@@ -1335,13 +1393,13 @@ ALTER TABLE `cash_out`
 -- AUTO_INCREMENT for table `games`
 --
 ALTER TABLE `games`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `upi`
@@ -1371,7 +1429,7 @@ ALTER TABLE `user_games`
 -- AUTO_INCREMENT for table `user_wallet`
 --
 ALTER TABLE `user_wallet`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `withdrawal_history`

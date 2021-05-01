@@ -31,9 +31,9 @@ $encrypted_user_id = encryptId($this->session->userdata('user_id'));
                 <h2 class="slim-logo"><a href="<?= base_url() ?>home"><img src="<?= $baseUrl ?>/img/logo/logo_dark.png" height="95"></a></h2>
                 <div class="slim-header-right">
 
-                    <div class="add_chips">
+<!--                    <div class="add_chips">
                         <a href="<?= base_url() . 'add-practice-cash' ?>" class="cash" title="Practice CHIPS"><span>Practice Chips: </span><b> <?= ($this->session->userdata('practice_cash')) ? $this->session->userdata('practice_cash') : 0 ?></b>  </a>
-                    </div>
+                    </div>-->
                     <div class="add_chips">
                         <a href="<?= base_url() . 'add-cash' ?>" class="cash" title="Add Cash"><span>CASH : </span><b> &#8377; <?= ($this->session->userdata('cash')) ? $this->session->userdata('cash') : 0 ?></b>  </a>
                     </div>
@@ -41,14 +41,14 @@ $encrypted_user_id = encryptId($this->session->userdata('user_id'));
                         <a href="" class="header-notification" data-toggle="dropdown">
                             <i class="icon ion-ios-bolt-outline"></i>
                         </a>
-                        <div class="dropdown-menu">
+<!--                        <div class="dropdown-menu">
                             <div class="dropdown-menu-header">
                                 <h6 class="dropdown-menu-title">Activity Logs</h6>
                                 <div>
                                     <a href="">Filter List</a>
                                     <a href="">Settings</a>
                                 </div>
-                            </div><!-- dropdown-menu-header -->
+                            </div> dropdown-menu-header 
                             <div class="dropdown-activity-list">
                                 <div class="activity-label">Today, December 13, 2017</div>
                                 <div class="activity-item">
@@ -56,42 +56,42 @@ $encrypted_user_id = encryptId($this->session->userdata('user_id'));
                                         <div class="col-2 tx-right">10:15am</div>
                                         <div class="col-2 tx-center"><span class="square-10 bg-success"></span></div>
                                         <div class="col-8">Purchased christmas sale cloud storage</div>
-                                    </div><!-- row -->
-                                </div><!-- activity-item -->
+                                    </div> row 
+                                </div> activity-item 
                                 <div class="activity-item">
                                     <div class="row no-gutters">
                                         <div class="col-2 tx-right">9:48am</div>
                                         <div class="col-2 tx-center"><span class="square-10 bg-danger"></span></div>
                                         <div class="col-8">Login failure</div>
-                                    </div><!-- row -->
-                                </div><!-- activity-item -->
+                                    </div> row 
+                                </div> activity-item 
                                 <div class="activity-item">
                                     <div class="row no-gutters">
                                         <div class="col-2 tx-right">7:29am</div>
                                         <div class="col-2 tx-center"><span class="square-10 bg-warning"></span></div>
                                         <div class="col-8">(D:) Storage almost full</div>
-                                    </div><!-- row -->
-                                </div><!-- activity-item -->
+                                    </div> row 
+                                </div> activity-item 
                                 <div class="activity-item">
                                     <div class="row no-gutters">
                                         <div class="col-2 tx-right">3:21am</div>
                                         <div class="col-2 tx-center"><span class="square-10 bg-success"></span></div>
                                         <div class="col-8">1 item sold <strong>Christmas bundle</strong></div>
-                                    </div><!-- row -->
-                                </div><!-- activity-item -->
+                                    </div> row 
+                                </div> activity-item 
                                 <div class="activity-label">Yesterday, December 12, 2017</div>
                                 <div class="activity-item">
                                     <div class="row no-gutters">
                                         <div class="col-2 tx-right">6:57am</div>
                                         <div class="col-2 tx-center"><span class="square-10 bg-success"></span></div>
                                         <div class="col-8">Earn new badge <strong>Elite Author</strong></div>
-                                    </div><!-- row -->
-                                </div><!-- activity-item -->
-                            </div><!-- dropdown-activity-list -->
+                                    </div> row 
+                                </div> activity-item 
+                            </div> dropdown-activity-list 
                             <div class="dropdown-list-footer">
                                 <a href="page-activity.html"><i class="fa fa-angle-down"></i> Show All Activities</a>
                             </div>
-                        </div><!-- dropdown-menu-right -->
+                        </div> dropdown-menu-right -->
                     </div><!-- dropdown -->
                     <div class="add_chips">
                         <a href="<?= base_url() . 'add-cash' ?>" class="addcash" title="Add Cash">ADD CASH</a>
@@ -101,7 +101,7 @@ $encrypted_user_id = encryptId($this->session->userdata('user_id'));
                     ?>
                     <div class="dropdown dropdown-c">
                         <a href="#" class="logged-user" data-toggle="dropdown">
-                            <img src="<?= $baseUrl ?>/img/img1.jpg" alt="">
+                            <img src="<?= $baseUrl ?>/img/user_icon.png" alt="">
                             <span><?= $this->session->userdata('username') ?></span>
                             <i class="fa fa-angle-down"></i>
                         </a>

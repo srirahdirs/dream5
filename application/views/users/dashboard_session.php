@@ -59,7 +59,7 @@ $this->load->view('layouts/menu_session');
                     <thead>
                         <tr>
                             <th class="wd-5p">#</th>
-                            <th class="wd-25p">Order Id</th>
+                            <th class="wd-25p">Reference Id</th>
                             <th class="wd-15p">Amount</th>
                             <th class="wd-20p">Payment Mode</th>
                             <th class="wd-15p">Date</th>
@@ -73,17 +73,11 @@ $this->load->view('layouts/menu_session');
                             ?>
                             <tr>                                    
                                 <td><?= $i ?></td>
-                                <td><?= $row['razorpay_payment_id'] ?></td>
+                                <td><?= $row['reference_id'] ?></td>
                                 <td><?= $row['amount'] ?></td>
-                                <td><?= $row['entity'] ?></td>
+                                <td><?= $row['payment_mode'] ?></td>
                                 <td><?= date('Y-m-d', strtotime($row['ordered_at'])) ?></td>
-                                <td><?php
-                                    if ($row['status'] != 'authorized') {
-                                        echo '<strike>' . $row['status'] . '</strike>';
-                                    } else {
-                                        echo '<span style="color:#23BF08">'. ucfirst('Success') .'</span>';
-                                    }
-                                    ?></td>
+                                <td><?= $row['status'] ?></td>
                             </tr>
                             <?php
                             $i++;

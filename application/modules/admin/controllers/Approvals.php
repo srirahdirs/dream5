@@ -52,6 +52,15 @@ class Approvals extends CI_Controller {
         $data['listData'] = $this->Approvals_model->getAdmins();
         return $this->load->view('admin/approvals/admin_lists',$data);        
     }
+    public function UpiPayments() {
+        $data['listData'] = $this->Approvals_model->getUpiPayments();
+        return $this->load->view('admin/approvals/upi_payments',$data);        
+    }
+    public function ConfirmUpiPayment($order_id) {
+        $this->Approvals_model->approveUpiPayment($order_id);  
+        $this->session->set_flashdata('success', 'Approved Successfully!.');
+        return redirect('admin/upi-payments');        
+    }
     public function AddAdmin() {
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[admin.email]');
         $this->form_validation->set_rules('password', 'Password', 'required');

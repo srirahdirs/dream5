@@ -85,5 +85,5 @@ $this->load->view('layouts/footer');
 <script>
     $('.sidebar-nav-link').removeClass("active");
     $('.masters').addClass("active");
-    $('.upi').addClass("active");
+    $('.upi_master').addClass("active");
 </script>

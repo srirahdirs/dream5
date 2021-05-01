@@ -7,6 +7,7 @@ class Approvals_model extends CI_Model {
     protected $admin_table = 'admin';
     protected $skill_table = 'skills';
     protected $brief_payment_table = 'brief';
+    protected $orders_table = 'orders';
     /**
      * User constructor.
      */
@@ -20,13 +21,30 @@ class Approvals_model extends CI_Model {
     public function getAdmins() {
         return $this->db->get_where($this->admin_table)->result_array();
     }
+    public function getUpiPayments() {
+        return $this->db->select('orders.*,users.email')->join('users','users.id = orders.user_id')->get_where($this->orders_table)->result_array();
+    }
     public function getBriefPayment() {
         return $this->db->select('brief.*,business.business,user.first_name as user')->join('business','business.id = brief.business')->join('user','user.id = brief.user')->get_where($this->brief_payment_table)->result_array();
     }
     public function approveBriefPayment($id) {
         $data['payment_status'] = 'approved';
         $this->db->where(['id' => $id]);
+        $this->insertIntoWallet($data['user_id'], $data['amount']);
         $this->db->update('brief',$data);
+    }
+    public function approveUpiPayment($order_id) {
+        $data['status'] = 'Approved';
+        
+        $this->db->where(['id' => $order_id]);
+        $this->db->update($this->orders_table,$data);
+        $this->load->model('../../models/Order_model'); 
+        $orderDetail = $this->Order_model->find($order_id);
+        $user_id = $orderDetail->user_id;
+        $amount = $orderDetail->amount;
+        $this->Order_model->insertIntoWallet($user_id,$amount);
+        
+        
     }
     public function deleteAdmin($id) {
         $this->db->where('id', $id);
