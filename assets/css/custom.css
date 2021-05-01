@@ -293,6 +293,12 @@ a {
 	.slim-logo{
 		text-align:center;
 	}
+    .slim-header.with-sidebar .slim-logo{
+        text-align:center;
+        width: auto;
+        margin-right: 0;
+        margin-left: 0;
+    }
 	.register_page {
 		display: block;
 	}
@@ -302,6 +308,28 @@ a {
     .login-box {
         display: none;
     }
+
+    .slim-header-right{
+        padding-left: 10px;
+    }
+    .slim-header-right .dropdown-a .dropdown-menu{
+        width:270px;
+    }
+
+    .slim-sidebar{
+        position: unset;
+        margin-left: 0;
+        padding: 20px 21px;
+        width:100%;
+    }
+    .slim-body .myprofile .container {
+        padding: 0;
+    }
+    .slim-body{
+        width: 100%;
+        max-width: 100%;
+    }
+ 
 }
 
 @media only screen and (max-width: 640px) {

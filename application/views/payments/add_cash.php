@@ -11,48 +11,48 @@ $this->load->view('layouts/menu_session');
                 <div class="row">
                     
                     <!--single row starts-->
-                    <div class="col-4">
+                    <div class="col-lg-4">
                         <div class="form-group">
                             <label>ENTER AMOUNT</label><br>
                             <input class="form-control" name="orderAmount" id="order_amount" value="5000" type="number" step="100"/>
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-lg-2">
                         <label class="hide_label">500</label><br>
                         <input class="form-control cursor_pointer" value="500" />
                     </div>
-                    <div class="col-2">
+                    <div class="col-lg-2">
                         <label class="hide_label">1000</label><br>
                         <input class="form-control cursor_pointer" value="1000"/>
                     </div>
-                    <div class="col-2">
+                    <div class="col-lg-2">
                         <label class="hide_label">2000</label><br>
                         <input class="form-control cursor_pointer" value="2000"/>
                     </div>
-                    <div class="col-2">
+                    <div class="col-lg-2">
                         <label class="hide_label">10000</label><br>
                         <input class="form-control cursor_pointer" value="10000"/>
                     </div>
                     <!--single row ends-->
-                    <div class="col-12" style="margin-bottom:20px;"></div>
+                    <div class="col-lg-12" style="margin-bottom:20px;"></div>
                     
                     <!--single row starts-->
-                    <div class="col-4">
+                    <div class="col-lg-4">
                         <div class="form-group">
                             <label>Bonus Code</label><br>
                             <input class="form-control"  id="bonus_code"  type="text" autocomplete="off"/>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-lg-3">
                         <label class="hide_label">Apply</label><br>
                         <a href="javascript:void(0)" class="btn btn-primary btn-block">APPLY</a>
                     </div>
                     <!-- <div class="hide_form"> -->
-                    <div class="col-3">
+                    <div class="col-lg-3">
                         <label class="hide_label">Pay</label><br>
                         <button id="rzp-button1" class="btn btn-primary btn-block">Pay</button>
                     </div>
-                    <div class="col-2">
+                    <div class="col-lg-2">
                         <label class="hide_label">UPI</label><br>
                         <button id="upi" class="btn btn-primary btn-block">UPI</button>
                     </div>
@@ -79,8 +79,8 @@ $this->load->view('layouts/menu_session');
                         </script>
                     <!-- </div> -->
                    
-                    <div class="col-12" style="margin-bottom:50px;"></div>
-                    <div class="col-6">
+                    <div class="col-lg-12" style="margin-bottom:50px;"></div>
+                    <div class="col-lg-6">
                             <!-- <button type="submit" class="btn btn-primary btn-block" value="Pay">ADD CASH</button> -->
                     </div> 
                 </div>                
