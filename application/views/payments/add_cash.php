@@ -52,11 +52,13 @@ $this->load->view('layouts/menu_session');
                         <label class="hide_label">Pay</label><br>
                         <button id="rzp-button1" class="btn btn-primary btn-block">Pay</button>
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-2"></div>
 <!--                    <div class="col-3">
                         <label class="hide_label">Pay</label><br>
                         <button id="rzp-button1" class="btn btn-primary btn-block">Pay</button>
                     </div>-->
+                   
+
                     <div class="col-2">
                         <label class="hide_label">UPI</label><br>
                         <button id="upi" class="btn btn-success">DEPOSIT</button>

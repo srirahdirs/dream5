@@ -354,6 +354,22 @@ a {
 	}
 }
 
+@media ( min-width: 768px ) and (max-width: 1024px){
+    .slim-sidebar{
+        position: unset;
+        margin-left: 0;
+        padding: 20px 21px;
+        width:100%;
+    }
+    .slim-body .myprofile .container {
+        padding: 0;
+    }
+    .slim-body{
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
 @media ( min-width: 992px ) and (max-width: 1199px){
 	.register_page {
 		display: block;
