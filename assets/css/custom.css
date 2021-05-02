@@ -329,6 +329,14 @@ a {
         width: 100%;
         max-width: 100%;
     }
+    #games_tbl .team_name{
+        display: inline-block;
+        margin:2px;
+        width: 100%; 
+    }
+    #games_tbl .team_name span{
+        width: 100%;
+    }
  
 }
 

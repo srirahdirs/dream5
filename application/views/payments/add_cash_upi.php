@@ -11,7 +11,7 @@ $this->load->view('layouts/menu_session');
                 <div class="row">
                     
                     <!--single row starts-->
-                    <div class="col-6">
+                    <div class="col-lg-6">
                         <div class="form-group">
                             <label>STEP 1 : TRANSFER TO THE UPI ID SHOWN BELOW</label><br>
                             <span>UPI ID:-</span><input class="form-control" name="upi_id" id="upi_id" value="<?= $upi_id ?>" type="text" />
@@ -20,8 +20,8 @@ $this->load->view('layouts/menu_session');
                             <span>Amount:-</span><input class="form-control" name="deposit_amount" id="order_amount" value="<?= $amount ?>" type="text" />
                         </div>
                     </div>
-                    <div class="col-12" style="margin-bottom:20px;"></div>
-                    <div class="col-6">
+                    <div class="col-lg-12" style="margin-bottom:20px;"></div>
+                    <div class="col-lg-6">
                         <div class="form-group">
                             <label>STEP 2 : After completing the FUNDS TRANSFER,<br>
                             Fill out the REFERENCE NUMBER below</label><br>
@@ -29,8 +29,8 @@ $this->load->view('layouts/menu_session');
                             <input name="payment_mode" type="hidden" value="<?= $payment_type ?>"/>
                         </div>
                     </div>
-                    <div class="col-12" style="margin-bottom:20px;"></div>
-                    <div class="col-6">
+                    <div class="col-lg-12" style="margin-bottom:20px;"></div>
+                    <div class="col-lg-6">
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-block">Submit</button>
                         </div>
