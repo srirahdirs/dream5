@@ -9,7 +9,7 @@ $encrypted_user_id = encryptId($this->session->userdata('user_id'));
 <div class="slim-body">
 
     <div class="slim-sidebar">
-        <label class="sidebar-label">Navigation</label>
+        <label class="sidebar-label">Navigation <i class="icon ion-navicon-round frion"></i></label>
 
         <ul class="nav nav-sidebar">
             <li class="sidebar-nav-item">
@@ -43,3 +43,24 @@ $encrypted_user_id = encryptId($this->session->userdata('user_id'));
             </li>
         </ul>
     </div>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(window).resize(function(e) {
+                $('.nav-sidebar').show();
+                if ($(window).width() <= 768) {
+                    $('.nav-sidebar').hide();
+                    /*$('.sidebar-label').click(function () {
+                      $('.nav-sidebar').slideToggle("slow");
+                    });*/
+                }
+            });
+            if ($(window).width() <= 768) {
+                    $('.nav-sidebar').hide();
+                    $('.sidebar-label').click(function () {
+                      $('.nav-sidebar').slideToggle("slow");
+                    });
+                }
+        });
+    </script>

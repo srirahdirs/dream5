@@ -56,10 +56,28 @@ class Approvals extends CI_Controller {
         $data['listData'] = $this->Approvals_model->getUpiPayments();
         return $this->load->view('admin/approvals/upi_payments',$data);        
     }
+    public function UserGames() {
+        $data['listData'] = $this->Approvals_model->getUserGames();
+        return $this->load->view('admin/approvals/user_games',$data);        
+    }
     public function ConfirmUpiPayment($order_id) {
         $this->Approvals_model->approveUpiPayment($order_id);  
         $this->session->set_flashdata('success', 'Approved Successfully!.');
         return redirect('admin/upi-payments');        
+    }
+    public function ApproveKyc($user_id) {
+        $this->Approvals_model->ApproveKyc($user_id);  
+        $this->session->set_flashdata('success', 'Approved Successfully!.');
+        return redirect('admin/user-kycs');        
+    }
+    public function RejectKyc($user_id) {
+        $this->Approvals_model->RejectKyc($user_id);  
+        $this->session->set_flashdata('success', 'Rejected Successfully!.');
+        return redirect('admin/user-kycs');        
+    }
+    public function UserKycs() {
+        $data['listData'] =  $this->Approvals_model->getUsersKyc();  
+        return $this->load->view('admin/approvals/user_kycs',$data);       
     }
     public function AddAdmin() {
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[admin.email]');

@@ -116,3 +116,4 @@ $encrypted_user_id = encryptId($this->session->userdata('user_id'));
 
             </div><!-- container -->
         </div><!-- slim-header -->
+        

@@ -8,6 +8,8 @@ class Approvals_model extends CI_Model {
     protected $skill_table = 'skills';
     protected $brief_payment_table = 'brief';
     protected $orders_table = 'orders';
+    protected $users_table = 'users';
+    protected $user_details_table = 'user_details';
     /**
      * User constructor.
      */
@@ -24,27 +26,41 @@ class Approvals_model extends CI_Model {
     public function getUpiPayments() {
         return $this->db->select('orders.*,users.email')->join('users','users.id = orders.user_id')->get_where($this->orders_table)->result_array();
     }
+    public function getUsersKyc() {
+        return $this->db->select('users.*,ud.*')->join('user_details ud','users.id = ud.user_id')->get_where($this->users_table)->result_array();
+    }
+    public function getUserGames() {
+        return $this->db->select('u.*,ug.*,g.*')->join('users u','u.id = ug.user_id')->join('games g','g.id = ug.game_id')->get_where('user_games ug')->result_array();
+    }
     public function getBriefPayment() {
         return $this->db->select('brief.*,business.business,user.first_name as user')->join('business','business.id = brief.business')->join('user','user.id = brief.user')->get_where($this->brief_payment_table)->result_array();
     }
     public function approveBriefPayment($id) {
         $data['payment_status'] = 'approved';
         $this->db->where(['id' => $id]);
-        $this->insertIntoWallet($data['user_id'], $data['amount']);
+        $this->Order_model->insertIntoWallet($data['user_id'], $data['amount']);
         $this->db->update('brief',$data);
     }
     public function approveUpiPayment($order_id) {
-        $data['status'] = 'Approved';
-        
+        $data['status'] = 'Approved';        
         $this->db->where(['id' => $order_id]);
         $this->db->update($this->orders_table,$data);
         $this->load->model('../../models/Order_model'); 
         $orderDetail = $this->Order_model->find($order_id);
         $user_id = $orderDetail->user_id;
         $amount = $orderDetail->amount;
-        $this->Order_model->insertIntoWallet($user_id,$amount);
+        $this->Order_model->insertIntoWallet($user_id,$amount);        
         
-        
+    }
+    public function ApproveKyc($user_id) {
+        $data['is_pan_verified'] = 'Yes';        
+        $this->db->where(['user_id' => $user_id]);
+        $this->db->update($this->user_details_table,$data);
+    }
+    public function RejectKyc($user_id) {
+        $data['is_pan_verified'] = 'Rejected';        
+        $this->db->where(['user_id' => $user_id]);
+        $this->db->update($this->user_details_table,$data);
     }
     public function deleteAdmin($id) {
         $this->db->where('id', $id);

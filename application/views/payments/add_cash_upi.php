@@ -14,7 +14,7 @@ $this->load->view('layouts/menu_session');
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>STEP 1 : TRANSFER TO THE UPI ID SHOWN BELOW</label><br>
-                            <span>UPI ID:-</span><input class="form-control" name="upi_id" id="upi_id" value="<?= $upi_id ?>" type="text" />
+                            <span>UPI ID:-</span><input class="form-control" name="upi_id" id="upi_id" value="<?= $upi_id ?>" type="text" style="color:#fff !important"/>
                         </div>
                         <div class="form-group">
                             <span>Amount:-</span><input class="form-control" name="deposit_amount" id="order_amount" value="<?= $amount ?>" type="text" />
@@ -24,7 +24,8 @@ $this->load->view('layouts/menu_session');
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>STEP 2 : After completing the FUNDS TRANSFER,<br>
-                            Fill out the REFERENCE NUMBER below</label><br>
+                            Fill out the <b>REFERENCE NUMBER</b> / 
+                            <b>UPI TRANSACTION ID</b>  below</label><br>
                             <input class="form-control" name="reference_number" placeholder="12 DIGIT REFERENCE NUMBER" type="number" maxlength="22"/>
                             <input name="payment_mode" type="hidden" value="<?= $payment_type ?>"/>
                         </div>

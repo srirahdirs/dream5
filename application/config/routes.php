@@ -11,6 +11,7 @@ $route['getSelectedCityList'] = 'common/getSelectedCityList';
 $route['login'] = 'common/login';
 $route['logout'] = 'common/logout';
 $route['home'] = 'common/index';
+$route['update_cash_session'] = 'common/update_cash_session';
 $route['refund_policy'] = 'common/refund_policy';
 
 //payments
@@ -42,6 +43,10 @@ $route['admin/home'] = 'admin/home/index';
 $route['admin/login'] = 'admin/home/login';
 $route['admin/logout'] = 'admin/home/logout';
 $route['admin/upi-payments'] = 'admin/approvals/UpiPayments';
+$route['admin/user-kycs'] = 'admin/approvals/UserKycs';
+$route['admin/user-games'] = 'admin/approvals/userGames';
+$route['admin/approve-kyc/(:any)'] = 'admin/approvals/ApproveKyc/$1';
+$route['admin/reject-kyc/(:any)'] = 'admin/approvals/RejectKyc/$1';
 $route['admin/confirm-upi-payment/(:num)'] = 'admin/approvals/confirmUpiPayment/$1';
 /**************ADMIN users**************/
 $route['admin/users/(:num)'] = 'admin/users/index';

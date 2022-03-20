@@ -96,16 +96,14 @@ $this->load->view('layouts/footer');
         e.preventDefault();
         var id = $(this).data('id');
         var team = $(this).data('team');
-        console.log(id);
-        console.log(team);
-
+        
         $.confirm({
             title: 'Betting SLIP for '+ team ,
             content: '' +
             '<form action="" class="formName">' +
             '<div class="form-group">' +
             '<label>Enter the amount</label>' +
-            '<input type="number" placeholder="Rs.100 - Rs.10000" min="1" max="10000" class="name form-control" required id="amount"/>' +
+            '<input type="number" placeholder="Rs.25 - Rs.10000" min="1" max="10000" class="name form-control" required id="amount"/>' +
             '</div>' +
             '</form><br><br><div class="bet_result" style="display:none"><div class="p_label">Total Cost</div><div class="p_value"></div><div class="p_label_1">Total cost you will get</div><div class="p_value_1 final_amount_user"></div></div>',
             buttons: {
@@ -116,6 +114,14 @@ $this->load->view('layouts/footer');
                         var amount = this.$content.find('.name').val();
                         if(!amount){
                             $.alert('Enter a valid amount');
+                            return false;
+                        }
+                        if(amount < 25){
+                            $.alert('Enter minimum 25 ');
+                            return false;
+                        }
+                        if(amount > 10000){
+                            $.alert('Enter maximum 10000');
                             return false;
                         }
                         $.ajax({
@@ -173,7 +179,10 @@ $this->load->view('layouts/footer');
                     });
 
                     var dbleval = $(this).val() * 2;
-                    var percent = (10 / 100) * dbleval;;
+                    var percent = (10 / 100) * dbleval;
+                    if($(this).val() < 1001){
+                        percent = 0;
+                    }
                     var final_amount = parseInt(dbleval - percent);
                     $(".p_value_1").html(final_amount);
                     return false; // reference the button and click it

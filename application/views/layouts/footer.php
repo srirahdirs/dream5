@@ -47,3 +47,16 @@
 </script>
 </body>
 </html>
+<script>
+jQuery(document).ready(function() {
+ // executes when HTML-Document is loaded and DOM is ready
+    $.ajax({
+        url: '<?= base_url() . 'update_cash_session' ?>',
+        type: 'POST',
+        dataType: "json",
+        success: function (data) {
+                    console.log(data);                     
+        } //success                            
+    });
+});
+</script>

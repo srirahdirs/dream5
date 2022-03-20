@@ -21,8 +21,14 @@ $this->load->view('layouts/menu_session');
             <label class="section-title">Your Balance: <span class="primary"><?= $user->cash ?></span> <span style="float: right">minimum withdrawal <span class="primary">200</span></span></label>
             <br>
             <?php 
-            if($user->is_bank_account_verified != 'Yes') {
-                echo '<p class="mg-b-20 mg-sm-b-40">Please complete your <a href="'. base_url('user/kyc').'"> KYC</a> and withdraw your wallet amount.</p>';
+            if($user->is_pan_verified != 'Yes') {
+                if($user->pan_card_file != '' && $user->is_pan_verified != 'Rejected'){
+                    echo '<p class="mg-b-20 mg-sm-b-40">Pancard <a href="javascript:void(0))"> uploaded</a>. Please wait our team is verifying your pancard.</p>';
+                } else if($user->is_pan_verified == 'Rejected'){
+                    echo '<p class="mg-b-20 mg-sm-b-40">Pancard <a style="color:red;" href="javascript:void(0))"> rejected</a>. Please wait our team will get back to you shortly.</p>';
+                } else {
+                    echo '<p class="mg-b-20 mg-sm-b-40">Please complete your <a href="'. base_url('user/kyc').'"> KYC</a> and withdraw your wallet amount.</p>';
+                }
             } else { 
                 ?>
             

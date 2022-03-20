@@ -217,7 +217,7 @@ class User extends CI_Controller {
         $data = [];
         $data['user'] = $model->findUserDetails($this->session->userdata('user_id'));
         $data['encrypted_user_id'] = base64_encode($this->encryption->encrypt($this->session->userdata('user_id')));
-        if ($this->input->post()) {
+        if ($this->input->post() || $_FILES) {
 
             $this->form_validation->set_rules('pan_card', 'Pan Card', 'required');            
             if ($this->form_validation->run() == FALSE) {

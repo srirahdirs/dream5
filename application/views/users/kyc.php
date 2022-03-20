@@ -30,7 +30,7 @@ $this->load->view('layouts/menu_session');
 
                                     <td>MOBILE NUMBER</td>
                                     <td><?= $user->mobile_number ?></td>
-                                    <td><?= ($user->otp_verified == 1 ) ? '<span class="success">Verified</span>' : '<span class="error">Not verified</span>' ?></td>
+                                    <td><?= '-';// ($user->otp_verified == 1 ) ? '<span class="success">Verified</span>' : '<span class="error">Not verified</span>' ?></td>
                                     <td  style="text-align:center;"><a class="small_btn btn btn-primary" href="<?= base_url() . 'my-profile/' . $encrypted_user_id ?>">UPDATE</a></td>
                                 </tr>
                                 <tr>                                   
@@ -56,7 +56,7 @@ $this->load->view('layouts/menu_session');
                                         <?php } ?>
                                     </td>
                                 </tr>
-                                <tr>                                    
+                                <!-- <tr>                                    
                                     <td>ADDRESS PROOF</td>
                                     <td>
                                         <select class="form-control select2 select2-hidden-accessible" name="address_proof" <?php if($user->address_proof != '') { echo 'disabled'; } ?>> 
@@ -76,7 +76,7 @@ $this->load->view('layouts/menu_session');
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input" name="address_proof_file[]" multiple="">
                                                 <label class="custom-file-label custom-file-label-primary address_proof_file" for="customFile">Front & Back</label>
-                                            </div><!-- custom-file -->
+                                            </div>
                                         <?php } ?>
                                     </td>
                                 </tr>                                
@@ -98,10 +98,10 @@ $this->load->view('layouts/menu_session');
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input" name="bank_proof_file">
                                                 <label class="custom-file-label custom-file-label-primary bank_proof_file" for="customFile">Upload</label>
-                                            </div><!-- custom-file -->
+                                            </div>
                                         <?php } ?>
                                     </td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                             <tfoot>
                                 <tr>

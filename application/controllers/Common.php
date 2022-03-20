@@ -122,5 +122,12 @@ class Common extends CI_Controller {
     public function refund_policy() {
         $this->load->view('layouts/refund_policy.html');
     }
+    public function update_cash_session() {
+        $model = new Order_model();
+        $balance = $model->getUserBalance($this->session->userdata('user_id'));
+        if($balance > 0){
+            $this->session->set_userdata('cash',$balance[0]->cash);
+        }
+    }
 
 }

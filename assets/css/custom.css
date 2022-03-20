@@ -173,7 +173,7 @@ body{
     background-image: none !important;
 }
 .toast-top-right {
-    right: 755px;
+    right: 770px !important;
 }
 
 
@@ -275,7 +275,9 @@ a {
 .register_page{
 	top:0;
 }
-
+.frion{
+    display: none;
+}
 
 
 
@@ -337,7 +339,39 @@ a {
     #games_tbl .team_name span{
         width: 100%;
     }
- 
+
+/* Top header */
+
+    .slim-header-left, .slim-header-right {
+        display: inline-block;
+        width: 100%;
+    }
+    .slim-header-right .add_chips, .slim-header-right .dropdown-a{
+        float: left;
+    }
+    .slim-header-right .dropdown-c{
+        float: right;
+    }
+}
+
+@media only screen and (max-width: 768px){
+    .slim-sidebar {
+        position: unset;
+        padding: 20px 21px;
+        width: 100%;
+        margin-left:0;
+    }
+    .sidebar-label{
+        font-size: 18px;
+        background: #ccc;
+        padding: 5px 10px;
+    }
+    .sidebar-label .frion{
+        float: right;
+    }
+    .frion{
+        display: block;
+    }
 }
 
 @media only screen and (max-width: 640px) {
@@ -375,6 +409,17 @@ a {
     .slim-body{
         width: 100%;
         max-width: 100%;
+    }
+}
+@media ( min-width: 1025px ) and (max-width: 1199px){
+    .slim-sidebar{
+        position: unset;
+        margin-left: 0;
+        padding: 20px 21px;
+        width:100%;
+    }
+    .slim-body .myprofile .container {
+        padding: 0;
     }
 }
 
@@ -417,4 +462,10 @@ a {
 }
 .disabled_bet .badge{
     padding:5px 10px;
+}
+
+@media ( min-width: 767px ) and (max-width: 1200px){
+    .slim-header.with-sidebar .slim-logo{
+        margin-left: 0;
+    }
 }
