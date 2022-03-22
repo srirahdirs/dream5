@@ -92,7 +92,7 @@ $this->load->view('layouts/menu_session');
                     </div> 
                 </div>                
                 <br>
-                <p class="mg-b-20 mg-sm-b-40"> By clicking confirm, you agree that you are 18+, resident of India and not playing from Assam, Orissa, Telangana and Tamilnadu.</p>
+                <p class="mg-b-20 mg-sm-b-40"> By clicking confirm, you agree that you are 18+, resident of India and not playing from Assam, Orissa, Telangana.</p>
             </form>
         </div>
     </div>

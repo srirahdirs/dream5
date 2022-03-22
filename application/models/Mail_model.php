@@ -98,12 +98,14 @@ class Mail_model extends CI_Model {
             $data['link'] = $link.$getUserDetails->password_reset_token;
             $data['user'] = $getUserDetails;
             $message = $this->load->view('emailer/forgot_password', $data,  TRUE);
+            
             $this->email->from(email_from, 'DREAM5 - Reset Password');
             $this->email->to($getUserDetails->email);
             $this->email->subject('DREAM5 - Reset Password');
             $this->email->set_mailtype("html");
             $this->email->message($message);
-
+            $this->email->priority(3);
+            
             if($this->email->send()){
                 $this->session->set_flashdata('success', 'Mail sent successfully');
             } else {

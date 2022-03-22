@@ -4,7 +4,7 @@
 <div class="slim-footer">
     <div class="container">
         <p>Copyright 2019 &copy; All Rights Reserved. </p>
-        <p class="by">By: <a href="https://www.youngzen.in/" target="_blank">YoungZen Technologies</a></p>
+        <!-- <p class="by">By: <a href="https://www.youngzen.in/" target="_blank">YoungZen Technologies</a></p> -->
     </div><!-- container -->
 </div><!-- slim-footer -->
 

@@ -84,7 +84,6 @@ class User extends CI_Controller {
             if($find1 !== false){
                 $user = $mailModel->forgotPasswordMail($email_or_phonenumber);
                 if($user) {
-                   $mailModel->forgotPasswordMail($user->email);
                     echo 'mail_sent';
                 } else {
                     echo 'email_not_exists';
@@ -92,7 +91,6 @@ class User extends CI_Controller {
             } elseif(preg_match('/^\d{10}$/',$email_or_phonenumber)) {
                     $user = $model->findByMobileNumber($email_or_phonenumber);
                     if($user) {
-                       $mailModel->forgotPasswordMail($user->email);
                         echo 'mail_sent';
                     } else {
                         echo 'mobile_number_not_exists';
