@@ -178,8 +178,8 @@ body{
 
 
 
-.small_btn.btn-primary {
-    padding: 4px 12px;
+.small_btn.btn-primary, .small_btn.btn-success {
+    padding: 4px 12px !important;
 }
 select.form-control.select2.select2-hidden-accessible{
     color: #868ba1;

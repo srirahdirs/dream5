@@ -9,7 +9,7 @@ $encrypted_user_id = encryptId($this->session->userdata('user_id'));
 <div class="slim-body">
 
     <div class="slim-sidebar">
-        <label class="sidebar-label">Navigation <i class="icon ion-navicon-round frion"></i></label>
+        <label class="sidebar-label">MENUS <i class="icon ion-navicon-round frion"></i></label>
 
         <ul class="nav nav-sidebar">
             <li class="sidebar-nav-item">

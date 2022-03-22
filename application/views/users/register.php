@@ -39,8 +39,11 @@
     </div><!-- row -->
     <div class="alert alert-danger err_password" style="display:none"></div>
 
+    <div class="alert alert-danger err_all" style="display:none"></div>
+    <div class="alert alert-success success_all" style="display:none"></div>
 
     <button class="btn btn-primary btn-block btn-submit">Sign Up</button>
+    <p class="toc">Aleady have an account? <a href="javascript:void(0)" class="login_required">Login</a></p>
     <p class="toc">BY CLICKING 'SIGN UP' YOU ACCEPT YOU ARE <b>18+</b> AND AGREE TO OUR <a href="#">T&C</a></p>
 </form>
 <!--
@@ -51,6 +54,77 @@
         <p class="mg-t-40 mg-b-0">Already have an account? <a href="page-signin.html">Sign In</a></p>-->
 </div>
 <script src="<?= $baseUrl ?>/lib/jquery/js/jquery.js"></script>
+<script>
+    $('.login_required').click(function (e) {
+        $(".login_form_err").css("display","none");
+        $("#display_error").css("display","none");
+            $.confirm({
+            title: 'Login Required!',
+            content: '<input type="text" class="form-control" name="username_or_email_ajax" placeholder="USERNAME or EMAIL" autocomplete="off"><br>\n\
+                    <input type="password" class="form-control" name="login_password_ajax" placeholder="PASSWORD" autocomplete="off">\n\
+                    <span style="color:red;margin-top:5px" id="display_error"></span>\n\
+                    ',
+            buttons: {
+                somethingElse: {
+                    text: 'Login',
+                    btnClass: 'btn-default',
+                    keys: ['enter', 'shift'],
+                    action: function () {
+
+                        var username_or_email = $("input[name='username_or_email_ajax']").val();
+                        var login_password = $("input[name='login_password_ajax']").val();
+                        if(username_or_email == ''){ 
+                           $("input[name='username_or_email_ajax']").focus();
+                           return false;
+                        }
+                        if(login_password == ''){ 
+                           $("input[name='login_password_ajax']").focus();
+                           return false;
+                        }
+                        
+                        $.ajax({
+                            url: '<?= base_url() . 'login' ?>',
+                            type: 'POST',
+                            dataType: "json",
+                            data: {username_or_email: username_or_email, login_password: login_password},
+                            success: function (data) {
+                                toastr.clear();
+                                
+                                if ($.isEmptyObject(data.error)) {
+                                    $(".alert-danger").css('display', 'none');
+                                    location.href = "<?php echo base_url('home'); ?>";
+                                } else {
+                                    $("#display_error").css("display","block");
+                                    e.preventDefault(); 
+                                    if (data.error['username_or_email']) {
+                                        $("input[name='username_or_email_ajax']").focus();
+                                        toastr.error(data.error['username_or_email']);
+                                        $("#display_error").html(data.error['username_or_email']);
+                                        return false;
+                                    } else if (data.error['login_password']) {
+                                        toastr.error(data.error['login_password']);
+                                        $("input[name='username_or_email_ajax']").focus();
+                                        $("#display_error").html(data.error['login_password']);
+                                    } else if (data.error) {
+                                        toastr.error(data.error);
+                                        $("#display_error").html(data.error);
+                                        return false;
+                                    } else {
+                                        $(".login_form_err").css('display', 'none');
+                                    }
+                                } //else                                
+                            } //success                            
+                        });
+                        return false; //confirm popup willnot close
+                    }
+                },
+                cancel: function () {
+
+                },
+            },
+        }); //confirm e
+    });
+</script>
 <script type="text/javascript">
 
 
@@ -78,6 +152,8 @@
 
                 type: $(this).closest('form').attr('method'),
 
+                method: "POST",
+
                 dataType: "json",
 
                 data: {username: username, email: email, mobile_number: mobile_number, password: password},
@@ -88,7 +164,9 @@
 
                         $(".alert-danger").css('display', 'none');
                         toastr.clear();
-                        toastr.success("Your account has been created");//                        
+                        toastr.success("Your account has been created");                                   
+                        $(".success_all").css('display', 'block');   
+                        $(".success_all").html('Your account has been created');         
                         setTimeout(function(){ location.reload(); }, 1000);
 
                     } else {

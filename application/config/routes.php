@@ -34,6 +34,7 @@ $route['get-game-details'] = 'payments/getGameDetails';
 $route['my-profile/(:any)'] = 'user/myProfile/$1';
 $route['change-password/(:any)'] = 'user/changePassword/$1';
 $route['forgot-password'] = 'user/forgotPassword';
+$route['sendVerifyMail'] = 'user/sendVerifyMail';
 $route['set-new-password/(:any)'] = 'user/setNewPassword/$1';
 
 

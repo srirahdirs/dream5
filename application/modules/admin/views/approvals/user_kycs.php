@@ -16,7 +16,7 @@ $this->load->view('layouts/menu');
             <h6 class="slim-pagetitle">User Kyc</h6>
         </div><!-- slim-pageheader -->
 
-        <div class="table-wrapper">
+        <div class="table-wrapper table-responsive">
             <table id="datatable1" class="table display responsive nowrap">
                 <thead>
                     <tr>

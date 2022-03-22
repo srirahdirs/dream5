@@ -24,7 +24,7 @@ class Approvals_model extends CI_Model {
         return $this->db->get_where($this->admin_table)->result_array();
     }
     public function getUpiPayments() {
-        return $this->db->select('orders.*,users.email')->join('users','users.id = orders.user_id')->get_where($this->orders_table)->result_array();
+        return $this->db->select('orders.*,users.email')->join('users','users.id = orders.user_id')->order_by("id", "DESC")->get_where($this->orders_table)->result_array();
     }
     public function getUsersKyc() {
         return $this->db->select('users.*,ud.*')->join('user_details ud','users.id = ud.user_id')->get_where($this->users_table)->result_array();

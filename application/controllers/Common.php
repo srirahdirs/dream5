@@ -13,6 +13,7 @@ class Common extends CI_Controller {
 
     public function index() {
         if ($this->session->userdata('username')) {
+            // $data['transactions_today'] = $this->Order_model->findUserPurchasedHistoryToday($this->session->userdata('user_id'));
             $data['transactions_history'] = $this->Order_model->findUserPurchasedHistory(10, 0 , $this->session->userdata('user_id'));
             $data['withdrawal_history'] = $this->UserModel->findUserWithdrawalHistory(10, 0 , $this->session->userdata('user_id'));
             $data['orders'] = $this->load->view('payments/transactions', $data,TRUE);
@@ -81,15 +82,20 @@ class Common extends CI_Controller {
 //            print_r($data);
 //            die;
             if($model->add($data)){
-                echo json_encode(['success' => 'Form submitted successfully.']);
-                $mailModel->sendVerifyMail($data['email']);
+                echo json_encode(['success' => 'Account created successfully.']);
+                error_reporting(0);
+                 $loginModel = new LoginModel();
+                $result = $loginModel->login($data);
+                if($mailModel->sendVerifyMail($data['email'])){
+                    return true;
+                }
                 
             } else {
                 echo json_encode(['error' => 'Failed.']);
             }
         }
     }
-
+    
     public function login() {
         $this->form_validation->set_rules('username_or_email', 'Username or Email', 'required', [
             'required' => '%s is required',

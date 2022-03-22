@@ -24,14 +24,17 @@ $this->load->view('layouts/menu_session');
                                     <td>EMAIL ID</td>
                                     <td><?= $user->email ?></td>
                                     <td><?= ($user->email_verified == 1 ) ? '<span class="success">Verified</span>' : '<span class="error">Not verified</span>' ?></td>
-                                    <td style="text-align:center;"><a class="small_btn btn btn-primary" href="<?= base_url() . 'my-profile/' . $encrypted_user_id ?>">UPDATE</a></td>
+                                    <td style="text-align:center;">
+                                        <a class="small_btn btn btn-primary" href="<?= base_url() . 'my-profile/' . $encrypted_user_id ?>">Update</a>
+                                        <a class="small_btn btn btn-success" style="color:#fff" onclick="sendVerifyMail();">Verify</a>
+                                    </td>
                                 </tr>
                                 <tr>
 
                                     <td>MOBILE NUMBER</td>
                                     <td><?= $user->mobile_number ?></td>
                                     <td><?= '-';// ($user->otp_verified == 1 ) ? '<span class="success">Verified</span>' : '<span class="error">Not verified</span>' ?></td>
-                                    <td  style="text-align:center;"><a class="small_btn btn btn-primary" href="<?= base_url() . 'my-profile/' . $encrypted_user_id ?>">UPDATE</a></td>
+                                    <td  style="text-align:center;"><a class="small_btn btn btn-primary" href="<?= base_url() . 'my-profile/' . $encrypted_user_id ?>">Update</a></td>
                                 </tr>
                                 <tr>                                   
                                     <td>PAN CARD</td>
@@ -180,4 +183,13 @@ $this->load->view('layouts/footer');
     $('input[name="bank_proof_file"]').change(function (e) {
         $('.bank_proof_file').html('bank proof attached');
     });
+    function sendVerifyMail() {
+        $.ajax({
+            url: '<?= base_url() ?>sendVerifyMail',
+            method: 'post',
+            success: function () {                
+                location.reload();
+            }
+        });
+    }
 </script>

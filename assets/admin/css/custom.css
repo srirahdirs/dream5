@@ -59,3 +59,14 @@
 .form-control::placeholder{
     color: #e1e8ed;
 }
+@media only screen and (max-width: 991px) {
+    .slim-sidebar{
+        width: auto;
+        position: static;
+        min-height: auto;
+        margin: 15px;
+    }
+    .slim-header.with-sidebar .slim-logo{
+        margin-left: 0;
+    }
+}

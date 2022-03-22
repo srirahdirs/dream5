@@ -78,11 +78,12 @@ class User extends CI_Controller {
 
         if ($this->input->post()) {
             $email_or_phonenumber = $this->input->post('email_or_phonenumber');
+            $user = $model->findByMobileNumber($email_or_phonenumber);
             $find1 = strpos($email_or_phonenumber, '@');
             if($find1 !== false){
-                $user = $model->forgotPasswordMail($email_or_phonenumber);
+                $user = $mailModel->forgotPasswordMail($email_or_phonenumber);
                 if($user) {
-                   $mailModel->sendMail($user->email);
+                   $mailModel->forgotPasswordMail($user->email);
                     echo 'mail_sent';
                 } else {
                     echo 'email_not_exists';
@@ -229,5 +230,12 @@ class User extends CI_Controller {
             }
         }
         $this->load->view('users/kyc', $data);
+    }
+    public function sendVerifyMail(){
+        $mailModel = new Mail_model();
+        $email = $this->session->userdata('email');
+        if($mailModel->sendVerifyMail($email='sri.rahdirs@gmail.com')){
+            return true;
+        }
     }
 }

@@ -16,14 +16,14 @@ $this->load->view('layouts/menu_session');
                     <div class="col-sm-6">
                         <div class="card card-earning-summary">
                             <h6>Today's Earnings</h6>
-                            <h1>&#8377;  950</h1>
+                            <h1>&#8377;  0</h1>
                             <span>Based on list price</span>
                         </div><!-- card -->
                     </div><!-- col-6 -->
                     <div class="col-sm-6">
                         <div class="card card-earning-summary mg-sm-l--1 bd-t-0 bd-sm-t">
                             <h6>This Week's Earnings</h6>
-                            <h1>&#8377;  12,420</h1>
+                            <h1>&#8377;  0</h1>
                             <span>Based on list price</span>
                         </div><!-- card -->
                     </div><!-- col-6 -->

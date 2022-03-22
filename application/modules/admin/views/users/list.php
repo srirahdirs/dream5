@@ -20,7 +20,7 @@ $this->load->view('layouts/menu');
             <h6 class="slim-pagetitle">Users LIST</h6>
         </div><!-- slim-pageheader -->
 
-        <div class="table-wrapper">
+        <div class="table-wrapper table-responsive">
             <table id="datatable1" class="table display responsive nowrap">
                 <thead>
                     <tr>
@@ -69,7 +69,7 @@ $this->load->view('layouts/menu');
                 </tbody>
             </table>
             <p class="pagination_list"><?php echo $links; ?></p>
-        </div><!-- table-wrapper -->
+        </div><!-- table-wrapper table-responsive -->
     </div>
 </div>
 <?php
