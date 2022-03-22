@@ -87,7 +87,7 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 define('secretKey','2de7819ab2a586bee6b28fe0d7d4ed2a432d7691');
 define('appId','10674f2d1ad1f3824b363dadb47601');
 
-define('email_from','sridharvmsccs@gmail.com');
+define('email_from','info@dream5.in');
 
 define('RAZOR_PAY_KEY_ID', 'rzp_live_bPYM890XEMEsjo');
 define('RAZOR_PAY_SECRET', 'M1W4w1zxGopKqU3sfVrHsE9R');

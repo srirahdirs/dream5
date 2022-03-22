@@ -58,7 +58,11 @@ body{
 .toc{
     font-size: 9px;
     color: white;
-    margin-top: 10px;
+    margin-top: 6px;
+    margin-bottom: 4px;
+}
+.toc p{
+    margin:0 !important;
 }
 .toc a {
     color: #F49917;
@@ -375,10 +379,26 @@ a {
 }
 
 @media only screen and (max-width: 640px) {
-	
+	.success {
+        color: #23BF08;
+        text-align: center;
+        padding-bottom: 20px;
+    }
+}
+@media only screen and (max-width: 640px) {
+	.success {
+        color: #23BF08;
+        text-align: center;
+        padding-bottom: 20px;
+    }
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 1199px) {
+    .success {
+        color: #23BF08;
+        text-align: center;
+        padding-bottom: 20px !important;
+    }
 }
 
 @media ( min-width: 576px ) and (max-width: 768px) {

@@ -105,25 +105,32 @@
                                 data: {email_or_phonenumber: $('#email_id').val()},
                                 success: function (response) {
                                     
-                                    toastr.clear();                                    
-                                    console.log(response);
+                                    
                                     if(response == 'invalid_mobile_or_email'){
-                                        $('#email_id').focus();
+                                        $('#email_id').focus();    
+                                        $(".err_all").css('display', 'block');                                       
+                                        $(".err_all").html('Invalid email or mobile number');
                                         toastr.error('Invalid email or mobile number');
                                         return false;
                                     }
                                     if(response == 'mobile_number_not_exists'){
                                         $('#email_id').focus();
+                                        $(".err_all").css('display', 'block');      
+                                        $(".err_all").html('Mobile number not exists');
                                         toastr.error('Mobile number not exists');
                                         return false;
                                     }
                                     if(response == 'email_not_exists'){
                                         $('#email_id').focus();
+                                        $(".err_all").css('display', 'block');  
+                                        $(".err_all").html('Email not exists');    
                                         toastr.error('Email not exists');
                                         return false;
                                     }
                                     if(response == 'mail_sent'){                                        
                                         toastr.success('Email has been sent');  
+                                        $(".success_all").css('display', 'block');   
+                                        $(".success_all").html('Email has been sent');
                                         setTimeout(function(){ location.reload(); }, 3000);
                                     }
                                 }

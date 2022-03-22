@@ -9,7 +9,7 @@ $this->load->view('layouts/menu_session');
         <div class="section-wrapper">
             <form id="depositForm" method="post" action="<?= base_url().'/payments/saveReferenceNumber'?>">
                 <div class="row">
-                    
+                   
                     <!--single row starts-->
                     <div class="col-lg-6">
                         <div class="form-group">

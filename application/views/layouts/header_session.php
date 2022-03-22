@@ -29,6 +29,12 @@ $encrypted_user_id = encryptId($this->session->userdata('user_id'));
             <div class="container">
                 <!--<div class="slim-header-left">-->
                 <h2 class="slim-logo"><a href="<?= base_url() ?>home"><img src="<?= $baseUrl ?>/img/logo/logo_dark.png" height="95"></a></h2>
+                <?php if ($this->session->flashdata('success')) { ?>
+                        <div class="notification success"><?= $this->session->flashdata('success') ?></div>
+                    <?php } else ?>
+                    <?php if ($this->session->flashdata('error')) { ?>    
+                        <div class="parsley-errors-list" style="margin-bottom: 20px;text-align: center"><?= $this->session->flashdata('error') ?></div>
+                <?php } ?>
                 <div class="slim-header-right">
 
 <!--                    <div class="add_chips">

@@ -77,6 +77,7 @@ class User extends CI_Controller {
         
 
         if ($this->input->post()) {
+            error_reporting(0);
             $email_or_phonenumber = $this->input->post('email_or_phonenumber');
             $user = $model->findByMobileNumber($email_or_phonenumber);
             $find1 = strpos($email_or_phonenumber, '@');

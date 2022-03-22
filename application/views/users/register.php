@@ -43,7 +43,8 @@
     <div class="alert alert-success success_all" style="display:none"></div>
 
     <button class="btn btn-primary btn-block btn-submit">Sign Up</button>
-    <p class="toc">Aleady have an account? <a href="javascript:void(0)" class="login_required">Login</a></p>
+    <p class="toc">Aleady have an account? <a href="javascript:void(0)" class="login_required"> Login </a></p>
+    <p class="toc">Forgot your password?<a href="javascript:void(0)" class="frgt_pwd_btn">Reset </a></p>
     <p class="toc">BY CLICKING 'SIGN UP' YOU ACCEPT YOU ARE <b>18+</b> AND AGREE TO OUR <a href="#">T&C</a></p>
 </form>
 <!--
