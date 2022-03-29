@@ -52,7 +52,7 @@ $this->load->view('layouts/menu');
                                 <td><?= $row['game_type']; ?></td>
                                 <td><?= $row['team_a']; ?></td>
                                 <td><?= $row['team_b']; ?></td>
-                                <td><?= $row['match_date_time']; ?></td>
+                                <td><?= date('d-m-y h:i',strtotime($row['match_date_time'])); ?></td>
                                 <td><?= $row['status']; ?></td>
                                 <td>                                    
                                     <a class="btn btn-info btn-xs" href="<?php echo base_url('admin/games/edit/' . $row['id']) ?>"><i class="fa fa-pencil"></i></a>

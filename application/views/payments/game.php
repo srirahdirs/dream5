@@ -44,7 +44,7 @@ $this->load->view('layouts/menu_session');
                                             <a href="javascript:void(0)" class="disabled_bet" data-id="<?= $row['id']?>" data-team="<?= $row['team_b']?>"><span data-toggle="tooltip" title="Bets currently disabled"<span class="badge badge-warning"><?= $row['team_b']; ?></span></span></a>
                                         <?php } ?>
                                     </td>
-                                    <td><?= $row['match_date_time']; ?></td>
+                                    <td><?= date('d-m-y h:i',strtotime($row['match_date_time'])); ?></td>
                                     <td><?= $row['status']; ?></td>
                                     <td>
                                         <?php if($row['bet_placed'] == 'Yes') { ?>

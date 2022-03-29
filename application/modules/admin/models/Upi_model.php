@@ -63,7 +63,7 @@ class Upi_model extends CI_Model {
         $data['ordered_at'] = date('Y-m-d h:i:s');
         $data['status'] = 'deposited';
         $data['upi_id'] = $this->input->post('upi_id');
-        $this->load->model('\models\Upi_model');
+        
         $model = new Upi_model();
         $model->sendPaymentMailToAdmin();
         return $this->db->insert('orders',$data);

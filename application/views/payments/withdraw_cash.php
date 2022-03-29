@@ -75,7 +75,7 @@ $this->load->view('layouts/menu_session');
                         <div class="row mg-t-20">
                             <label class="col-sm-5 form-control-label"><span class="tx-danger">*</span> IFSC CODE:</label>
                             <div class="col-sm-7 mg-t-10 mg-sm-t-0">
-                                <input type="text" class="form-control" autocomplete="off" required="" value="<?= ($user->ifsc_code != '') ? $user->ifsc_code : set_value('ifsc_code') ?>"  name="ifsc_code" <?= ($user->ifsc_code != '') ? 'readonly' : ''?> placeholder="eg:SEDI0003309">
+                                <input type="text" class="form-control" autocomplete="off" style="text-transform:uppercase"  required="" value="<?= ($user->ifsc_code != '') ? $user->ifsc_code : set_value('ifsc_code') ?>"  name="ifsc_code" <?= ($user->ifsc_code != '') ? 'readonly' : ''?> placeholder="eg:SEDI0003309">
                                 <?php echo form_error('ifsc_code', '<div class="error">', '</div>'); ?>
                             </div>
                         </div>
