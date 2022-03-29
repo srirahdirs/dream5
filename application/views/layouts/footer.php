@@ -8,7 +8,7 @@
         <p> <a href="">Privacy Policy</a> </p>
         <p> <a href="">Terms & Conditions</a> </p>
         <p> <a href="">Cancellation/Refund Policy</a> </p>-->
-        <p>By: <a href="http://www.youngzen.in/" target="_blank">YoungZen Technologies</a></p>
+        <!-- <p>By: <a href="http://www.youngzen.in/" target="_blank">YoungZen Technologies</a></p> -->
     </div><!-- container -->
 </div><!-- slim-footer -->
 

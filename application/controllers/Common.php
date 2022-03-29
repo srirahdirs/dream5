@@ -72,15 +72,12 @@ class Common extends CI_Controller {
             $errors = $this->form_validation->error_array();
             echo json_encode(['error' => $errors]);
         } else {
-//            echo "<pre>";
             $data['username'] = $this->input->post('username',TRUE);
             $data['email'] = $this->input->post('email',TRUE);
             $data['mobile_number'] = $this->input->post('mobile_number',TRUE);
             $data['password'] = $this->input->post('password',TRUE);
             $model = new UserModel();
             $mailModel = new Mail_model();
-//            print_r($data);
-//            die;
             if($model->add($data)){
                 echo json_encode(['success' => 'Account created successfully.']);
                 error_reporting(0);

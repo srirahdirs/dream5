@@ -9,8 +9,14 @@ $this->load->view('layouts/menu_session');
         <div class="row">
             <div class="col-lg-6">
                 <h3 class="tx-white mg-b-15">Welcome, <span style="color: #23BF08"><?= $this->session->userdata('username') ?></span>!</h3>
-                <p class="mg-b-40"><b>5</b> CRAZY reasons Why should you choose <b>DREAM5.</b></p>
-
+                <p class="mg-b-40" style="margin-bottom: 5px;"><b>5</b> CRAZY reasons Why should you choose <span class="tx-white mg-b-15">DREAM5.</span></p>
+                <ul>
+                    <li>Free and trustworthy</li>
+                    <li>Win real cash</li>
+                    <li>Modern and user-friendly betting site</li>
+                    <li>Refer and earn more money</li>
+                    <li>Easy to deposit with UPI</li>
+                </ul>
                 <h6 class="slim-card-title mg-b-15">Your Earning Summary</h6>
                 <div class="row no-gutters">
                     <div class="col-sm-6">
@@ -31,11 +37,11 @@ $this->load->view('layouts/menu_session');
             </div><!-- col-6 -->
             <div class="col-lg-6 mg-t-20 mg-sm-t-30 mg-lg-t-0">
                 <div class="card card-dash-headline">
-                    <h4>Introducing the responsive admin dashboard template made with Bootstrap 4</h4>
-                    <p>Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus...</p>
+                    <h4>Refer & Earn Now!</h4>
+                    <p>Invite your friends/ family and earn upto <span class="tx-white mg-b-15">&#8377;500.</span> when each friend joins and plays</p>
                     <div class="row row-sm">
                         <div class="col-sm-6">
-                            <a href="" class="btn btn-primary btn-block">Account Settings</a>
+                            <a href="" class="btn btn-primary btn-block">MY EARNINGS</a>
                         </div><!-- col-6 -->
                         <div class="col-sm-6 mg-t-10 mg-sm-t-0">
                             <a href="" class="btn btn-success btn-block">REFER NOW</a>

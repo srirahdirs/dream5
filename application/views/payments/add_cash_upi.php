@@ -16,8 +16,14 @@ $this->load->view('layouts/menu_session');
                             <label>STEP 1 : TRANSFER TO THE UPI ID SHOWN BELOW</label><br>
                             <span>UPI ID:-</span><input class="form-control" name="upi_id" id="upi_id" value="<?= $upi_id ?>" type="text" style="color:#fff !important"/>
                         </div>
+                        <div class="form-group" style="text-align: left;">
+                            <p>Use the above <span style="color:#fff !important">UPI ID</span> or scan the <span style="color:#fff !important">QR code</span> below to pay</p>
+                        </div>
                         <div class="form-group">
-                            <span>Amount:-</span><input class="form-control" name="deposit_amount" id="order_amount" value="<?= $amount ?>" type="text" />
+                            <img src="<?= base_url().'/assets/img/qr_code_sample.png' ?>" alt="QR CODE">
+                        </div>
+                        <div class="form-group">
+                            <span>Amount:-</span><input class="form-control" name="deposit_amount" id="order_amount" readonly="true" value="<?= $amount ?>" type="text" />
                         </div>
                     </div>
                     <div class="col-lg-12" style="margin-bottom:20px;"></div>
@@ -49,6 +55,11 @@ $this->load->view('layouts/footer');
 ?>
 
 <script type="text/javascript">
+    $('#order_amount').keypress(function(event){
+        if(event.which != 8 && isNaN(String.fromCharCode(event.which))){
+            event.preventDefault(); //stop character from entering input
+        }
+    });
     $(".sidebar-nav-item").removeClass('active');
     $(".sidebar-nav-item .add_cash").addClass('active');    
     //main menu

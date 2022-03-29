@@ -88,6 +88,8 @@ define('secretKey','2de7819ab2a586bee6b28fe0d7d4ed2a432d7691');
 define('appId','10674f2d1ad1f3824b363dadb47601');
 
 define('email_from','info@dream5.in');
+define('smtp_user','info@dream5.in');
+define('smtp_pass','email@dream5');
 
 define('RAZOR_PAY_KEY_ID', 'rzp_live_bPYM890XEMEsjo');
 define('RAZOR_PAY_SECRET', 'M1W4w1zxGopKqU3sfVrHsE9R');

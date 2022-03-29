@@ -26,19 +26,34 @@ class Mail_model extends CI_Model {
     public function sendVerifyMail($email){
         
         $getUserData = $this->findWithEmail($email);
-        $generateToken = $this->generateToken($getUserData->id);
+        $generateToken = $this->generateVerifyToken($getUserData->id);
         
         if($generateToken){            
             $getUserDetails = $this->find($getUserData->id);
-            $link = 'http://localhost/mangatha_ci/verifyMail/';
+            $link = 'http://localhost/dream5/verifyMail/';
             if($_SERVER['SERVER_NAME'] == 'localhost') :
-                $link = 'http://localhost/mangatha_ci/verifyMail/';
+                $link = 'http://localhost/dream5/verifyMail/';
             else:                   
                 $link = base_url().'/verifyMail/';
             endif;
-            $data['link'] = $link.$getUserDetails->password_reset_token;
+            $data['link'] = $link.$getUserDetails->verification_token;
             $data['user'] = $getUserDetails;
             $message = $this->load->view('emailer/verify_mail', $data,  TRUE);
+
+            $config = [
+                'mailtype' => 'html',
+                'charset' => 'utf-8',
+                'protocol' => 'smtp',
+                'smtp_host' => 'ssl://ssmtp.googlemail.com',
+                'smtp_user' => smtp_user,
+                'smtp_pass' => smtp_pass,
+                'smtp_port' => '465',
+                'smtp_timeout' => '20',
+                'validation' => TRUE,
+                'newline' => "\r\n"
+            ];
+            $this->load->library('email', $config);
+
             $this->email->from(email_from, 'DREAM5 - Verify Your Email');
             $this->email->to($getUserDetails->email);
             $this->email->subject('Wohoo! Welcome to the DREAM5 family!');
@@ -58,15 +73,29 @@ class Mail_model extends CI_Model {
         
         $getUserData = $this->findWithEmail($email);       
         $getUserDetails = $this->find($getUserData->id);
-        $link = 'http://localhost/mangatha_ci/verifyMail/';
+        $link = 'http://localhost/dream5/home/';
         if($_SERVER['SERVER_NAME'] == 'localhost') :
-            $link = 'http://localhost/mangatha_ci/login/';
+            $link = base_url().'/login/';
         else:                   
             $link = base_url().'/login/';
         endif;
         $data['link'] = $link;
         $data['user'] = $getUserDetails;
         $message = $this->load->view('emailer/verified_mail', $data,  TRUE);
+        $config = [
+            'mailtype' => 'html',
+            'charset' => 'utf-8',
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://ssmtp.googlemail.com',
+            'smtp_user' => smtp_user,
+            'smtp_pass' => smtp_pass,
+            'smtp_port' => '465',
+            'smtp_timeout' => '20',
+            'validation' => TRUE,
+            'newline' => "\r\n"
+        ];
+        $this->load->library('email', $config);
+
         $this->email->from(email_from, 'Wohoo! Welcome to the DREAM5 family!');
         $this->email->to($getUserDetails->email);
         $this->email->subject('DREAM5 - Email Verified Successfully');
@@ -98,13 +127,24 @@ class Mail_model extends CI_Model {
             $data['link'] = $link.$getUserDetails->password_reset_token;
             $data['user'] = $getUserDetails;
             $message = $this->load->view('emailer/forgot_password', $data,  TRUE);
-            
+            $config = [
+                'mailtype' => 'html',
+                'charset' => 'utf-8',
+                'protocol' => 'smtp',
+                'smtp_host' => 'ssl://ssmtp.googlemail.com',
+                'smtp_user' => smtp_user,
+                'smtp_pass' => smtp_pass,
+                'smtp_port' => '465',
+                'smtp_timeout' => '20',
+                'validation' => TRUE,
+                'newline' => "\r\n"
+            ];
+            $this->load->library('email', $config);
             $this->email->from(email_from, 'DREAM5 - Reset Password');
             $this->email->to($getUserDetails->email);
             $this->email->subject('DREAM5 - Reset Password');
             $this->email->set_mailtype("html");
             $this->email->message($message);
-            $this->email->priority(3);
             
             if($this->email->send()){
                 $this->session->set_flashdata('success', 'Mail sent successfully');
@@ -118,6 +158,13 @@ class Mail_model extends CI_Model {
     {
         $token = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 50);
         $data['password_reset_token'] = $token;
+        $this->db->where('id',$id);
+        return $this->db->update($this->user_table,$data);        
+    }
+    public function generateVerifyToken($id)
+    {
+        $token = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 50);
+        $data['verification_token'] = $token;
         $this->db->where('id',$id);
         return $this->db->update($this->user_table,$data);        
     }

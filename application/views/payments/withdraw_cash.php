@@ -48,34 +48,34 @@ $this->load->view('layouts/menu_session');
                         <div class="row mg-t-20">
                             <label class="col-sm-5 form-control-label"><span class="tx-danger">*</span> FULL NAME:</label>
                             <div class="col-sm-7 mg-t-10 mg-sm-t-0">
-                                <input type="text" class="form-control" value="<?= $user->first_name . ' ' .$user->last_name ?>" disabled="" style="text-transform: uppercase;">
+                                <input type="text" class="form-control" value="<?= $user->first_name . ' ' .$user->last_name ?>" readonly="" style="text-transform: uppercase;">
                             </div>
                         </div>
                         <div class="row mg-t-20">
                             <label class="col-sm-5 form-control-label"><span class="tx-danger">*</span> ACCOUNT NO:</label>
                             <div class="col-sm-7 mg-t-10 mg-sm-t-0">
-                                <input type="text" class="form-control" autocomplete="off" required="" value="<?= ($user->account_number != '') ? '******' .substr($user->account_number, -4) : set_value('account_number') ?>" name="account_number" <?= ($user->account_number != '') ? 'disabled' : ''?> placeholder="eg:1010003520***">
+                                <input type="text" class="form-control" autocomplete="off" required="" value="<?= ($user->account_number != '') ? $user->account_number : set_value('account_number') ?>" name="account_number" <?= ($user->account_number != '') ? 'readonly' : ''?> placeholder="eg:1010003520***">
                                 <?php echo form_error('account_number', '<div class="error">', '</div>'); ?>
                             </div>
                         </div>
                         <div class="row mg-t-20">
                             <label class="col-sm-5 form-control-label"><span class="tx-danger">*</span> CONFIRM A/C NO:</label>
                             <div class="col-sm-7 mg-t-10 mg-sm-t-0">
-                                <input type="text" class="form-control"  autocomplete="off" required="" value="<?= ($user->account_number != '') ? '******' .substr($user->account_number, -4) : set_value('confirm_account_number') ?>" name="confirm_account_number" <?= ($user->account_number != '') ? 'disabled' : ''?> placeholder="eg:1010003520***">
+                                <input type="text" class="form-control"  autocomplete="off" required="" value="<?= ($user->account_number != '') ? $user->account_number : set_value('confirm_account_number') ?>" name="confirm_account_number" <?= ($user->account_number != '') ? 'readonly' : ''?> placeholder="eg:1010003520***">
                                 <?php echo form_error('confirm_account_number', '<div class="error">', '</div>'); ?>
                             </div>
                         </div>
                         <div class="row mg-t-20">
                             <label class="col-sm-5 form-control-label"><span class="tx-danger">*</span> BANK NAME:</label>
                             <div class="col-sm-7 mg-t-10 mg-sm-t-0">
-                                <input type="text" class="form-control" autocomplete="off" required="" value="<?= ($user->bank_name != '') ? $user->bank_name : set_value('bank_name') ?>"  name="bank_name" <?= ($user->bank_name != '') ? 'disabled' : ''?> placeholder="eg:STA*** BANK OF INDIA">
+                                <input type="text" class="form-control" autocomplete="off" required="" value="<?= ($user->bank_name != '') ? $user->bank_name : set_value('bank_name') ?>"  name="bank_name" <?= ($user->bank_name != '') ? 'readonly' : ''?> placeholder="eg:STA*** BANK OF INDIA">
                                 <?php echo form_error('bank_name', '<div class="error">', '</div>'); ?>
                             </div>
                         </div>
                         <div class="row mg-t-20">
                             <label class="col-sm-5 form-control-label"><span class="tx-danger">*</span> IFSC CODE:</label>
                             <div class="col-sm-7 mg-t-10 mg-sm-t-0">
-                                <input type="text" class="form-control" autocomplete="off" required="" value="<?= ($user->ifsc_code != '') ? $user->ifsc_code : set_value('ifsc_code') ?>"  name="ifsc_code" <?= ($user->ifsc_code != '') ? 'disabled' : ''?> placeholder="eg:SEDI0003309">
+                                <input type="text" class="form-control" autocomplete="off" required="" value="<?= ($user->ifsc_code != '') ? $user->ifsc_code : set_value('ifsc_code') ?>"  name="ifsc_code" <?= ($user->ifsc_code != '') ? 'readonly' : ''?> placeholder="eg:SEDI0003309">
                                 <?php echo form_error('ifsc_code', '<div class="error">', '</div>'); ?>
                             </div>
                         </div>

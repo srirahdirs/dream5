@@ -35,6 +35,7 @@ $route['my-profile/(:any)'] = 'user/myProfile/$1';
 $route['change-password/(:any)'] = 'user/changePassword/$1';
 $route['forgot-password'] = 'user/forgotPassword';
 $route['sendVerifyMail'] = 'user/sendVerifyMail';
+$route['verifyMail/(:any)'] = 'user/verifyMail/$1';
 $route['set-new-password/(:any)'] = 'user/setNewPassword/$1';
 
 
@@ -49,6 +50,7 @@ $route['admin/user-games'] = 'admin/approvals/userGames';
 $route['admin/approve-kyc/(:any)'] = 'admin/approvals/ApproveKyc/$1';
 $route['admin/reject-kyc/(:any)'] = 'admin/approvals/RejectKyc/$1';
 $route['admin/confirm-upi-payment/(:num)'] = 'admin/approvals/confirmUpiPayment/$1';
+$route['admin/games/(:num)'] = 'admin/games/index';
 /**************ADMIN users**************/
 $route['admin/users/(:num)'] = 'admin/users/index';
 $route['admin/users/delete/(:any)'] = 'admin/users/delete/$1';

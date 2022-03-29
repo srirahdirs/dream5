@@ -9,7 +9,7 @@ class User extends CI_Controller {
         $this->load->library(['form_validation', 'encryption']);
         $this->load->model(['UserModel','Mail_model']);
         if (!$this->session->userdata('login_status')) {
-            $allowed = array('forgotPassword', 'resetPassword','setNewPassword');
+            $allowed = array('forgotPassword', 'resetPassword','setNewPassword','verifyMail');
             if (!in_array($this->router->fetch_method(), $allowed)) {
                 redirect('home');
             }
@@ -134,7 +134,8 @@ class User extends CI_Controller {
             $this->session->set_flashdata('success', 'Token validated');
             return $this->load->view('users/set_new_password',$data);
         } else {
-            $this->session->set_flashdata('error','Token expired or invalid');                    
+            $this->session->set_flashdata('error','Token expired or invalid');  
+            return redirect('home');                  
         }
         $this->load->view('users/set_new_password',$data);
     }
@@ -150,31 +151,19 @@ class User extends CI_Controller {
 
 
 
-//    public function forgotPassword(){
-//        $email = $this->session->userdata('email');
-//        $getUserData = $this->UserModel->findWithEmail($email);
-//        if($this->UserModel->generateToken($getUserData->id)){
-//            $this->data['data'] = $getUserData;
-//                $link = 'http://localhost/dwf/resetPassword/';
-//                if($_SERVER['SERVER_NAME'] == 'localhost') :
-//                    $link = 'http://localhost/dwf/resetPassword/';
-//                else:                   
-//                    $link = 'https://projects.omgtech.in/dwf/resetPassword/';
-//                endif;
-//            $this->data['link'] = $link.$getUserData->password_reset_token;
-//            
-//            $message = $this->load->view('emailer/resetPassword', $this->data,  TRUE);
-//            $this->email->from('info@leadh.co', 'DWF - Set Your Passsword');
-//            $this->email->to($getUserData->email);
-//            $this->email->subject('DWF - Set Password');
-//            $this->email->message($message);
-//
-//            $this->email->send();
-// 
-//            $this->session->set_flashdata('success', 'Please check Mail!.');
-//        }
-//        
-//    }
+   public function verifyMail($token){
+        $getData = $this->UserModel->findVerificationToken($token);          
+        if($getData) {
+            $user_id = $getData->id;            
+            $this->UserModel->updateUserStatus($user_id);    
+            $this->session->set_flashdata('success', 'Email verified!.');    
+            return redirect('home');
+        } else {
+            $this->session->set_flashdata('error', 'Token Expired or Invalid!.');
+            return redirect('home');
+        }
+       
+   }
 //    public function resetPassword($token){
 //        $getData = $this->UserModel->findWithToken($token);
 //       

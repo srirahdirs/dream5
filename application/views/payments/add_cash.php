@@ -17,7 +17,7 @@ $this->load->view('layouts/menu_session');
                             <input class="form-control" name="orderAmount" id="order_amount" value="5000" type="number" step="100"/>
                         </div>
                     </div>
-                    <div class="col-lg-2">
+                    <!-- <div class="col-lg-2">
                         <label class="hide_label">500</label><br>
                         <input class="form-control cursor_pointer" value="500" />
                     </div>
@@ -32,7 +32,7 @@ $this->load->view('layouts/menu_session');
                     <div class="col-lg-2">
                         <label class="hide_label">10000</label><br>
                         <input class="form-control cursor_pointer" value="10000"/>
-                    </div>
+                    </div> -->
                     <!--single row ends-->
                     <div class="col-lg-12" style="margin-bottom:20px;"></div>
                     
@@ -43,7 +43,7 @@ $this->load->view('layouts/menu_session');
                             <input class="form-control"  id="bonus_code"  type="text" autocomplete="off"/>
                         </div>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-2">
                         <label class="hide_label">Apply</label><br>
                         <a href="javascript:void(0)" class="btn btn-primary btn-block">APPLY</a>
                     </div>
@@ -116,8 +116,21 @@ $this->load->view('layouts/footer');
         $(this).css('background', '#FFB612');
         $('#order_amount').val($(this).val());
     });
+    $('#order_amount').keypress(function(event){
+        if(event.which != 8 && isNaN(String.fromCharCode(event.which))){
+            event.preventDefault(); //stop character from entering input
+        }
+    });
     $('#upi').click(function (e) {
         e.preventDefault();
+        if($('#order_amount').val() > 20000){
+            $.alert('Enter amount less than 20000');
+            return false;
+        }
+        if($('#order_amount').val() < 25){
+            $.alert('Enter amount greater than 25');
+            return false;
+        }
         $.confirm({
             title: 'Please select payment method' ,
             content: '' +
@@ -131,7 +144,7 @@ $this->load->view('layouts/footer');
             '<option value="BHIM">BHIM</option>' +
             '</select>' +
             '<label>Enter the amount</label>' +
-            '<input type="number" placeholder="Rs.100 - Rs.10000" min="1" max="10000" class="deposit_amount form-control" required id="amount" value="'+ $("#order_amount").val()+'"/>' +
+            '<input type="number" placeholder="Rs.100 - Rs.20000" min="1" max="10000" class="deposit_amount form-control" required id="amount" value="'+ $("#order_amount").val()+'"/>' +
             '</div>' +
             '</form><br>',
             buttons: {

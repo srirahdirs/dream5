@@ -62,6 +62,10 @@ class UserModel extends CI_Model {
     {
         return $this->db->get_where("users", array("password_reset_token" => $token))->row(0);
     }
+    public function findVerificationToken($token)
+    {
+        return $this->db->get_where("users", array("verification_token" => $token))->row(0);
+    }
     public function sendSetPasswordLink($email){
         
         $getUserData = $this->findWithEmail($email);
@@ -101,6 +105,14 @@ class UserModel extends CI_Model {
         $this->db->where('id',$id);
         return $this->db->update('users',$data);        
     }
+    public function updateUserStatus($user_id)
+    {
+        $data['verification_token'] = NULL;
+        $data['email_verified'] = 1;
+        $this->db->where('id',$user_id);
+        return $this->db->update('users',$data);        
+    }
+     
 //
 //    /**
 //     * Find all data.
@@ -129,6 +141,8 @@ class UserModel extends CI_Model {
 
         if ($userTbl) {
             $dataUser['user_id'] = $user_id;
+            $orderModel = new Order_model();
+            $orderModel->insertIntoWallet($user_id, 100);
             return $this->db->insert('user_details', $dataUser);
         }
     }
