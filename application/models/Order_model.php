@@ -13,9 +13,7 @@ class Order_model extends CI_Model {
 
     public function saveOrder($data){
         $data['user_id'] = $this->session->userdata('user_id');
-        if($this->db->insert('orders',$data)) {
-            $mailModel = new Mail_model();
-            $mailModel->sendPaymentMailToAdmin();
+        if($this->db->insert('orders',$data)) {            
             $this->insertIntoWallet($data['user_id'], $data['amount']);
             return true;
         } else {

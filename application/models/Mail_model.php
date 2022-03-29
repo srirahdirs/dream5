@@ -159,8 +159,9 @@ class Mail_model extends CI_Model {
 
 
     public function sendNewUserMailToAdmin(){
+        $data = '';
         
-        $message = $this->load->view('emailer/new_user_to_admin.php', TRUE);
+        $message = $this->load->view('emailer/new_user_to_admin.php',$data, TRUE);
         $config = [
             'mailtype' => 'html',
             'charset' => 'utf-8',
@@ -175,22 +176,21 @@ class Mail_model extends CI_Model {
         ];
         $this->load->library('email', $config);
 
+        $admin_list = array(admin_email_1, admin_email_2, admin_email_3);
+        $this->email->to($admin_list);
+
         $this->email->from(email_from, 'Wohoo! New user to DREAM5 family!');
-        $this->email->to(admin_email_1,admin_email_2,admin_email_3);
+        
         $this->email->subject('DREAM5 - New Registration');
         $this->email->set_mailtype("html");
         $this->email->message($message);
 
-        if($this->email->send()){
-            // $this->session->set_flashdata('success', 'Mail sent successfully');
-        } else {
-            // $this->session->set_flashdata('error', 'Failed to send email.');
-        }            
-        return 1;
+        $this->email->send();
+        return true;
     }
     public function sendPaymentMailToAdmin(){
-        
-        $message = $this->load->view('emailer/new_payment_to_admin.php', TRUE);
+        $data = '';
+        $message = $this->load->view('emailer/new_payment_to_admin.php',$data,TRUE);
         $config = [
             'mailtype' => 'html',
             'charset' => 'utf-8',
@@ -205,18 +205,15 @@ class Mail_model extends CI_Model {
         ];
         $this->load->library('email', $config);
 
+        $admin_list = array(admin_email_1, admin_email_2, admin_email_3);
+        $this->email->to($admin_list);
+        
         $this->email->from(email_from, 'Hola! New Payment!');
-        $this->email->to(admin_email_1,admin_email_2,admin_email_3);
         $this->email->subject('DREAM5 - New UPI payment!');
         $this->email->set_mailtype("html");
         $this->email->message($message);
 
-        if($this->email->send()){
-            // $this->session->set_flashdata('success', 'Mail sent successfully');
-        } else {
-            // $this->session->set_flashdata('error', 'Failed to send email.');
-        }            
-        return 1;
+        $this->email->send();
     }
    
     public function generateToken($id)

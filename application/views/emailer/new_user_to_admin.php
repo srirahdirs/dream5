@@ -16,7 +16,6 @@
                                 
                                 <p>New user has been registered.</p><br>
                                 
-                                <p>We will use this email to communicate about your account but otherwise your email stays private.</p>
                                 <p>Thanks</p>
                                 <p>The <span style="font-weight:800;font-family: sans-serif;font-size: 17px;line-height: 15px; color:#FFDD00;">DREAM<b>5</b></span> Team</p>
                             </td>
