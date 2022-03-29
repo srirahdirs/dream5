@@ -43,7 +43,7 @@ class Games extends CI_Controller {
 
         $config["base_url"] = base_url() . "admin/games";
         $config["total_rows"] = $this->Games_model->findCount();
-        $config["per_page"] = 2;
+        $config["per_page"] = 8;
         $config["uri_segment"] = 3;
 
         $this->pagination->initialize($config);

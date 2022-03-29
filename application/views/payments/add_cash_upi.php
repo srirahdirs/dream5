@@ -32,7 +32,7 @@ $this->load->view('layouts/menu_session');
                             <label>STEP 2 : After completing the FUNDS TRANSFER,<br>
                             Fill out the <b>REFERENCE NUMBER</b> / 
                             <b>UPI TRANSACTION ID</b>  below</label><br>
-                            <input class="form-control" name="reference_number" placeholder="12 DIGIT REFERENCE NUMBER" type="number" maxlength="22"/>
+                            <input class="form-control" name="reference_number" required placeholder="12 DIGIT REFERENCE NUMBER" type="number" maxlength="22"/>
                             <input name="payment_mode" type="hidden" value="<?= $payment_type ?>"/>
                         </div>
                     </div>

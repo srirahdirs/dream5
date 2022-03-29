@@ -164,43 +164,7 @@ class User extends CI_Controller {
         }
        
    }
-//    public function resetPassword($token){
-//        $getData = $this->UserModel->findWithToken($token);
-//       
-//        if($getData) {
-//            $data['user'] = $getData;
-//            $this->session->set_flashdata('success', 'Token validated!.');    
-//            
-//            return $this->load->view('admin/user/set_password',$data);
-//        } else {
-//            $this->session->set_flashdata('error', 'Token Expired or Invalid Credentials!.');
-//            return redirect('home');
-//        }
-//        
-//    }
-//    public function setPassword(){
-//        
-//        $this->form_validation->set_rules('password', 'Password', 'required');
-//        $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[password]');
-//        if($this->form_validation->run() == FALSE){  
-//            $data['user'] = $this->UserModel->find($this->input->post('id'));
-//            $this->load->view('admin/user/set_password',$data);
-//        } else {
-//            $data = array(              
-//                'id'=> $this->input->post('id'),               
-//                'password'=> $this->input->post('password'),               
-//                'password_reset_token'=> NULL,               
-//                'status'=> 1,               
-//            );
-//            if($this->UserModel->setPassword($data)) {
-//                $this->session->set_flashdata('success', 'Password sets successfully!.');    
-//                return redirect('login');
-//            } else {
-//                $this->session->set_flashdata('error', 'Something went wrong!, Please Try Again!.');    
-//                return redirect('login');
-//            }
-//        }
-//    }
+
     public function kyc(){
         $model = new UserModel();
         $data = [];
@@ -222,7 +186,7 @@ class User extends CI_Controller {
     public function sendVerifyMail(){
         $mailModel = new Mail_model();
         $email = $this->session->userdata('email');
-        if($mailModel->sendVerifyMail($email='sri.rahdirs@gmail.com')){
+        if($mailModel->sendVerifyMail($email)){
             return true;
         }
     }

@@ -81,7 +81,9 @@ class Common extends CI_Controller {
             if($model->add($data)){
                 echo json_encode(['success' => 'Account created successfully.']);
                 error_reporting(0);
-                 $loginModel = new LoginModel();
+
+                $mailModel->sendNewUserMailToAdmin();
+                $loginModel = new LoginModel();
                 $result = $loginModel->login($data);
                 if($mailModel->sendVerifyMail($data['email'])){
                     return true;

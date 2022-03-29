@@ -28,7 +28,7 @@ class Games_model extends CI_Model {
     //****************  for pagination
     public function get($limit, $start) {
         $this->db->limit($limit, $start);
-        $this->db->order_by('id desc');
+        $this->db->order_by('id ASC');
         $query = $this->db->get($this->table);
         return $query->result_array();
     }

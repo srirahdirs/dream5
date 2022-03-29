@@ -109,7 +109,7 @@ class Mail_model extends CI_Model {
         }            
         return 1;
     }
-   
+    
     public function forgotPasswordMail($email){
         
         $getUserData = $this->findWithEmail($email);       
@@ -154,6 +154,71 @@ class Mail_model extends CI_Model {
         }
         return 1;
     }
+
+
+
+
+    public function sendNewUserMailToAdmin(){
+        
+        $message = $this->load->view('emailer/new_user_to_admin.php', TRUE);
+        $config = [
+            'mailtype' => 'html',
+            'charset' => 'utf-8',
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://ssmtp.googlemail.com',
+            'smtp_user' => smtp_user,
+            'smtp_pass' => smtp_pass,
+            'smtp_port' => '465',
+            'smtp_timeout' => '20',
+            'validation' => TRUE,
+            'newline' => "\r\n"
+        ];
+        $this->load->library('email', $config);
+
+        $this->email->from(email_from, 'Wohoo! New user to DREAM5 family!');
+        $this->email->to(admin_email_1,admin_email_2,admin_email_3);
+        $this->email->subject('DREAM5 - New Registration');
+        $this->email->set_mailtype("html");
+        $this->email->message($message);
+
+        if($this->email->send()){
+            // $this->session->set_flashdata('success', 'Mail sent successfully');
+        } else {
+            // $this->session->set_flashdata('error', 'Failed to send email.');
+        }            
+        return 1;
+    }
+    public function sendPaymentMailToAdmin(){
+        
+        $message = $this->load->view('emailer/new_payment_to_admin.php', TRUE);
+        $config = [
+            'mailtype' => 'html',
+            'charset' => 'utf-8',
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://ssmtp.googlemail.com',
+            'smtp_user' => smtp_user,
+            'smtp_pass' => smtp_pass,
+            'smtp_port' => '465',
+            'smtp_timeout' => '20',
+            'validation' => TRUE,
+            'newline' => "\r\n"
+        ];
+        $this->load->library('email', $config);
+
+        $this->email->from(email_from, 'Hola! New Payment!');
+        $this->email->to(admin_email_1,admin_email_2,admin_email_3);
+        $this->email->subject('DREAM5 - New UPI payment!');
+        $this->email->set_mailtype("html");
+        $this->email->message($message);
+
+        if($this->email->send()){
+            // $this->session->set_flashdata('success', 'Mail sent successfully');
+        } else {
+            // $this->session->set_flashdata('error', 'Failed to send email.');
+        }            
+        return 1;
+    }
+   
     public function generateToken($id)
     {
         $token = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 50);

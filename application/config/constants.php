@@ -87,6 +87,10 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 define('secretKey','2de7819ab2a586bee6b28fe0d7d4ed2a432d7691');
 define('appId','10674f2d1ad1f3824b363dadb47601');
 
+define('admin_email_1','sri.rahdirs@gmail.com');
+define('admin_email_2','dharshinisathya@gmail.com');
+define('admin_email_3','jayaprathapvcc@gmail.com');
+
 define('email_from','info@dream5.in');
 define('smtp_user','info@dream5.in');
 define('smtp_pass','email@dream5');
