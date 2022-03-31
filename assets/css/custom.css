@@ -44,7 +44,7 @@ body{
 
 .register_page{
     position: absolute;
-    right: 11.3%;
+    right: 13.3%;
     top: 19.8%;
 }
 .slider{
@@ -309,7 +309,7 @@ a {
 		display: block;
 	}
 	.register_page{
-		right: 8%;
+		right: 14%;
 	}
     .login-box {
         display: none;

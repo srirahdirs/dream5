@@ -18,9 +18,9 @@ $this->load->view('layouts/menu_session');
                             <a href="<?= base_url().'assets/img/qr_code_full.jfif' ?>" target="_blank">View QR Code
                             </a>
                         </div>
-                        <div class="form-group" style="text-align: left;">
+                        <!-- <div class="form-group" style="text-align: left;">
                             <p>scan the <span style="color:#fff !important">QR code</span> below to pay</p>
-                        </div>
+                        </div> -->
                         <div class="form-group">
                             <img src="<?= base_url().'/assets/img/qr_code_sample.png' ?>" width="250" height="300" alt="QR CODE">
                         </div>

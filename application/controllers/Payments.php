@@ -9,7 +9,7 @@ class Payments extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->library(['form_validation', 'pagination']);
-        $this->load->model(['UserModel', 'Order_model']);
+        $this->load->model(['UserModel', 'Order_model','Mail_model']);
         if (!$this->session->userdata('user_id')) {            
             $allowed = array('', '');
             if (!in_array($this->router->fetch_method(), $allowed)) {
@@ -42,6 +42,8 @@ class Payments extends CI_Controller {
         $this->load->model('../../modules/admin/models/Upi_model');        
         
         $this->Upi_model->saveUserRefNumber();
+        $mailModel = new Mail_model();
+        $mailModel->sendPaymentMailToAdmin();
         $this->session->set_flashdata('success', 'Amount will be added with in 5 - 15 minutes');
         redirect('home');
     }
