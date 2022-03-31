@@ -12,28 +12,28 @@
                 <i class="icon ion-ios-analytics-outline"></i>
                 <div class="dash-content">
                     <label class="tx-primary">Total Users</label>
-                    <h2>1200</h2>
+                    <h2><?= 1000 + $total_user ?></h2>
                 </div><!-- dash-content -->
             </div><!-- col-3 -->
             <div class="col-lg-3">
                 <i class="icon ion-ios-pie-outline"></i>
                 <div class="dash-content">
                     <label class="tx-success">Daily Visits</label>
-                    <h2>433</h2>
+                    <h2><?= 77 + $total_user ?></h2>
                 </div><!-- dash-content -->
             </div><!-- col-3 -->
             <div class="col-lg-3">
                 <i class="icon ion-ios-stopwatch-outline"></i>
                 <div class="dash-content">
                     <label class="tx-purple">ONLINE Users</label>
-                    <h2>100</h2>
+                    <h2>-</h2>
                 </div><!-- dash-content -->
             </div><!-- col-3 -->
             <div class="col-lg-3">
                 <i class="icon ion-ios-world-outline"></i>
                 <div class="dash-content">
                     <label class="tx-danger">Likes</label>
-                    <h2>100.3 K</h2>
+                    <h2>-</h2>
                 </div><!-- dash-content -->
             </div><!-- col-3 -->
         </div><!-- row -->

@@ -64,8 +64,7 @@ class Upi_model extends CI_Model {
         $data['status'] = 'deposited';
         $data['upi_id'] = $this->input->post('upi_id');
         
-        $model = new Upi_model();
-        $model->sendPaymentMailToAdmin();
+        $this->sendPaymentMailToAdmin();
         return $this->db->insert('orders',$data);
     }
     public function sendPaymentMailToAdmin(){

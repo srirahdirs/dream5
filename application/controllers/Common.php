@@ -19,7 +19,9 @@ class Common extends CI_Controller {
             $data['orders'] = $this->load->view('payments/transactions', $data,TRUE);
             $this->load->view('users/dashboard_session',$data);
         } else {
-            $this->load->view('users/dashboard');
+            $total_user = $this->UserModel->findUsersCount();
+            $data['total_user'] = $total_user;
+            $this->load->view('users/dashboard',$data);
         }
     }
 

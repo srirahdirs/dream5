@@ -14,18 +14,21 @@ $this->load->view('layouts/menu_session');
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>STEP 1 : TRANSFER TO THE UPI ID SHOWN BELOW</label><br>
-                            <span>UPI ID:-</span><input class="form-control" name="upi_id" id="upi_id" value="<?= $upi_id ?>" type="text" style="color:#fff !important"/>
+                            <span>Qr Code:-</span>
+                            <a href="<?= base_url().'assets/img/qr_code_full.jfif' ?>" target="_blank">View QR Code
+                            </a>
                         </div>
                         <div class="form-group" style="text-align: left;">
-                            <p>Use the above <span style="color:#fff !important">UPI ID</span> or scan the <span style="color:#fff !important">QR code</span> below to pay</p>
+                            <p>scan the <span style="color:#fff !important">QR code</span> below to pay</p>
                         </div>
                         <div class="form-group">
-                            <img src="<?= base_url().'/assets/img/qr_code_sample.png' ?>" alt="QR CODE">
+                            <img src="<?= base_url().'/assets/img/qr_code_sample.png' ?>" width="250" height="300" alt="QR CODE">
                         </div>
                         <div class="form-group">
-                            <span>Amount:-</span><input class="form-control" name="deposit_amount" id="order_amount" readonly="true" value="<?= $amount ?>" type="text" />
+                            <span>Amount:-</span><input class="form-control" name="deposit_amount" id="order_amount" value="<?= $amount ?>" type="text" />
                         </div>
                     </div>
+                    <input type="hidden" name="upi_id" value="<?= $upi_id?>">
                     <div class="col-lg-12" style="margin-bottom:20px;"></div>
                     <div class="col-lg-6">
                         <div class="form-group">

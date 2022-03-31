@@ -20,7 +20,7 @@
         <!-- Slim CSS -->
         <link rel="stylesheet" href="<?= $baseUrl ?>/css/slim.css">
         <link rel="stylesheet" href="<?= $baseUrl ?>/css/slim.one.css">
-        <link rel="stylesheet" href="<?= $baseUrl ?>/css/custom.css">
+        <link rel="stylesheet" href="<?= $baseUrl ?>/css/custom.css?<?= time();?>">
 
     </head>
     <body class="dashboard-4">

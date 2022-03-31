@@ -37,7 +37,7 @@ $this->load->view('layouts/menu_session');
                     <div class="col-lg-12" style="margin-bottom:20px;"></div>
                     
                     <!--single row starts-->
-                    <div class="col-lg-4">
+                    <!-- <div class="col-lg-4">
                         <div class="form-group">
                             <label>Bonus Code</label><br>
                             <input class="form-control"  id="bonus_code"  type="text" autocomplete="off"/>
@@ -46,7 +46,7 @@ $this->load->view('layouts/menu_session');
                     <div class="col-lg-2">
                         <label class="hide_label">Apply</label><br>
                         <a href="javascript:void(0)" class="btn btn-primary btn-block">APPLY</a>
-                    </div>
+                    </div> -->
                     <!-- <div class="hide_form"> -->
 <!--                    <div class="col-lg-3">
                         <label class="hide_label">Pay</label><br>
@@ -131,41 +131,43 @@ $this->load->view('layouts/footer');
             $.alert('Enter amount greater than 25');
             return false;
         }
-        $.confirm({
-            title: 'Please select payment method' ,
-            content: '' +
-            '<form action="" class="formName">' +
-            '<div class="form-group">' +
-            '<label>Payment Method</label>' +
-            '<select class="form-control" required id="payment_type">' +
-            '<option value="Gpay">Gpay</option>' +
-            '<option value="Paytm">Paytm</option>' +
-            '<option value="Phonepe">Phonepe</option>' +
-            '<option value="BHIM">BHIM</option>' +
-            '</select>' +
-            '<label>Enter the amount</label>' +
-            '<input type="number" placeholder="Rs.100 - Rs.20000" min="1" max="10000" class="deposit_amount form-control" required id="amount" value="'+ $("#order_amount").val()+'"/>' +
-            '</div>' +
-            '</form><br>',
-            buttons: {
-                formSubmit: {
-                    text: 'DEPOSIT',
-                    btnClass: 'btn-success',
-                    action: function () {
-                        var amount = this.$content.find('.deposit_amount').val();
-                        var payment_type = $("#payment_type").val();
-                        if(!amount){
-                            $.alert('Enter a valid amount');
-                            return false;
-                        }
-                        window.location.href="<?php echo base_url('payments/depositAmount'); ?>?amount="+amount +"&payment_type="+payment_type;
+        var amount = $('#order_amount').val();
+        window.location.href="<?php echo base_url('payments/depositAmount'); ?>?amount="+amount;
+        // $.confirm({
+        //     title: 'Please select payment method' ,
+        //     content: '' +
+        //     '<form action="" class="formName">' +
+        //     '<div class="form-group">' +
+        //     '<label>Payment Method</label>' +
+        //     '<select class="form-control" required id="payment_type">' +
+        //     '<option value="Gpay">Gpay</option>' +
+        //     '<option value="Paytm">Paytm</option>' +
+        //     '<option value="Phonepe">Phonepe</option>' +
+        //     '<option value="BHIM">BHIM</option>' +
+        //     '</select>' +
+        //     '<label>Enter the amount</label>' +
+        //     '<input type="number" placeholder="Rs.100 - Rs.20000" min="1" max="10000" class="deposit_amount form-control" required id="amount" value="'+ $("#order_amount").val()+'"/>' +
+        //     '</div>' +
+        //     '</form><br>',
+        //     buttons: {
+        //         formSubmit: {
+        //             text: 'DEPOSIT',
+        //             btnClass: 'btn-success',
+        //             action: function () {
+        //                 var amount = this.$content.find('.deposit_amount').val();
+        //                 var payment_type = $("#payment_type").val();
+        //                 if(!amount){
+        //                     $.alert('Enter a valid amount');
+        //                     return false;
+        //                 }
+        //                 window.location.href="<?php echo base_url('payments/depositAmount'); ?>?amount="+amount +"&payment_type="+payment_type;
                         
-                    }
-                },
-                cancel: function () {
-                    //close
-                },
-            },
-        }); //confirm e
+        //             }
+        //         },
+        //         cancel: function () {
+        //             //close
+        //         },
+        //     },
+        // }); //confirm e
     });
 </script>

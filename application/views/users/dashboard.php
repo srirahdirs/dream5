@@ -3,8 +3,10 @@
     $this->load->view('layouts/menu');
 ?>
 <?php
+
+$data['total_user'] = $total_user;
 $this->load->view('layouts/home_slider');
-$this->load->view('layouts/home_slider_bottom');
+$this->load->view('layouts/home_slider_bottom',$data);
 ?>
 
 <?php

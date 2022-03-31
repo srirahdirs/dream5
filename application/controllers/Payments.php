@@ -34,7 +34,8 @@ class Payments extends CI_Controller {
         $data['amount'] = $this->input->get('amount');
         $data['user_id'] = $this->session->userdata('user_id');
         $payment_type = $this->Upi_model->findByUpiMethod($data['payment_type']);
-        $data['upi_id']= $payment_type->upi_id;
+        // $data['upi_id']= $payment_type->upi_id;
+        $data['upi_id']= 'PayTm';
         $this->load->view('payments/add_cash_upi', $data);
     }
     public function saveReferenceNumber() {
@@ -49,7 +50,9 @@ class Payments extends CI_Controller {
         $model = new UserModel();
         $data['user'] = $model->findUserDetailsWithWallet($this->session->userdata('user_id'));
         if ($this->input->post()) {
-            $this->form_validation->set_rules('amount', 'amount', 'greater_than[199]|less_than[' . $data['user']->cash . ']', array('less_than' => 'Please enter amount below ' . $data['user']->cash, 'greater_than' => 'Please enter amount above 200'));
+            $user_cash = $data['user']->cash;
+            $user_cash = $user_cash + 1;
+            $this->form_validation->set_rules('amount', 'amount', 'greater_than[199]|less_than[' . $user_cash . ']', array('less_than' => 'Please enter amount below ' . $data['user']->cash, 'greater_than' => 'Please enter amount above 200'));
             if ($data['user']->is_bank_account_verified != 'Yes') {
                 $this->form_validation->set_rules('account_number', 'Account Number', 'required|min_length[8]|integer');
                 $this->form_validation->set_rules('confirm_account_number', 'Confirm A/C Number', 'matches[account_number]', array('matches' => 'Account Number does not match'));

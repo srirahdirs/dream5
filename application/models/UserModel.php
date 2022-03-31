@@ -40,6 +40,10 @@ class UserModel extends CI_Model {
     public function findCount($user_id) {
          return $this->db->where('user_id',$user_id)->from("withdrawal_history")->count_all_results();
     }
+    public function findUsersCount() {
+         return $this->db->from("users")->count_all_results();
+    }
+    
     
 
     public function find($id)
