@@ -36,7 +36,7 @@ $this->load->view('layouts/menu_session');
                             Fill out the <b>REFERENCE NUMBER</b> / 
                             <b>UPI TRANSACTION ID</b>  below</label><br>
                             <input class="form-control" name="reference_number" required placeholder="12 DIGIT REFERENCE NUMBER" type="number" maxlength="22"/>
-                            <input name="payment_mode" type="hidden" value="<?= $payment_type ?>"/>
+                            <input name="payment_type" type="hidden" value="<?= $payment_type ?>"/>
                         </div>
                     </div>
                     <div class="col-lg-12" style="margin-bottom:20px;"></div>

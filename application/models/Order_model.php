@@ -108,7 +108,7 @@ class Order_model extends CI_Model {
         $dataW['user_id'] = $data['user_id'];
         $dataW['updated_at'] = date('Y-m-d h:i:s');
         $this->updateUserWallet($dataW);
-        if($this->db->insert('cash_out',$dataC)) {
+        if($this->db->insert('cash_history',$dataC)) {
             return true;
         } else {
             return false;

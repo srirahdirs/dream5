@@ -13,11 +13,11 @@ $this->load->view('layouts/menu_session');
                     <table class="table mg-b-0 tx-13" id="games_tbl">
                         <thead>
                             <tr>
-                                <th class="wd-5p bg_clr_yel">Category</th>
-                                <th class="wd-5p bg_clr_yel">Type</th>
+                                <!-- <th class="wd-5p bg_clr_yel">Category</th> -->
+                                <!-- <th class="wd-5p bg_clr_yel">Type</th> -->
                                 <th class="wd-10p bg_clr_yel">Team A</th>
                                 <th class="wd-10p bg_clr_yel">Team B</th>
-                                <th class="wd-15p bg_clr_yel">Date & Time</th>
+                                <th class="wd-20p bg_clr_yel">Date & Time</th>
                                 <th class="wd-5p bg_clr_yel">Status</th>
                                 <th class="wd-15p bg_clr_yel">Bet</th>
                             </tr>
@@ -28,8 +28,8 @@ $this->load->view('layouts/menu_session');
                             foreach ($games as $row):
                                 ?>
                                 <tr>                                    
-                                    <td><?= $row['category']; ?></td>
-                                    <td><?= $row['game_type']; ?></td>
+                                    <!-- <td><?= $row['category']; ?></td> -->
+                                    <!-- <td><?= $row['game_type']; ?></td> -->
                                     <td>
                                         <?php if($row['status'] == 'Upcoming') { ?>
                                             <a href="javascript:void(0)" class="team_name" data-id="<?= $row['id']?>" data-team="<?= $row['team_a']?>"><span data-toggle="tooltip" title="Click to bet on - <?= $row['team_a']; ?>"<span class="badge badge-success"><?= $row['team_a']; ?></span></span></a>
@@ -44,7 +44,9 @@ $this->load->view('layouts/menu_session');
                                             <a href="javascript:void(0)" class="disabled_bet" data-id="<?= $row['id']?>" data-team="<?= $row['team_b']?>"><span data-toggle="tooltip" title="Bets currently disabled"<span class="badge badge-warning"><?= $row['team_b']; ?></span></span></a>
                                         <?php } ?>
                                     </td>
-                                    <td><?= date('d-m-y h:i',strtotime($row['match_date_time'])); ?></td>
+                                    <td><p style="margin-bottom: 0;margin-top: 24px !important;"><?= date('d-M h:i A',strtotime($row['match_date_time'])); ?></p>
+                                    <b style="visibility:hidden">Thecontentstest</b>
+                                    </td>
                                     <td><?= $row['status']; ?></td>
                                     <td>
                                         <?php if($row['bet_placed'] == 'Yes') { ?>

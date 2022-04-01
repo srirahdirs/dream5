@@ -21,6 +21,7 @@
         <link rel="stylesheet" href="<?= $baseUrl ?>/css/slim.css">
         <link rel="stylesheet" href="<?= $baseUrl ?>/css/slim.one.css">
         <link rel="stylesheet" href="<?= $baseUrl ?>/css/custom.css?<?= time();?>">
+        <link rel="yzt" type="image/x-icon" href="<?= $baseUrl ?>/img/fav_icon.jpg" />
 
     </head>
     <body class="dashboard-4">

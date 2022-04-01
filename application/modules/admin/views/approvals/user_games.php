@@ -21,15 +21,16 @@ $this->load->view('layouts/menu');
                 <thead>
                     <tr>
                         <th class="wd-5p">#</th>
+                        <th class="wd-5p">Game Id</th>
                         <th class="wd-10p">Email Id</th>
-                        <th class="wd-10p">Game Type</th>
+                        <!-- <th class="wd-10p">Game Type</th> -->
                         <th class="wd-10p">Match</th>
                         <th class="wd-10p">Betting Team</th>
-                        <th class="wd-10p">Opponent Team</th>
+                        <!-- <th class="wd-10p">Opponent Team</th> -->
                         <th class="wd-10p">Betting Amount</th>
                         <th class="wd-10p">User Winning Amount</th>
-                        <th class="wd-10p">Status</th>
-                        <th class="wd-10p">Result</th>
+                        <!-- <th class="wd-10p">Status</th> -->
+                        <th class="wd-10p">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,19 +40,20 @@ $this->load->view('layouts/menu');
                         ?>
                         <tr>                                    
                             <td><?= $i ?></td>
+                            <td><?= $row['id'] ?></td>
                             <td><?= $row['email'] ?></td>
-                            <td><?= $row['game_type'] ?></td>
+                            <!-- <td><?= $row['game_type'] ?></td> -->
                             <td><?= $row['team_a'] . ' vs ' . $row['team_b'] ?></td>
                             <td><?= $row['betting_team']  ?></td>
-                            <td><?= $row['betting_team']  ?></td>
+                            <!-- <td><?= $row['team_b']  ?></td> -->
                             <td><?= $row['betting_amount']  ?></td>                            
                             <td><?= $row['final_amount']  ?></td>
-                            <td><?= $row['status']  ?></td>
+                            <!-- <td><?= $row['status']  ?></td> -->
                             <td>  
-                                <?php if($row['status'] != 'Yes' && $row['status'] != ''){ ?>
-                                    <a class="btn btn-success" href="javascript:void(0)" onclick="approveKyc(<?= $row['user_id'] ?>)"><i class="fa fa-check-circle-o"></i></a>
-                                    <a class="btn btn-danger" href="javascript:void(0)" onclick="rejectKyc(<?= $row['user_id'] ?>)"><i class="fa fa-check-wrong>"</i></a>
-                                <?php } ?>
+                                <?php if($row['status'] != 'won' && $row['status'] != 'loss'){ ?>
+                                    <a class="btn btn-success" href="javascript:void(0)" onclick="teamA('<?= $row['game_id'] ?>','<?= $row['team_a'] ?>')"><?= $row['team_a']?></a>
+                                    <a class="btn btn-danger" href="javascript:void(0)" onclick="teamA('<?= $row['game_id'] ?>','<?= $row['team_b'] ?>')"><?= $row['team_b']?></a>
+                                <?php } else {echo 'R'} ?>
                             </td>
                         </tr>
                     <?php $i++; endforeach; ?>
@@ -71,13 +73,13 @@ $this->load->view('layouts/footer');
     $('.upi_payment').css('display','none');
 
 
-    function approveKyc(user_id) {
+    function teamA(game_id,team_a) {
         $.confirm({
             title: 'Please Confirm',
-            content: 'Are sure you want to Approve?',
+            content: 'Are sure! ' + team_a + ' won the match?',
             buttons: {
                 confirm: function () {
-                    window.location = '<?php echo base_url('admin/approve-kyc/'); ?>' + user_id;
+                    window.location = '<?php echo base_url('admin/set-match-result/'); ?>' + game_id + '?winning_team='+ team_a;
                 }, //confirm btn ends
                 cancel: function () {
 

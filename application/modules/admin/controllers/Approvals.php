@@ -65,6 +65,12 @@ class Approvals extends CI_Controller {
         $this->session->set_flashdata('success', 'Approved Successfully!.');
         return redirect('admin/upi-payments');        
     }
+    public function setMatchResult($game_id) {
+        $winning_team = $_GET['winning_team'];
+        $this->Approvals_model->setMatchResult($game_id,$winning_team); 
+        $this->session->set_flashdata('success', 'Result sets Successfully!.');
+        return redirect('admin/user-games'); 
+    }
     public function ApproveKyc($user_id) {
         $this->Approvals_model->ApproveKyc($user_id);  
         $this->session->set_flashdata('success', 'Approved Successfully!.');

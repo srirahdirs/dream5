@@ -30,7 +30,10 @@ class Approvals_model extends CI_Model {
         return $this->db->select('users.*,ud.*')->join('user_details ud','users.id = ud.user_id')->get_where($this->users_table)->result_array();
     }
     public function getUserGames() {
-        return $this->db->select('u.*,ug.*,g.*')->join('users u','u.id = ug.user_id')->join('games g','g.id = ug.game_id')->get_where('user_games ug')->result_array();
+        return $this->db->select('u.*,ug.*,g.*,g.id as game_id,ug.status as status')->join('users u','u.id = ug.user_id')->join('games g','g.id = ug.game_id')->get_where('user_games ug')->result_array();
+    }
+    public function getUserGamesById($game_id) {
+        return $this->db->select('u.*,ug.*,g.*,g.id as game_id')->join('users u','u.id = ug.user_id')->join('games g','g.id = ug.game_id')->get_where('user_games ug',array('ug.game_id =' => $game_id))->result_array();
     }
     public function getBriefPayment() {
         return $this->db->select('brief.*,business.business,user.first_name as user')->join('business','business.id = brief.business')->join('user','user.id = brief.user')->get_where($this->brief_payment_table)->result_array();
@@ -51,6 +54,73 @@ class Approvals_model extends CI_Model {
         $amount = $orderDetail->amount;
         $this->Order_model->insertIntoWallet($user_id,$amount);        
         
+    }
+    public function getUserBalance($user_id) {
+        return $this->db->select('cash')->get_where("user_wallet", array("user_id" => $user_id))->result();
+    }
+    public function updateUserWallet($data){
+        $this->db->where('user_id', $data['user_id']);           
+        $this->db->update('user_wallet', $data);
+    }
+    public function setMatchResult($game_id,$winning_team) {
+        $data['match_result'] = $winning_team .' won the game';        
+        $this->db->where(['id' => $game_id]);
+        $this->db->update('games',$data);
+
+        $getRes = $this->getUserGamesById($game_id);
+        foreach($getRes as $res):
+            if($res['betting_team'] == $winning_team){
+                if($this->checkGameResultExists($game_id,$res['user_id']) == '0'){
+                    $getCash = $this->getUserBalance($res['user_id']);
+                    $totalCash = $getCash[0]->cash;
+                    $dataC['updated_wallet_balance'] = $totalCash + $res['final_amount'];
+                    $dataC['cash_in'] = $res['final_amount'];
+
+                    $dataW['cash'] = $dataC['updated_wallet_balance'];
+                    $dataW['user_id'] = $res['user_id'];
+                    $dataW['updated_at'] = date('Y-m-d h:i:s');
+                    $this->updateUserWallet($dataW);
+
+
+                    $dataUG['status'] = 'won';
+                    $this->db->where(['game_id' => $game_id]);
+                    $this->db->where(['user_id' => $res['user_id']]);
+                    $this->db->update('user_games',$dataUG);
+
+                    $dataCH['updated_at'] = date('Y-m-d h:i:s');
+                    $dataCH['cash_in'] =  $res['final_amount'];
+                    $dataCH['updated_wallet_balance'] =  $dataC['updated_wallet_balance'];;
+                    $this->db->where(['game_id' => $game_id]);
+                    $this->db->where(['user_id' => $res['user_id']]);
+                    $this->db->update('cash_history',$dataCH);
+                }
+            } else {
+                    $getCash = $this->getUserBalance($res['user_id']);
+                    $totalCash = $getCash[0]->cash;
+
+                    $dataUG['status'] = 'loss';
+                    $this->db->where(['game_id' => $game_id]);
+                    $this->db->where(['user_id' => $res['user_id']]);
+                    $this->db->update('user_games',$dataUG);
+
+            }
+        
+        endforeach;
+        return true;   
+        
+    }
+    public function checkGameResultExists($game_id,$user_id){
+        $this->db->where(['game_id' => $game_id]);
+        $this->db->where(['user_id' => $user_id]);
+        $winRes = $this->db->select('*')->get_where('user_games',array('game_id'=> $game_id,'user_id' => $user_id,'status' => 'won' ))->result();
+        $lossRes = $this->db->select('*')->get_where('user_games',array('game_id'=> $game_id,'user_id' => $user_id,'status' => 'loss' ))->result();
+        if($winRes){
+            return true;
+        } else if($lossRes){
+            return true;
+        } else{
+            return 0;
+        }
     }
     public function ApproveKyc($user_id) {
         $data['is_pan_verified'] = 'Yes';        

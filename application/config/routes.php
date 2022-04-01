@@ -50,6 +50,7 @@ $route['admin/user-games'] = 'admin/approvals/userGames';
 $route['admin/approve-kyc/(:any)'] = 'admin/approvals/ApproveKyc/$1';
 $route['admin/reject-kyc/(:any)'] = 'admin/approvals/RejectKyc/$1';
 $route['admin/confirm-upi-payment/(:num)'] = 'admin/approvals/confirmUpiPayment/$1';
+$route['admin/set-match-result/(:num)'] = 'admin/approvals/setMatchResult/$1';
 $route['admin/games/(:num)'] = 'admin/games/index';
 /**************ADMIN users**************/
 $route['admin/users/(:num)'] = 'admin/users/index';
