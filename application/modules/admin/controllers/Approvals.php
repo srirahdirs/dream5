@@ -7,7 +7,7 @@ class Approvals extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Approvals_model');
-        $this->load->library(['form_validation','email']);
+        $this->load->library(['form_validation','email', 'pagination']);
         $this->load->helper(['form','email']);
         if (!$this->session->userdata('admin_logged_in')) {
             redirect('admin/login');

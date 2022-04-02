@@ -40,7 +40,7 @@ $this->load->view('layouts/menu');
                         ?>
                         <tr>                                    
                             <td><?= $i ?></td>
-                            <td><?= $row['id'] ?></td>
+                            <td><?= $row['game_id_ug'] ?></td>
                             <td><?= $row['email'] ?></td>
                             <!-- <td><?= $row['game_type'] ?></td> -->
                             <td><?= $row['team_a'] . ' vs ' . $row['team_b'] ?></td>
@@ -53,14 +53,16 @@ $this->load->view('layouts/menu');
                                 <?php if($row['status'] != 'won' && $row['status'] != 'loss'){ ?>
                                     <a class="btn btn-success" href="javascript:void(0)" onclick="teamA('<?= $row['game_id'] ?>','<?= $row['team_a'] ?>')"><?= $row['team_a']?></a>
                                     <a class="btn btn-danger" href="javascript:void(0)" onclick="teamA('<?= $row['game_id'] ?>','<?= $row['team_b'] ?>')"><?= $row['team_b']?></a>
-                                <?php } else {echo 'R'} ?>
+                                <?php } else { echo "done";} ?>
                             </td>
                         </tr>
                     <?php $i++; endforeach; ?>
                 </tbody>
             </table>
+            
     </div>
 </div>
+<?php // $links; ?>
 </div>
 <?php
 $this->load->view('layouts/footer');

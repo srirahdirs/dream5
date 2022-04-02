@@ -42,7 +42,13 @@ $encrypted_user_id = encryptId($this->session->userdata('user_id'));
                         <a href="<?= base_url() . 'add-practice-cash' ?>" class="cash" title="Practice CHIPS"><span>Practice Chips: </span><b> <?= ($this->session->userdata('practice_cash')) ? $this->session->userdata('practice_cash') : 0 ?></b>  </a>
                     </div>-->
                     <div class="add_chips">
-                        <a href="<?= base_url() . 'add-cash' ?>" class="cash" title="Add Cash"><span>CASH : </span><b> &#8377; <?= ($this->session->userdata('cash')) ? $this->session->userdata('cash') : 0 ?></b>  </a>
+                        <?php
+                        $CI =& get_instance();
+                        $CI->load->model('Order_model');
+                        $getCash = $CI->Order_model->getUserBalance($this->session->userdata('user_id'));
+                        $totalCash = $getCash[0]->cash; 
+                        ?>
+                        <a href="<?= base_url() . 'add-cash' ?>" class="cash" title="Add Cash"><span>CASH : </span><b> &#8377; <?= ($totalCash) ? $totalCash : 0 ?></b>  </a>
                     </div>
                     <div class="dropdown dropdown-a">
                         <a href="" class="header-notification" data-toggle="dropdown">

@@ -30,7 +30,12 @@ class Approvals_model extends CI_Model {
         return $this->db->select('users.*,ud.*')->join('user_details ud','users.id = ud.user_id')->get_where($this->users_table)->result_array();
     }
     public function getUserGames() {
-        return $this->db->select('u.*,ug.*,g.*,g.id as game_id,ug.status as status')->join('users u','u.id = ug.user_id')->join('games g','g.id = ug.game_id')->get_where('user_games ug')->result_array();
+        // ->group_by('ug.game_id')
+        //->limit($limit, $start)
+        return $this->db->select('u.*,ug.*,ug.game_id as game_id_ug,g.*,g.id as game_id,ug.status as status')->join('users u','u.id = ug.user_id')->join('games g','g.id = ug.game_id')->order_by("ug.id", "DESC")->get_where('user_games ug')->result_array();
+    }
+    public function findUserGameCount() {
+         return $this->db->from('user_games')->group_by('game_id')->count_all_results();
     }
     public function getUserGamesById($game_id) {
         return $this->db->select('u.*,ug.*,g.*,g.id as game_id')->join('users u','u.id = ug.user_id')->join('games g','g.id = ug.game_id')->get_where('user_games ug',array('ug.game_id =' => $game_id))->result_array();

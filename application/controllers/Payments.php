@@ -289,8 +289,11 @@ class Payments extends CI_Controller {
     }
     public function getFinalBetAmount($amount){
         $doubleAmount = $amount * 2;
-        $dream5percentage = 10;
+        $dream5percentage = 3;
         $percentageAmount = ($dream5percentage / 100) * $doubleAmount;
+        if($amount < 1001){
+            $percentageAmount = 0;
+        }
         $finalAmount = $doubleAmount - $percentageAmount;
         return $finalAmount;
     }

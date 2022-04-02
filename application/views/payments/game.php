@@ -181,7 +181,7 @@ $this->load->view('layouts/footer');
                     });
 
                     var dbleval = $(this).val() * 2;
-                    var percent = (10 / 100) * dbleval;
+                    var percent = (3 / 100) * dbleval;
                     if($(this).val() < 1001){
                         percent = 0;
                     }

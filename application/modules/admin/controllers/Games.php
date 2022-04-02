@@ -21,11 +21,12 @@ class Games extends CI_Controller {
         { 
             redirect('admin/login');            
         }
+        date_default_timezone_set("Asia/Calcutta"); 
         $gamesList = $this->Games_model->findAll();
         $today = date("Y-m-d H:i:s");     // 2019-10-30 22:42:18(MySQL DATETIME format)
 
-        foreach ($gamesList as $key => $value) {
-          if(strtotime($value['match_date_time']) > strtotime($today)){
+        foreach ($gamesList as $key => $value) {           
+          if($value['match_date_time'] > $today){
           } else {
             $this->Games_model->updateGameStatus($value['id'],'Completed');
           }
