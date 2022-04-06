@@ -57,7 +57,6 @@
 <script src="<?= $baseUrl ?>/lib/jquery/js/jquery.js"></script>
 <script>
     $('.login_required').click(function (e) {
-        e.preventDefault();
         $(".login_form_err").css("display","none");
         $("#display_error").css("display","none");
             $.confirm({
@@ -72,6 +71,7 @@
                     btnClass: 'btn-default',
                     keys: ['enter', 'shift'],
                     action: function () {
+
                         var username_or_email = $("input[name='username_or_email_ajax']").val();
                         var login_password = $("input[name='login_password_ajax']").val();
                         if(username_or_email == ''){ 
@@ -89,11 +89,14 @@
                             dataType: "json",
                             data: {username_or_email: username_or_email, login_password: login_password},
                             success: function (data) {
-                                if (data.error == 0) {
+                                toastr.clear();
+                                
+                                if ($.isEmptyObject(data.error)) {
                                     $(".alert-danger").css('display', 'none');
                                     location.href = "<?php echo base_url('home'); ?>";
                                 } else {
                                     $("#display_error").css("display","block");
+                                    e.preventDefault(); 
                                     if (data.error['username_or_email']) {
                                         $("input[name='username_or_email_ajax']").focus();
                                         toastr.error(data.error['username_or_email']);

@@ -53,29 +53,32 @@
                 dataType: "json",
                 data: {username_or_email: username_or_email, login_password: login_password},
                 success: function (data) {
-                    console.log(data);
-                    if (data.error == 0) {
+                    toastr.clear();
+                    if ($.isEmptyObject(data.error)) {
                         $(".alert-danger").css('display', 'none');
                         location.href = "<?php echo base_url('home'); ?>";
                     } else {
-                        $("#display_error").css("display","block");
+                        console.log(data.error);
                         if (data.error['username_or_email']) {
-                            $("input[name='username_or_email_ajax']").focus();
+//                            $(".login_form_err").css('display', 'block');
+//                            $(".login_form_err").html(data.error['username_or_email']);
+//                            $('.register_page').css("top", "28.9%");
+                            $("input[name='username_or_email']").focus();
                             toastr.error(data.error['username_or_email']);
-                            $("#display_error").html(data.error['username_or_email']);
-                            return false;
+
                         } else if (data.error['login_password']) {
+//                            $(".login_form_err").css('display', 'block');
+//                            $(".login_form_err").html(data.error['login_password']);
                             toastr.error(data.error['login_password']);
-                            $("input[name='username_or_email_ajax']").focus();
-                            $("#display_error").html(data.error['login_password']);
+                            $("input[name='login_password']").focus();
                         } else if (data.error) {
+//                            $(".login_form_err").css('display', 'block');
                             toastr.error(data.error);
-                            $("#display_error").html(data.error);
-                            return false;
+//                            $(".login_form_err").html(data.error);
                         } else {
                             $(".login_form_err").css('display', 'none');
                         }
-                    } //else          
+                    } //else
 
                 } //success
 

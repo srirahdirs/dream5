@@ -118,12 +118,10 @@ class Common extends CI_Controller {
             $data['password'] = $this->input->post('login_password',TRUE);
             $loginModel = new LoginModel();
             $result = $loginModel->login($data);
-            if ($result == 'failed') {
-                echo json_encode(['error' => "Username or Password is Incorrect."]);
-            } else if ($result == 'failed_not_registered') {
-                echo json_encode(['error' => "You are not registered with this domain"]);
+            if (isset($result['failed'])) {
+                echo json_encode(['error' => $result['failed']]);
             } else {
-                echo json_encode(['success' => 'Login successfully.','error' => 0]);
+                echo json_encode(['success' => 'Login successfully.']);
             }
         }
     }
