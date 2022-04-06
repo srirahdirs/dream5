@@ -8,11 +8,13 @@ $route['register'] = 'common/register';
 $route['getCityList'] = 'common/getCityList';
 $route['getSelectedCityList'] = 'common/getSelectedCityList';
 
+//cmn
 $route['login'] = 'common/login';
 $route['logout'] = 'common/logout';
 $route['home'] = 'common/index';
 $route['update_cash_session'] = 'common/update_cash_session';
 $route['refund_policy'] = 'common/refund_policy';
+$route['contact-us'] = 'common/contactUs';
 
 //payments
 $route['payment-response'] = 'payments/response';
@@ -37,7 +39,6 @@ $route['forgot-password'] = 'user/forgotPassword';
 $route['sendVerifyMail'] = 'user/sendVerifyMail';
 $route['verifyMail/(:any)'] = 'user/verifyMail/$1';
 $route['set-new-password/(:any)'] = 'user/setNewPassword/$1';
-
 
 
 /**************ADMIN HOME**************/

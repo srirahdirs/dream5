@@ -20,16 +20,18 @@ class LoginModel extends CI_Model
         if ($this->user) {
             return $this->setUser();
         } else {
-            return $this->failedLogin($request);
+            return 'failed';
         }
         
-        return false;
     }
     
     protected function credentials($username, $password)
     {
         $where = "((`username`='".$username."') or (`email` = '".$username."'))";
         $user = $this->db->select('user_wallet.cash,user_wallet.practice_cash,users.*')->join('user_wallet','user_wallet.user_id = users.id','LEFT')->get_where("users",$where)->row(0);
+        if(!$user){
+            return 'failed_not_registered';
+        }
         if($user && password_verify($password, $user->password)) {
             return $user;
         }
@@ -52,10 +54,6 @@ class LoginModel extends CI_Model
         ));
         return 'success';
     }
-     protected function failedLogin($request)
-    {
-        $this->error["failed"] = "Username or Password is Incorrect.";
-        return $this->error;
-    }
+     
 
 }

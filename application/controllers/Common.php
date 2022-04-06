@@ -24,6 +24,11 @@ class Common extends CI_Controller {
             $this->load->view('users/dashboard',$data);
         }
     }
+    public function contactUs() {        
+        $total_user = $this->UserModel->findUsersCount();
+        $data['total_user'] = $total_user;
+        $this->load->view('contact_us',$data);        
+    }
 
     public function getCityList() {
         $model = new UserModel();
@@ -113,10 +118,12 @@ class Common extends CI_Controller {
             $data['password'] = $this->input->post('login_password',TRUE);
             $loginModel = new LoginModel();
             $result = $loginModel->login($data);
-            if (isset($result['failed'])) {
-                echo json_encode(['error' => $result['failed']]);
+            if ($result == 'failed') {
+                echo json_encode(['error' => "Username or Password is Incorrect."]);
+            } else if ($result == 'failed_not_registered') {
+                echo json_encode(['error' => "You are not registered with this domain"]);
             } else {
-                echo json_encode(['success' => 'Login successfully.']);
+                echo json_encode(['success' => 'Login successfully.','error' => 0]);
             }
         }
     }

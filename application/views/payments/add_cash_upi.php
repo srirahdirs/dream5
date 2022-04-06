@@ -18,11 +18,11 @@ $this->load->view('layouts/menu_session');
                     
                     <div class="col-lg-8" style="margin-top:20px">
                         <?php  //if ((strpos($_SERVER['HTTP_USER_AGENT'], 'Mobile/') !== false)) { ?>   
-                            <div class="form-group"> 
+                            <!-- <div class="form-group"> 
                                 <label>STEP 1 : <span>PAY USING ANY UPI APP</span></label> &nbsp;&nbsp; 
                                 <a href="upi://pay?pa=youngzentechnologies@ybl&amp;pn=YoungZen Technologies&amp;cu=INR" class="upi-pay1">Pay Now !</a>
                             </div> 
-                            <span style="color: #fff;">OR</span>
+                            <span style="color: #fff;">OR</span> -->
                         <?php //} ?>
 
                         <div class="form-group" style="margin-top:20px">
