@@ -1,9 +1,9 @@
 <?php $baseUrl = base_url() . 'assets'; ?>
 <?php
 
-// $this->load->view('layouts/header_session');
-// $this->load->view('layouts/menu');
-// $this->load->view('layouts/menu_session');
+$this->load->view('layouts/header_session');
+$this->load->view('layouts/menu');
+$this->load->view('layouts/menu_session');
 
 ?>
 <div class="slim-mainpanel myprofile">
@@ -33,9 +33,7 @@
                     echo '<p class="mg-b-20 mg-sm-b-40">Please complete your <a href="'. base_url('user/kyc').'"> KYC</a> and withdraw your wallet amount.</p>';
                 }
             } else { 
-                echo "<pre>";
-                print_r($user);
-                die;
+               
                 ?>
             
             <form id="redirectForm" method="post" action="<?= base_url() . 'withdraw-cash' ?>">
