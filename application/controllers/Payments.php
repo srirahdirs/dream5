@@ -51,6 +51,7 @@ class Payments extends CI_Controller {
     public function withdrawCash() {
         $model = new UserModel();
         $data['user'] = $model->findUserDetailsWithWallet($this->session->userdata('user_id'));
+        
         if ($this->input->post()) {
             $user_cash = $data['user']->cash;
             $user_cash = $user_cash + 1;
@@ -70,6 +71,8 @@ class Payments extends CI_Controller {
                 redirect('withdraw-cash');
             }
         }
+        // echo "<pre>";
+        // print_R($data); 
         $this->load->view('payments/withdraw_cash', $data);
     }
 

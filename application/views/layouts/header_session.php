@@ -46,7 +46,10 @@ $encrypted_user_id = encryptId($this->session->userdata('user_id'));
                         $CI =& get_instance();
                         $CI->load->model('Order_model');
                         $getCash = $CI->Order_model->getUserBalance($this->session->userdata('user_id'));
-                        $totalCash = $getCash[0]->cash; 
+                        $totalCash = 0;
+                        if($getCash){
+                            $totalCash = $getCash[0]->cash; 
+                        }
                         ?>
                         <a href="<?= base_url() . 'add-cash' ?>" class="cash" title="Add Cash"><span>CASH : </span><b> &#8377; <?= ($totalCash) ? $totalCash : 0 ?></b>  </a>
                     </div>

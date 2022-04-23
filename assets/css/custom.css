@@ -391,6 +391,20 @@ a {
         text-align: center;
         padding-bottom: 20px;
     }
+  #depositForm .input-group-prepend,
+  #depositForm .input-group-prepend .input-group-text,
+  #depositForm .input-group-append,
+  #depositForm .input-group-append .input-group-text,
+  #depositForm #upi_id,
+  #depositForm .input-group .form-control{
+    width: 100%;
+    display: block !important;
+    text-align: center;
+  }
+  .m-al{
+    text-align:center;
+    display: block;
+  }
 }
 
 @media only screen and (max-width: 1199px) {

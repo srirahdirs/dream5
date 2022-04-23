@@ -134,10 +134,7 @@
         $(".btn-submit").click(function (e) {
 
             e.preventDefault();
-            $(".err_password").css('display', 'none');
-            $(".err_username").css('display', 'none');
-            $(".err_mobile_number").css('display', 'none');
-            $(".err_email").css('display', 'none');
+
             var username = $("input[name='username']").val();
 
             var email = $("input[name='email']").val();
@@ -153,8 +150,6 @@
 
                 type: $(this).closest('form').attr('method'),
 
-                method: "POST",
-
                 dataType: "json",
 
                 data: {username: username, email: email, mobile_number: mobile_number, password: password},
@@ -164,11 +159,8 @@
                     if ($.isEmptyObject(data.error)) {
 
                         $(".alert-danger").css('display', 'none');
-                        toastr.clear();
-                        toastr.success("Your account has been created");                                   
-                        $(".success_all").css('display', 'block');   
-                        $(".success_all").html('Your account has been created');         
-                        setTimeout(function(){ location.reload(); }, 1000);
+
+                        alert(data.success);
 
                     } else {
                         if (data.error['username']) {

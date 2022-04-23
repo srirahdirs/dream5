@@ -1,8 +1,10 @@
 <?php $baseUrl = base_url() . 'assets'; ?>
 <?php
-$this->load->view('layouts/header_session');
-$this->load->view('layouts/menu');
-$this->load->view('layouts/menu_session');
+
+// $this->load->view('layouts/header_session');
+// $this->load->view('layouts/menu');
+// $this->load->view('layouts/menu_session');
+
 ?>
 <div class="slim-mainpanel myprofile">
     <div class="container pd-t-50">
@@ -21,6 +23,7 @@ $this->load->view('layouts/menu_session');
             <label class="section-title">Your Balance: <span class="primary"><?= $user->cash ?></span> <span style="float: right">minimum withdrawal <span class="primary">200</span></span></label>
             <br>
             <?php 
+           
             if($user->is_pan_verified != 'Yes') {
                 if($user->pan_card_file != '' && $user->is_pan_verified != 'Rejected'){
                     echo '<p class="mg-b-20 mg-sm-b-40">Pancard <a href="javascript:void(0))"> uploaded</a>. Please wait our team is verifying your pancard.</p>';
@@ -30,6 +33,9 @@ $this->load->view('layouts/menu_session');
                     echo '<p class="mg-b-20 mg-sm-b-40">Please complete your <a href="'. base_url('user/kyc').'"> KYC</a> and withdraw your wallet amount.</p>';
                 }
             } else { 
+                echo "<pre>";
+                print_r($user);
+                die;
                 ?>
             
             <form id="redirectForm" method="post" action="<?= base_url() . 'withdraw-cash' ?>">

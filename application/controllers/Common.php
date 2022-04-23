@@ -103,22 +103,22 @@ class Common extends CI_Controller {
     }
     
     public function login() {
-        $this->form_validation->set_rules('username_or_email', 'Username or Email', 'required', [
-            'required' => '%s is required',
+        $this->form_validation->set_rules('username_or_email', 'Username or Email', 'required',[
+            'required'      => '%s is required',
         ]);
 
-        $this->form_validation->set_rules('login_password', 'Password', 'required', ['required' => '%s is required']);
-
+        $this->form_validation->set_rules('login_password', 'Password', 'required',['required'=> '%s is required']);
+        
         if ($this->form_validation->run() == FALSE) {
             $errors = $this->form_validation->error_array();
             echo json_encode(['error' => $errors]);
-        } else {
-
-            $data['username'] = $this->input->post('username_or_email',TRUE);
-            $data['password'] = $this->input->post('login_password',TRUE);
+        } else { 
+            
+            $data['username'] = $this->input->post('username_or_email');            
+            $data['password'] = $this->input->post('login_password');
             $loginModel = new LoginModel();
             $result = $loginModel->login($data);
-            if (isset($result['failed'])) {
+            if(isset($result['failed'])) {
                 echo json_encode(['error' => $result['failed']]);
             } else {
                 echo json_encode(['success' => 'Login successfully.']);

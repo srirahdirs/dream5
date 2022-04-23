@@ -15,26 +15,34 @@ $this->load->view('layouts/menu_session');
                     <div class="col-lg-12" style="text-align: center;">
                         <img src="<?= base_url().'assets/img/payment_icons_new.png'?>" width="50%">
                     </div>
-                    
-                    <div class="col-lg-8" style="margin-top:20px">
-                        <?php  //if ((strpos($_SERVER['HTTP_USER_AGENT'], 'Mobile/') !== false)) { ?>   
-                            <!-- <div class="form-group"> 
-                                <label>STEP 1 : <span>PAY USING ANY UPI APP</span></label> &nbsp;&nbsp; 
-                                <a href="upi://pay?pa=youngzentechnologies@ybl&amp;pn=YoungZen Technologies&amp;cu=INR" class="upi-pay1">Pay Now !</a>
-                            </div> 
-                            <span style="color: #fff;">OR</span> -->
-                        <?php //} ?>
-
-                        <div class="form-group" style="margin-top:20px">
-                            <label>STEP 1 : TRANSFER THE AMOUNT USING THE QR CODE SHOWN BELOW</label><br>
-                            <a href="<?= base_url().'assets/img/qr_code_full.jfif' ?>" target="_blank">View QR Code
-                            </a>
+                    <div class="col-lg-8" style="margin-top:35px;">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">STEP 1 (UPI ID)</span>
+                            </div>
+                            <input type="text" class="form-control" id="upi_id" value="youngzentechnologies@okhdfcbank">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><a onclick="myFunction()"><i class="fa fa-copy" style="font-size:24px"></i></a></span>
+                            </div>
                         </div>
-                        
-                        <!-- <div class="form-group" style="text-align: left;">
-                            <p>scan the <span style="color:#fff !important">QR code</span> below to pay</p>
-                        </div> -->
-                        
+                    </div>
+                    <div class="col-lg-8">
+                        <span class="m-al" style="color: #fff;">OR</span> 
+                    </div>
+
+                    <div class="col-lg-8" style="margin-top:10px;">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">STEP 1 (QR CODE)</span>
+                            </div>
+                            <input type="text" class="form-control" value="TRANSFER USING THE QR CODE ">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><a href="<?= base_url().'assets/img/qr_code_full.jfif' ?>" target="_blank">View QR Code
+                            </a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">                        
                         <div class="form-group">
                             <span>Amount:-</span><input  style="padding-left:0" class="form-control" name="deposit_amount" id="order_amount" value="<?= $amount ?>" type="text" />
                         </div>
@@ -70,6 +78,20 @@ $this->load->view('layouts/footer');
 ?>
 
 <script type="text/javascript">
+    function myFunction() {
+    /* Get the text field */
+    var copyText = document.getElementById("upi_id");
+
+    /* Select the text field */
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+    /* Copy the text inside the text field */
+    navigator.clipboard.writeText(copyText.value);
+
+    /* Alert the copied text */
+    toastr.success("UPI ID Copied.");
+    }
     $('#order_amount').keypress(function(event){
         if(event.which != 8 && isNaN(String.fromCharCode(event.which))){
             event.preventDefault(); //stop character from entering input
@@ -84,3 +106,14 @@ $this->load->view('layouts/footer');
     
     
 </script>
+<style>
+    .input-group-append .input-group-text {
+        background-color: #FFB612;
+        border: 1px solid #FFB612;
+        color:#fff !important;
+    }    
+    .input-group-prepend .input-group-text {
+        color:#fff !important;
+    }    
+    .input-group-append .input-group-text a { color:#000;}
+</style>
