@@ -188,6 +188,34 @@ class Mail_model extends CI_Model {
         $this->email->send();
         return true;
     }
+    public function sendContactUsMailToAdmin($data){
+        
+        $message = $this->load->view('emailer/contact_us_to_admin.php',$data, TRUE);
+        $config = [
+            'mailtype' => 'html',
+            'charset' => 'utf-8',
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://ssmtp.googlemail.com',
+            'smtp_user' => smtp_user,
+            'smtp_pass' => smtp_pass,
+            'smtp_port' => '465',
+            'smtp_timeout' => '20',
+            'validation' => TRUE,
+            'newline' => "\r\n"
+        ];
+        $this->load->library('email', $config);
+
+        $admin_list = array(admin_email_1, admin_email_2);
+        $this->email->to($admin_list);
+
+        $this->email->from(email_from, 'Hey someone contacted through contact us Form in DREAM5');
+        
+        $this->email->subject('DREAM5 - Alert U got a Enquery!');
+        $this->email->set_mailtype("html");
+        $this->email->message($message);
+        $this->email->send();
+        return true;
+    }
     public function sendPaymentMailToAdmin(){
         $data = '';
         $message = $this->load->view('emailer/new_payment_to_admin.php',$data,TRUE);

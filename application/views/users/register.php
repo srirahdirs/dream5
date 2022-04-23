@@ -157,11 +157,10 @@
                 success: function (data) {
 
                     if ($.isEmptyObject(data.error)) {
-
                         $(".alert-danger").css('display', 'none');
-
-                        alert(data.success);
-
+                        // alert(data.success);
+                        toastr.success(data.success);
+                        location.reload();
                     } else {
                         if (data.error['username']) {
                             $(".err_username").css('display', 'block');

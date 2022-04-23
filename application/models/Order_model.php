@@ -114,6 +114,10 @@ class Order_model extends CI_Model {
             return false;
         }        
     }
+    public function getUserGames($user_id) {
+        return $this->db->select('u.id,u.email,ug.*,ug.game_id as game_id_ug,g.*,g.id as game_id,ug.status as status')->join('users u','u.id = ug.user_id')->join('games g','g.id = ug.game_id')->where('ug.user_id',$user_id)->order_by("ug.id", "DESC")->get_where('user_games ug')->result_array();
+    //  print_r($this->db->last_query());    
+    }
     public function updateUserWallet($data){
         $this->db->where('user_id', $data['user_id']);           
         $this->db->update('user_wallet', $data);

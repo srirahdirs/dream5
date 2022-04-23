@@ -50,10 +50,10 @@
                     <span>WITHDRAW</span>
                 </a>            
             </li>
-            <li class="nav-item">
-                <a class="nav-link winners" href="<?= site_url('home') ?>">
+            <li class="nav-item games_main_menu">
+                <a class="nav-link games" href="<?= site_url('payments/games') ?>">
                     <i class="icon ion-trophy"></i>
-                    <span>WINNERS</span>
+                    <span>GAMES</span>
                 </a>            
             </li>
             <li class="nav-item">

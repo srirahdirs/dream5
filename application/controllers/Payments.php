@@ -132,6 +132,29 @@ class Payments extends CI_Controller {
         $data['transactions_history'] = $this->Order_model->findUserPurchasedHistory($config["per_page"], $page , $this->session->userdata('user_id'));
         $this->load->view('payments/transactions', $data);
     }
+    public function Games() {
+        
+        $config["base_url"] = base_url() . "payments/games";
+        $config["total_rows"] = $this->Order_model->findCount($this->session->userdata('user_id'));
+        $config["per_page"] = 9;
+        $config["uri_segment"] = 3;
+
+        $config['full_tag_open'] = "<div clas='pagination-wrapper'><ul class='pagination pagination-success mg-b-0'>";
+        $config['full_tag_close'] = '</ul></div>';
+        $config['cur_tag_open'] = '&nbsp;<a class="current">';
+        $config['cur_tag_close'] = '</a>';
+        $config['next_link'] = '>';
+        $config['prev_link'] = '<';
+        $this->pagination->initialize($config);
+
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+        $data["links"] = $this->pagination->create_links();
+
+        $data['games_history'] = $this->Order_model->getUserGames($this->session->userdata('user_id'));
+       
+        $this->load->view('payments/user_games', $data);
+    }
 
     public function addPracticeCash() {
         $model = new Order_model();

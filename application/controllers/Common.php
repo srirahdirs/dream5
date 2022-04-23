@@ -29,6 +29,22 @@ class Common extends CI_Controller {
         $data['total_user'] = $total_user;
         $this->load->view('contact_us',$data);        
     }
+    public function contactUsSave() {        
+        $model = new UserModel();
+        $mailModel = new Mail_model();
+        $data['first_name'] = $this->input->post('first_name',TRUE);
+        $data['last_name'] = $this->input->post('last_name',TRUE);
+        $data['email'] = $this->input->post('email',TRUE);
+        $data['mobile_number'] = $this->input->post('mobile_number',TRUE);
+        $data['user_query'] = $this->input->post('user_query',TRUE);
+        if($model->saveContactForm($data)){
+            error_reporting(0);
+            $mailModel->sendContactUsMailToAdmin($data);
+            echo 'Success';
+        } else {
+            echo 'Failed';
+        }      
+    }
 
     public function getCityList() {
         $model = new UserModel();
@@ -86,15 +102,15 @@ class Common extends CI_Controller {
             $model = new UserModel();
             $mailModel = new Mail_model();
             if($model->add($data)){
-                echo json_encode(['success' => 'Account created successfully.']);
                 error_reporting(0);
-
                 $mailModel->sendNewUserMailToAdmin();
                 $loginModel = new LoginModel();
                 $result = $loginModel->login($data);
                 if($mailModel->sendVerifyMail($data['email'])){
                     return true;
                 }
+                echo json_encode(['success' => 'Account created successfully.']);
+                
                 
             } else {
                 echo json_encode(['error' => 'Failed.']);

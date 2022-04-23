@@ -150,6 +150,9 @@ class UserModel extends CI_Model {
             return $this->db->insert('user_details', $dataUser);
         }
     }
+    public function saveContactForm($data) {
+        return $this->db->insert('contact_us', $data);
+    }
 
     public function setPassword($data) {
         return password_hash($data["password"], PASSWORD_BCRYPT);

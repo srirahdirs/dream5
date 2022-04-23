@@ -50,7 +50,7 @@ $this->load->view('layouts/menu_session');
                                     <td><?= $row['status']; ?></td>
                                     <td>
                                         <?php if($row['bet_placed'] == 'Yes') { ?>
-                                            <a href="javascript:void(0)" class="view_bet"><span class="badge badge-primary">View</span></a>
+                                            <a href="<?= site_url('payments/games') ?>" class="view_bet"><span class="badge badge-primary">View</span></a>
                                         <?php } else { ?>
                                             <?php if($row['status'] == 'Upcoming') {?>
                                             <a href="javascript:void(0)" class="team_name" data-id="<?= $row['id']?>" data-team="<?= $row['team_a']?>"><span data-toggle="tooltip" title="Click to bet on - <?= $row['team_a']; ?>"<span class="badge badge-success"><?= $row['team_a']; ?></span></span></a> - 
@@ -192,7 +192,7 @@ $this->load->view('layouts/footer');
             }
         }); //confirm e
     });
-    $('.view_bet').click(function (e) {
+    $('.view_bet1').click(function (e) {
         e.preventDefault();
         $.ajax({
             url: '<?= base_url() ?>viewUserBets',
