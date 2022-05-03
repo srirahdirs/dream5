@@ -39,9 +39,13 @@ body{
     min-height: 400px;
 }
 .signin-box{
-    width: 279px !important;
+    width: 382px !important;
 }
-
+.alert-danger {
+    color: #fff;
+    background-color: #c71d1d;
+    border-color: #c71d1d;
+}
 .register_page{
     position: absolute;
     right: 13.3%;

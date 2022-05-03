@@ -12,6 +12,7 @@ $route['getSelectedCityList'] = 'common/getSelectedCityList';
 $route['login'] = 'common/login';
 $route['logout'] = 'common/logout';
 $route['home'] = 'common/index';
+$route['login_ajax'] = 'common/login_ajax';
 $route['update_cash_session'] = 'common/update_cash_session';
 $route['refund_policy'] = 'common/refund_policy';
 $route['contact-us'] = 'common/contactUs';

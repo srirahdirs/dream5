@@ -22,7 +22,7 @@
         <link rel="stylesheet" href="<?= $baseUrl ?>/css/slim.one.css">
         <link rel="stylesheet" href="<?= $baseUrl ?>/css/custom.css?<?= time();?>">
         <link rel="yzt" type="image/x-icon" href="<?= $baseUrl ?>/img/fav_icon.jpg" />
-
+        <?= $this->load->view('layouts/meta'); ?>
     </head>
     <body class="dashboard-4">
         <div class="slim-header">
@@ -30,7 +30,7 @@
                 <!--<div class="slim-header-left">-->
                 <h2 class="slim-logo"><a href="<?= base_url() ?>home"><img src="<?= $baseUrl ?>/img/logo/logo_dark.png" height="95"></a></h2>
                         <?php
-                        $this->load->view('users/login');
+                        $this->load->view('users/login_ajax');
                         ?>
 
             </div><!-- container -->

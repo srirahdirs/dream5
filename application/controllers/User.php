@@ -24,7 +24,7 @@ class User extends CI_Controller {
         $data['encrypted_user_id'] = base64_encode($this->encryption->encrypt($this->session->userdata('user_id')));
 
         if ($this->input->post()) {
-            $user_id = $this->encryption->decrypt(base64_decode($encrypted_user_id));
+            $user_id = $this->session->userdata('user_id');
             $this->form_validation->set_rules('first_name', 'First Name', 'required|alpha');
             $this->form_validation->set_rules('state_id', 'State', 'required');
             $this->form_validation->set_rules('gender', 'Gender', 'required');

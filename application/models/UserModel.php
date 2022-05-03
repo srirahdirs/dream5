@@ -203,6 +203,7 @@ class UserModel extends CI_Model {
         $this->db->where('user_id', $user_id);
         $q = $this->db->get('user_details');
         if ($q->num_rows() > 0) {
+            $this->db->where('user_id', $user_id);
             $this->db->update('user_details', $dataUserDetails);
         } else {
             $dataUserDetails['user_id'] = $user_id;

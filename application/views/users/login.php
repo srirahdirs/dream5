@@ -1,38 +1,37 @@
 <?php $baseUrl = base_url() . 'assets'; ?>
-<div class="login-box">
+<?php
+    $this->load->view('layouts/header');
+    $this->load->view('layouts/menu');
+?>
+<div class="slim-mainpanel">
+    <div class="signin-wrapper" style="padding: 0 !important;min-height:0">
 
-    <?php echo form_open('login', ['class' => 'login_form']); ?>
-    <div class="row">
-        <div class="col-lg-4">
-            <div class="form-group">             
-                <input type="text" class="form-control" name="username_or_email" placeholder="USERNAME or EMAIL" autocomplete="off">                
-            </div>
-        </div>
-
-
-        <div class="col-lg-4">
+    <div class="signin-box" style="padding:40px;">
+        <?php if(validation_errors()) { ?>
+            <div class="alert alert-danger err_all" style=""><?php echo validation_errors(); ?></div>
+        <?php }  ?>
+        <?php if($error != '') { ?>
+            <div class="alert alert-danger err_all" style=""><?php echo $error; ?></div>
+        <?php }  ?>
+        <h2 class="signin-title-primary" style="margin-bottom: 25px;">Sign in!</h2>
+        <!-- <h3 class="signin-title-secondary">Sign in to continue.</h3> -->
+        <?php echo form_open('login', ['class' => 'login_form']); ?>
             <div class="form-group">
-                <input type="password" class="form-control" name="login_password" placeholder="PASSWORD" autocomplete="off">
-            </div>
-        </div><!-- row -->
+            <input type="text" class="form-control" name="username_or_email" placeholder="USERNAME or EMAIL" autocomplete="off" required>  
+            </div><!-- form-group -->
+            <div class="form-group mg-b-50" style="margin-bottom: 25px;">
+            <input type="password" class="form-control" name="login_password" placeholder="PASSWORD" autocomplete="off" required>
+            </div><!-- form-group -->
+            <button class="btn btn-primary btn-block btn-signin">Sign In</button>
+        <?php echo form_close(); ?>
+        <p class="mg-b-0">Don't have an account? <a href="<?= base_url('register'); ?>">Sign Up</a></p>
+    </div><!-- signin-box -->
 
-        <div class="col-lg-1 mg-t-20 mg-lg-t-0">
-            <div class="btn-group" role="group" aria-label="Basic example">                  
-                <button type="button" class="btn btn-secondary active frgt_pwd_btn">
-                    <span class="fa-passwd-reset fa-stack">
-                        <i class="fa fa-undo fa-stack-2x"></i>
-                        <i class="fa fa-lock fa-stack-1x"></i>
-                    </span>
-                </button>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <button class="btn btn-primary btn-block btn-login">Login</button>
-        </div>
     </div>
-<?php echo form_close(); ?>
-
 </div>
+<?php
+    $this->load->view('layouts/footer');       
+?>
 <style>
     .fa-passwd-reset > .fa-lock {
         font-size: 0.85rem;
@@ -42,45 +41,6 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $(".btn-login").click(function (e) {
-            e.preventDefault();
-            var username_or_email = $("input[name='username_or_email']").val();
-            var login_password = $("input[name='login_password']").val();
-
-            $.ajax({
-                url: $(this).closest('form').attr('action'),
-                type: $(this).closest('form').attr('method'),
-                dataType: "json",
-                data: {username_or_email: username_or_email, login_password: login_password},
-                success: function (data) {
-                    if ($.isEmptyObject(data.error)) {
-                        $(".alert-danger").css('display', 'none');
-                        location.href = "<?php echo base_url('home'); ?>";
-                    } else {
-                        console.log(data.error);
-                        if (data.error['username_or_email']) {
-                            $(".login_form_err").css('display', 'block');
-                            $(".login_form_err").html(data.error['username_or_email']);
-                            $('.register_page').css("top", "28.9%");
-                            $("input[name='username_or_email']").focus();
-
-                        } else if (data.error['login_password']) {
-                            $(".login_form_err").css('display', 'block');
-                            $(".login_form_err").html(data.error['login_password']);
-                            $("input[name='login_password']").focus();
-                        } else if (data.error) {
-                            $(".login_form_err").css('display', 'block');
-                            $(".login_form_err").html(data.error);
-                        } else {
-                            $(".login_form_err").css('display', 'none');
-                        }
-                    }
-
-                }
-
-            });
-
-        });
         $(".frgt_pwd_btn").click(function () {            
             $.confirm({
                 title: 'Forgot Password or Username?',

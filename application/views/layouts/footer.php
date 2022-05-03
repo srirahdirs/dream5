@@ -8,7 +8,7 @@
         <p> <a href="">Privacy Policy</a> </p>
         <p> <a href="">Terms & Conditions</a> </p>
         <p> <a href="">Cancellation/Refund Policy</a> </p>-->
-        <!-- <p>By: <a href="http://www.youngzen.in/" target="_blank">YoungZen Technologies</a></p> -->
+        <p>By: <a href="http://www.youngzen.in/" target="_blank">YoungZen Technologies</a></p>
     </div><!-- container -->
 </div><!-- slim-footer -->
 
@@ -23,6 +23,7 @@
 <script src="<?= $baseUrl ?>/lib/jqvmap/js/jquery.vmap.world.js"></script>
 <script src="<?= $baseUrl ?>/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js"></script>
 <script src="<?= $baseUrl ?>/js_external/jquery-confirm.min.js"></script>
+<script src="<?= $baseUrl ?>/lib/parsleyjs/js/parsley.js"></script> 
 
 <script src="<?= $baseUrl ?>/js/slim.js"></script>
 <script src="<?= $baseUrl ?>/js/ResizeSensor.js"></script>
@@ -35,7 +36,9 @@
         'use strict'
     });
 
-<?php if($this->session->flashdata('success')){ ?>
+<?php
+
+if($this->session->flashdata('success')){ ?>
         toastr.success("<?php echo $this->session->flashdata('success'); ?>");
     <?php }else if($this->session->flashdata('error')){  ?>
         toastr.error("<?php echo $this->session->flashdata('error'); ?>");

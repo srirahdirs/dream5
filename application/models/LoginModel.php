@@ -15,6 +15,16 @@ class LoginModel extends CI_Model
     public function login($request)
     {
         
+        $this->user = $this->credentials($request['username'], $request['password']);
+        if ($this->user) {
+            return $this->setUser();
+        } else {
+            return false;
+        }
+    }
+    public function login_ajax($request)
+    {
+        
         
         $this->user = $this->credentials($request['username'], $request['password']);
         if ($this->user) {
@@ -50,7 +60,7 @@ class LoginModel extends CI_Model
             "practice_cash" => $this->user->practice_cash,          
             "login_status" => true
         ));
-        return 'success';
+        return true;
     }
      protected function failedLogin($request)
     {

@@ -17,24 +17,36 @@
 
   <div class="row row-xs mg-b-10">
         <div class="col-sm mg-t-10 mg-sm-t-0">             
-            <input type="text" class="form-control" name="username" placeholder="USERNAME" autocomplete="off" required value="<?php echo set_value('username');?>">                
+            <input type="text" class="form-control" name="username" placeholder="USERNAME" autocomplete="off" required>                
         </div>
     </div>
+    <div class="alert alert-danger err_username" style="display:none"></div>
+
     <div class="row row-xs mg-b-10">
         <div class="col-sm mg-t-10 mg-sm-t-0">
-            <input type="email" class="form-control" name="email" placeholder="E-MAIL " autocomplete="off" required value="<?php echo set_value('email');?>">
-        </div>
-    </div><!-- row -->    
-    <div class="row row-xs mg-b-10">
-        <div class="col-sm mg-t-10 mg-sm-t-0">
-            <input type="number" class="form-control"  name="mobile_number" placeholder="MOBILE NUMBER" autocomplete="off" required value="<?php echo set_value('mobile_number');?>">
+            <input type="email" class="form-control" name="email" placeholder="E-MAIL " autocomplete="off" required>
         </div>
     </div><!-- row -->            
+    <div class="alert alert-danger err_email" style="display:none"></div>
+
     <div class="row row-xs mg-b-10">
         <div class="col-sm mg-t-10 mg-sm-t-0">
-            <input type="password" class="form-control" name="password" placeholder="PASSWORD" autocomplete="off" required value="<?php echo set_value('password');?>">
+            <input type="number" class="form-control"  name="mobile_number" placeholder="MOBILE NUMBER" autocomplete="off" required>
+        </div>
+    </div><!-- row -->            
+    <div class="alert alert-danger err_mobile_number" style="display:none"></div>
+
+    <div class="row row-xs mg-b-10">
+        <div class="col-sm mg-t-10 mg-sm-t-0">
+            <input type="password" class="form-control" name="password" placeholder="PASSWORD" autocomplete="off" required>
         </div>
     </div><!-- row -->
+    <div class="alert alert-danger err_password" style="display:none"></div>
+
+    <div class="alert alert-danger err_all" style="display:none"></div>
+    <div class="alert alert-success success_all" style="display:none"></div>
+
+  
 
     <button class="btn btn-primary btn-block btn-submit">Sign Up</button>
     
@@ -46,7 +58,11 @@
 </div><!-- signin-box -->
 
 </div>
-
+<?php
+    // $this->load->view('layouts/home_slider');
+    // $this->load->view('layouts/home_slider_bottom');
+    // $this->load->view('layouts/home_pricing');
+?>
 </div><!-- slim-mainpanel -->
 <?php
     $this->load->view('layouts/footer');       

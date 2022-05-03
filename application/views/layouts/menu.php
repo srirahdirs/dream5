@@ -23,11 +23,13 @@
                     $href_add_cash = site_url('add-cash');
                     $href_withdraw = site_url('withdraw-cash');                    
                     $href_support = site_url('contact-us');
+                    $href_games = site_url('payments/games');
                 } else {
                     $class_name = 'login_required';
                     $href_play_game = 'javascript:void(0)';
                     $href_add_cash = 'javascript:void(0)';
                     $href_withdraw = 'javascript:void(0)';
+                    $href_games = 'javascript:void(0)';
                     $href_support = site_url('contact-us');
                 }
                 ?>
@@ -51,13 +53,13 @@
                 </a>            
             </li>
             <li class="nav-item games_main_menu">
-                <a class="nav-link games" href="<?= site_url('payments/games') ?>">
+                <a class="nav-link games <?= $class_name ?>" href="<?= $href_games ?>">
                     <i class="icon ion-trophy"></i>
                     <span>GAMES</span>
                 </a>            
             </li>
             <li class="nav-item">
-                <a class="nav-link support <?= $class_name ?>" href="<?= $href_support ?>">
+                <a class="nav-link support" href="<?= $href_support ?>">
                     <i class="icon ion-chatboxes"></i>
                     <span>SUPPORT</span>
                     <span class="square-8"></span>

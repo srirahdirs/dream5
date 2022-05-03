@@ -21,9 +21,11 @@ class Common extends CI_Controller {
         } else {
             $total_user = $this->UserModel->findUsersCount();
             $data['total_user'] = $total_user;
-            $this->load->view('users/dashboard',$data);
+            $data['error'] = '';
+            $this->load->view('users/login',$data);
         }
     }
+    
     public function contactUs() {        
         $total_user = $this->UserModel->findUsersCount();
         $data['total_user'] = $total_user;
@@ -91,9 +93,8 @@ class Common extends CI_Controller {
 
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]', ['required' => '%s is required']);
 
-        if ($this->form_validation->run() == FALSE) {
-            $errors = $this->form_validation->error_array();
-            echo json_encode(['error' => $errors]);
+        if ($this->form_validation->run() == FALSE)  {
+            $this->load->view('users/register');
         } else {
             $data['username'] = $this->input->post('username',TRUE);
             $data['email'] = $this->input->post('email',TRUE);
@@ -106,19 +107,39 @@ class Common extends CI_Controller {
                 $mailModel->sendNewUserMailToAdmin();
                 $loginModel = new LoginModel();
                 $result = $loginModel->login($data);
-                if($mailModel->sendVerifyMail($data['email'])){
-                    return true;
-                }
-                echo json_encode(['success' => 'Account created successfully.']);
-                
-                
+                $mailModel->sendVerifyMail($data['email']);
+                return redirect('home');
             } else {
-                echo json_encode(['error' => 'Failed.']);
+                $this->load->view('register');
             }
         }
     }
     
     public function login() {
+        $data['error'] = '';
+        $this->form_validation->set_rules('username_or_email', 'Username or Email', 'required',[
+            'required'      => '%s is required',
+        ]);
+
+        $this->form_validation->set_rules('login_password', 'Password', 'required',['required'=> '%s is required']);
+        
+        if ($this->form_validation->run() == FALSE)  {
+            $this->load->view('users/login',$data);
+        } else {            
+            $data['username'] = $this->input->post('username_or_email');            
+            $data['password'] = $this->input->post('login_password');
+            $loginModel = new LoginModel();
+            $result = $loginModel->login($data);
+            if($result) {
+                return redirect('home');                
+            } else {
+                $data['error'] = 'Invalid username or password';
+                $this->session->set_flashdata('error', 'Invalid username or password');
+                $this->load->view('users/login',$data);
+            }
+        }
+    }
+    public function login_ajax() {
         $this->form_validation->set_rules('username_or_email', 'Username or Email', 'required',[
             'required'      => '%s is required',
         ]);
@@ -133,7 +154,7 @@ class Common extends CI_Controller {
             $data['username'] = $this->input->post('username_or_email');            
             $data['password'] = $this->input->post('login_password');
             $loginModel = new LoginModel();
-            $result = $loginModel->login($data);
+            $result = $loginModel->login_ajax($data);
             if(isset($result['failed'])) {
                 echo json_encode(['error' => $result['failed']]);
             } else {

@@ -23,7 +23,7 @@ $encrypted_user_id = encryptId($this->session->userdata('user_id'));
         <link rel="stylesheet" href="<?= $baseUrl ?>/css/slim.one.css">
         <link rel="stylesheet" href="<?= $baseUrl ?>/css/custom.css?<?= time();?>">
         <link rel="yzt" type="image/x-icon" href="<?= $baseUrl ?>/img/fav_icon.jpg" />
-
+        <?= $this->load->view('layouts/meta'); ?>
     </head>
     <body class="dashboard-4">
         <div class="slim-header with-sidebar">
