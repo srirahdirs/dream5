@@ -92,10 +92,13 @@
                             return false;
                         } else {
                             $.ajax({
-                                url: '',
+                                url: '<?= base_url() ?>forgot-password',
                                 type: 'post',
-                                data: {email: $('#email_id').val()},
-                                success: function (data) { location.reload();}
+                                data: {email_or_phonenumber: $('#email_id').val()},
+                                success: function (data) {
+                                    toastr.success('Please check mail');
+                                    location.reload();
+                                }
                             });
 
                         }  // else ends            

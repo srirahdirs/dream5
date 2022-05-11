@@ -22,7 +22,7 @@
             <div class="row row-xs mg-b-10">
                 <div class="col-sm mg-t-10 mg-sm-t-0">
                     <div class="toggle-sec">
-                    <input type="password" class="form-control password" name="password" placeholder="PASSWORD" autocomplete="off" required value="<?php echo set_value('password');?>">
+                    <input type="password" class="form-control password" name="login_password" placeholder="PASSWORD" autocomplete="off" required value="<?php echo set_value('password');?>">
                         <i class="bi bi-eye-slash" id="togglePassword"></i>
                     </div>
                 </div>
@@ -34,6 +34,19 @@
 
     </div>
 </div>
+<script>
+    $(document).ready(function(){
+    $("#togglePassword").on('click',function() {
+        jQuery('#togglePassword').toggleClass("bi-eye");
+        var input = $(".password");
+        if (input.attr("type") === "password") {
+            input.attr("type", "text");
+        } else {
+            input.attr("type", "password");
+        }
+    });
+});
+</script>
 <?php
     $this->load->view('layouts/footer');       
 ?>
@@ -42,48 +55,3 @@
         font-size: 0.85rem;
     }
 </style>
-<script src="<?= $baseUrl ?>/lib/jquery/js/jquery.js"></script>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $(".frgt_pwd_btn").click(function () {            
-            $.confirm({
-                title: 'Forgot Password or Username?',
-                content: '<input type="text" class="form-control" name="email" id="email_id" placeholder="Enter Email or Mobile Number" required>',
-                buttons: {
-                    confirm: function () {                    
-                        if($('#email_id').val() === '') {
-                            $('#email_id').focus();
-                            return false;
-                        } else {
-                            $.ajax({
-                                url: '',
-                                type: 'post',
-                                data: {email: $('#email_id').val()},
-                                success: function (data) { location.reload();}
-                            });
-
-                        }  // else ends            
-                    }, //confirm btn ends
-                    cancel: function () {
-
-                    },
-                },
-            }); //confirm e
-        });
-    });
-
-   
-    $(document).ready(function(){
-        $("#togglePassword").on('click',function() {
-            jQuery('#togglePassword').toggleClass("bi-eye");
-            var input = $(".password");
-            if (input.attr("type") === "password") {
-                input.attr("type", "text");
-            } else {
-                input.attr("type", "password");
-            }
-        });
-    });
-    
-  </script>

@@ -523,3 +523,6 @@ form #togglePasswordRegister {
         margin-left: 0;
     }
 }
+.btn-green {
+    background: #23BF08 !important;
+}

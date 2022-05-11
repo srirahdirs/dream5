@@ -8,7 +8,7 @@ $this->load->view('layouts/menu_session');
     <div class="container pd-t-50">
     <blink><marquee style="color: #23BF08">Note: amount will be added to the account within 15 minutes.</marquee></blink>
         <div class="section-wrapper">
-            <form id="depositForm" method="post" action="<?= base_url().'/payments/saveReferenceNumber'?>">
+            <form id="depositForm" method="post" action="<?= base_url().'/payments/saveReferenceNumber'?>" onsubmit="return submitResult();">
                 <div class="row">
                    
                     <!--single row starts-->
@@ -62,7 +62,7 @@ $this->load->view('layouts/menu_session');
                     <div class="col-lg-12" style="margin-bottom:20px;"></div>
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                        <input type="submit" type="submit" class="btn btn-primary btn-block" value="Submit">
                         </div>
                     </div>
                 </div>                
@@ -97,6 +97,29 @@ $this->load->view('layouts/footer');
             event.preventDefault(); //stop character from entering input
         }
     });
+    function submitResult(){
+        if($('#order_amount').val() > 20000){
+            $.alert('Enter amount less than 20000');
+            return false;
+        }
+        if($('#order_amount').val() < 25){
+            $.alert('Enter amount greater than 25');
+            return false;
+        }
+        var amount = $('#order_amount').val();
+        if(!confirm("Please confirm the amount Rs." + amount)) {
+            return false;
+        }
+        $("depositForm").submit();
+    }
+    function nextStep(trueOrFalse){
+   if(trueOrFalse){
+      // upload your file or do anything you want
+   }else{
+      // do another thing
+   }
+}
+
     $(".sidebar-nav-item").removeClass('active');
     $(".sidebar-nav-item .add_cash").addClass('active');    
     //main menu
@@ -116,4 +139,5 @@ $this->load->view('layouts/footer');
         color:#fff !important;
     }    
     .input-group-append .input-group-text a { color:#000;}
+    
 </style>

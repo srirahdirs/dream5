@@ -62,16 +62,6 @@ jQuery(document).ready(function() {
         } //success                            
     });
 });
-$(document).ready(function(){
-    $("#togglePassword").on('click',function() {
-        jQuery('#togglePassword').toggleClass("bi-eye");
-        var input = $(".password");
-        if (input.attr("type") === "password") {
-            input.attr("type", "text");
-        } else {
-            input.attr("type", "password");
-        }
-    });
-});
+
     
   </script>
