@@ -51,7 +51,7 @@ $encrypted_user_id = encryptId($this->session->userdata('user_id'));
                             $totalCash = $getCash[0]->cash; 
                         }
                         ?>
-                        <a href="<?= base_url() . 'add-cash' ?>" class="cash" title="Add Cash"><span>CASH : </span><b> &#8377; <?= ($totalCash) ? $totalCash : 0 ?></b>  </a>
+                        <a href="<?= site_url('deposit-amount'); ?>" class="cash" title="Add Cash"><span>CASH : </span><b> &#8377; <?= ($totalCash) ? $totalCash : 0 ?></b>  </a>
                     </div>
                     <div class="dropdown dropdown-a">
                         <a href="" class="header-notification" data-toggle="dropdown">
@@ -110,7 +110,7 @@ $encrypted_user_id = encryptId($this->session->userdata('user_id'));
                         </div> dropdown-menu-right -->
                     </div><!-- dropdown -->
                     <div class="add_chips">
-                        <a href="<?= base_url() . 'add-cash' ?>" class="addcash" title="Add Cash">ADD CASH</a>
+                        <a href="<?= site_url('deposit-amount'); ?>" class="addcash" title="Add Cash">ADD CASH</a>
                     </div><!-- dropdown -->
                     <?php
 //          print_r($this->session->userdata());

@@ -16,7 +16,7 @@
         <link href="<?= $baseUrl ?>/css_external/jquery-confirm.min.css" rel="stylesheet">
         
         <link href="<?= $baseUrl ?>/lib/toastr/toastr.min.css" rel="stylesheet">
-
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
         <!-- Slim CSS -->
         <link rel="stylesheet" href="<?= $baseUrl ?>/css/slim.css">
         <link rel="stylesheet" href="<?= $baseUrl ?>/css/slim.one.css">

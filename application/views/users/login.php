@@ -19,9 +19,14 @@
             <div class="form-group">
             <input type="text" class="form-control" name="username_or_email" placeholder="USERNAME or EMAIL" required>  
             </div><!-- form-group -->
-            <div class="form-group mg-b-50" style="margin-bottom: 25px;">
-            <input type="password" class="form-control" name="login_password" placeholder="PASSWORD" required>
-            </div><!-- form-group -->
+            <div class="row row-xs mg-b-10">
+                <div class="col-sm mg-t-10 mg-sm-t-0">
+                    <div class="toggle-sec">
+                    <input type="password" class="form-control password" name="password" placeholder="PASSWORD" autocomplete="off" required value="<?php echo set_value('password');?>">
+                        <i class="bi bi-eye-slash" id="togglePassword"></i>
+                    </div>
+                </div>
+            </div><!-- row -->
             <button class="btn btn-primary btn-block btn-signin">Sign In</button>
         <?php echo form_close(); ?>
         <p class="mg-b-0">Don't have an account? <a href="<?= base_url('register'); ?>">Sign Up</a></p>
@@ -68,5 +73,17 @@
         });
     });
 
-
-</script>
+   
+    $(document).ready(function(){
+        $("#togglePassword").on('click',function() {
+            jQuery('#togglePassword').toggleClass("bi-eye");
+            var input = $(".password");
+            if (input.attr("type") === "password") {
+                input.attr("type", "text");
+            } else {
+                input.attr("type", "password");
+            }
+        });
+    });
+    
+  </script>

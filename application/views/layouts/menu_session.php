@@ -24,7 +24,7 @@ $encrypted_user_id = encryptId($this->session->userdata('user_id'));
                 </ul>
             </li>
             <li class="sidebar-nav-item">
-                <a href="<?= base_url() . 'add-cash' ?>" class="sidebar-nav-link add_cash"><i class="icon ion-cash"></i> ADD CASH</a>
+                <a href="<?= site_url('deposit-amount'); ?>" class="sidebar-nav-link add_cash"><i class="icon ion-cash"></i> ADD CASH</a>
             </li>
             <li class="sidebar-nav-item with-sub">
                 <a href="" class="sidebar-nav-link withdraw_cash_side_menu"><i class="fa fa-money" aria-hidden="true"></i>  Withdraw </a>

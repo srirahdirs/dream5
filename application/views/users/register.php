@@ -32,13 +32,16 @@
     </div><!-- row -->            
     <div class="row row-xs mg-b-10">
         <div class="col-sm mg-t-10 mg-sm-t-0">
-            <input type="password" class="form-control" name="password" placeholder="PASSWORD" autocomplete="off" required value="<?php echo set_value('password');?>">
+            <div class="toggle-sec">
+            <input type="password" class="form-control password" name="password" placeholder="PASSWORD" autocomplete="off" required value="<?php echo set_value('password');?>">
+                <i class="bi bi-eye-slash" id="togglePasswordRegister"></i>
+            </div>
         </div>
     </div><!-- row -->
-
+    
     <button class="btn btn-primary btn-block btn-submit">Sign Up</button>
     
-    <p class="toc">Aleady have an account? <a href="javascript:void(0)" class="login_required"> Login </a></p>
+    <p class="toc">Aleady have an account? <a href="<?= site_url('login') ?>" class="login_required"> Login </a></p>
     <p class="toc">Forgot your password?<a href="javascript:void(0)" class="frgt_pwd_btn">Reset </a></p>
     <p class="toc">BY CLICKING 'SIGN UP' YOU ARE AGREE TO OUR <a href="#">T&C</a></p>
     <div class="signup-separator" style="margin-top:20px"></div>
@@ -48,6 +51,21 @@
 </div>
 
 </div><!-- slim-mainpanel -->
+<script>
+      
+      
+      $(document).ready(function(){
+        $("#togglePasswordRegister").on('click',function() {
+            jQuery('#togglePasswordRegister').toggleClass("bi-eye");
+            var input = $(".password");
+            if (input.attr("type") === "password") {
+                input.attr("type", "text");
+            } else {
+                input.attr("type", "password");
+            }
+        });
+    });
+  </script>
 <?php
     $this->load->view('layouts/footer');       
 ?>
