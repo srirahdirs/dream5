@@ -30,8 +30,8 @@ class Payments extends CI_Controller {
     }
     public function depositAmount() {
         $this->load->model('../../modules/admin/models/Upi_model');
-        $data['payment_type'] = $this->input->get('payment_type');
-        $data['amount'] = $this->input->get('amount');
+        $data['payment_type'] = '';
+        $data['amount'] = 5000;
         $data['user_id'] = $this->session->userdata('user_id');
         $payment_type = $this->Upi_model->findByUpiMethod($data['payment_type']);
         // $data['upi_id']= $payment_type->upi_id;

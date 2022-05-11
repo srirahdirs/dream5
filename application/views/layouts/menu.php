@@ -20,16 +20,17 @@
                 <?php if ($this->session->userdata('login_status')) { 
                     $class_name = '';
                     $href_play_game = site_url('payments/game');
-                    $href_add_cash = site_url('add-cash');
+                    $href_add_cash = site_url('deposit-amount');
                     $href_withdraw = site_url('withdraw-cash');                    
                     $href_support = site_url('contact-us');
                     $href_games = site_url('payments/games');
                 } else {
-                    $class_name = 'login_required';
-                    $href_play_game = 'javascript:void(0)';
-                    $href_add_cash = 'javascript:void(0)';
-                    $href_withdraw = 'javascript:void(0)';
-                    $href_games = 'javascript:void(0)';
+                    // $class_name = 'login_required';
+                    $class_name = '';
+                    $href_play_game = site_url('home');
+                    $href_add_cash = site_url('home');;
+                    $href_withdraw = site_url('home');;
+                    $href_games = site_url('home');;
                     $href_support = site_url('contact-us');
                 }
                 ?>

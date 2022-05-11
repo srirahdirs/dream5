@@ -17,10 +17,10 @@
         <!-- <h3 class="signin-title-secondary">Sign in to continue.</h3> -->
         <?php echo form_open('login', ['class' => 'login_form']); ?>
             <div class="form-group">
-            <input type="text" class="form-control" name="username_or_email" placeholder="USERNAME or EMAIL" autocomplete="off" required>  
+            <input type="text" class="form-control" name="username_or_email" placeholder="USERNAME or EMAIL" required>  
             </div><!-- form-group -->
             <div class="form-group mg-b-50" style="margin-bottom: 25px;">
-            <input type="password" class="form-control" name="login_password" placeholder="PASSWORD" autocomplete="off" required>
+            <input type="password" class="form-control" name="login_password" placeholder="PASSWORD" required>
             </div><!-- form-group -->
             <button class="btn btn-primary btn-block btn-signin">Sign In</button>
         <?php echo form_close(); ?>
