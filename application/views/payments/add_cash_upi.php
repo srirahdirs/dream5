@@ -49,7 +49,7 @@ $this->load->view('layouts/menu_session');
                     </div>
                     <input type="hidden" name="upi_id" value="<?= $upi_id?>">
                     <div class="col-lg-12" style="margin-bottom:20px;"></div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-8">
                         <div class="form-group">
                             <label>STEP 2 : After completing the FUNDS TRANSFER,<br>
                             Fill out the <b style="color: #fff;">REFERENCE NUMBER</b> / 
@@ -60,7 +60,7 @@ $this->load->view('layouts/menu_session');
                         </div>
                     </div>
                     <div class="col-lg-12" style="margin-bottom:20px;"></div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-8">
                         <div class="form-group">
                         <input type="submit" type="submit" class="btn btn-primary btn-block" value="Submit">
                         </div>
@@ -130,14 +130,6 @@ $this->load->view('layouts/footer');
     
 </script>
 <style>
-    .input-group-append .input-group-text {
-        background-color: #FFB612;
-        border: 1px solid #FFB612;
-        color:#fff !important;
-    }    
-    .input-group-prepend .input-group-text {
-        color:#fff !important;
-    }    
-    .input-group-append .input-group-text a { color:#000;}
+   
     
 </style>

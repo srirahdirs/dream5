@@ -39,6 +39,8 @@ $route['my-profile/(:any)'] = 'user/myProfile/$1';
 $route['change-password/(:any)'] = 'user/changePassword/$1';
 $route['forgot-password'] = 'user/forgotPassword';
 $route['sendVerifyMail'] = 'user/sendVerifyMail';
+$route['refer'] = 'user/refer';
+$route['buddy-register'] = 'common/buddyRegister';
 $route['verifyMail/(:any)'] = 'user/verifyMail/$1';
 $route['set-new-password/(:any)'] = 'user/setNewPassword/$1';
 

@@ -388,6 +388,9 @@ a {
         text-align: center;
         padding-bottom: 20px;
     }
+    .refer_banner_img{
+        width: 100% !important;
+    }
 }
 @media only screen and (max-width: 640px) {
 	.success {
@@ -423,6 +426,9 @@ a {
 	.login-box .mg-t-20 {
 		margin-top: 0;
 	}
+    .refer_banner_img{
+        width: 100% !important;
+    }
 }
 
 @media ( min-width: 768px ) and (max-width: 991px){
@@ -522,7 +528,20 @@ form #togglePasswordRegister {
     .slim-header.with-sidebar .slim-logo{
         margin-left: 0;
     }
+    .refer_banner_img{
+        width: 100% !important;
+    }
 }
 .btn-green {
     background: #23BF08 !important;
 }
+
+.input-group-append .input-group-text {
+    background-color: #FFB612;
+    border: 1px solid #FFB612;
+    color:#fff !important;
+}    
+.input-group-prepend .input-group-text {
+    color:#fff !important;
+}    
+.input-group-append .input-group-text a { color:#000;}

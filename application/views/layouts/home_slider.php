@@ -25,7 +25,8 @@
     </div><!-- carousel -->
 	
 	<?php
-		$this->load->view('users/register');
+        $data = '';
+		$this->load->view('users/register',$data);
 	?>
 
 </div>

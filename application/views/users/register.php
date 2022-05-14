@@ -10,7 +10,7 @@
 <?php if(validation_errors()) { ?>
 <div class="alert alert-danger err_all" style=""><?php echo validation_errors(); ?></div>
 <?php } ?>
-<?php echo form_open('register', ['class' => 'register_form']); ?>
+<?php echo form_open('register?name='.$referral_username, ['class' => 'register_form']); ?>
 
   <h3 class="signin-title-primary">Register!</h3>
   <h5 class="signin-title-secondary lh-4 text-center" style="margin-bottom: 15px;">Signup for Free and Get <span style="color:#FFB612;font-weight:800;">&#8377;100.</span></h5>
@@ -38,7 +38,13 @@
             </div>
         </div>
     </div><!-- row -->
-    
+    <?php if($referral_username) {?>
+    <div class="row row-xs mg-b-10">
+        <div class="col-sm mg-t-10 mg-sm-t-0">
+            <input type="text" class="form-control" name="referral_username" placeholder="" autocomplete="off" required value="<?php echo $referral_username;?>">
+        </div>
+    </div><!-- row --> 
+    <?php } ?>
     <button class="btn btn-primary btn-block btn-submit">Sign Up</button>
     
     <p class="toc">Aleady have an account? <a href="<?= site_url('login') ?>" class="login_required"> Login </a></p>

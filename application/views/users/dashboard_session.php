@@ -44,7 +44,7 @@ $this->load->view('layouts/menu_session');
                             <a href="" class="btn btn-primary btn-block">MY EARNINGS</a>
                         </div><!-- col-6 -->
                         <div class="col-sm-6 mg-t-10 mg-sm-t-0">
-                            <a href="" class="btn btn-success btn-block">REFER NOW</a>
+                            <a href="<?= site_url('refer'); ?>" class="btn btn-success btn-block">REFER NOW</a>
                         </div><!-- col-6 -->
                     </div><!-- row -->
                 </div><!-- card -->

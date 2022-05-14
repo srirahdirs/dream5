@@ -76,6 +76,8 @@ class Common extends CI_Controller {
     }
 
     public function register() {
+        $data = [];
+        $data['referral_username'] = $this->input->get("name");
         $this->form_validation->set_rules('username', 'Username', 'required|min_length[3]|is_unique[users.username]', [
             'required' => '%s is required',
             'is_unique' => '%s already exists.'
@@ -94,23 +96,28 @@ class Common extends CI_Controller {
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]', ['required' => '%s is required']);
 
         if ($this->form_validation->run() == FALSE)  {
-            $this->load->view('users/register');
+            $this->load->view('users/register',$data);
         } else {
-            $data['username'] = $this->input->post('username',TRUE);
-            $data['email'] = $this->input->post('email',TRUE);
-            $data['mobile_number'] = $this->input->post('mobile_number',TRUE);
-            $data['password'] = $this->input->post('password',TRUE);
+            $dataR['username'] = $this->input->post('username',TRUE);
+            $dataR['email'] = $this->input->post('email',TRUE);
+            $dataR['mobile_number'] = $this->input->post('mobile_number',TRUE);
+            $dataR['password'] = $this->input->post('password',TRUE);
+            if($data['referral_username']){
+                $dataR['referral_username'] = $data['referral_username'];
+            }
             $model = new UserModel();
             $mailModel = new Mail_model();
-            if($model->add($data)){
+            if($model->add($dataR)){
                 error_reporting(0);
                 $mailModel->sendNewUserMailToAdmin();
                 $loginModel = new LoginModel();
-                $result = $loginModel->login($data);
-                $mailModel->sendVerifyMail($data['email']);
+                $result = $loginModel->login($dataR);
+                
+                $mailModel->sendVerifyMail($dataR['email']);
+                
                 return redirect('home');
             } else {
-                $this->load->view('register');
+                $this->load->view('users/register',$data);
             }
         }
     }
@@ -184,6 +191,13 @@ class Common extends CI_Controller {
         if($balance > 0){
             $this->session->set_userdata('cash',$balance[0]->cash);
         }
+    }
+    public function buddyRegister($referal_username = null) {
+        $data = [];
+        $model = new UserModel();
+        $data['referral_username'] = $this->input->get("name");
+           
+        $this->load->view('users/register', $data);
     }
     
 

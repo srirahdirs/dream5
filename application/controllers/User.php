@@ -9,7 +9,7 @@ class User extends CI_Controller {
         $this->load->library(['form_validation', 'encryption']);
         $this->load->model(['UserModel','Mail_model']);
         if (!$this->session->userdata('login_status')) {
-            $allowed = array('forgotPassword', 'resetPassword','setNewPassword','verifyMail');
+            $allowed = array('forgotPassword', 'resetPassword','setNewPassword','verifyMail','buddyRegister');
             if (!in_array($this->router->fetch_method(), $allowed)) {
                 redirect('home');
             }
@@ -70,6 +70,7 @@ class User extends CI_Controller {
         }
         $this->load->view('users/change_password', $data);
     }
+    
     public function forgotPassword() {
         $data = [];
         $model = new UserModel();
@@ -191,7 +192,9 @@ class User extends CI_Controller {
         }
     }
     public function refer() {
-        $model = new Order_model();
-        $this->load->view('users/refer');
+        $model = new UserModel();
+        $data = '';
+        $this->load->view('users/refer',$data);
     }
+    
 }

@@ -140,6 +140,10 @@ class UserModel extends CI_Model {
         } else {
             $data["password"] = NULL;
         }
+        if($data['referral_username']){
+            $referral_username = $data['referral_username'];
+            unset($data['referral_username']);
+        }
         $userTbl = $this->db->insert('users', $data);
         $user_id = $this->db->insert_id();
 
@@ -147,6 +151,17 @@ class UserModel extends CI_Model {
             $dataUser['user_id'] = $user_id;
             $orderModel = new Order_model();
             $orderModel->insertIntoWallet($user_id, 100);
+
+            if($referral_username){
+                $existingUser = $this->findByUsername($referral_username);
+                
+                $dataReferral['user_id'] = $existingUser->id; 
+                $dataReferral['username'] = $referral_username; //referred users username
+                $dataReferral['referral_username'] = $data['username']; //newly registered users username
+                $dataReferral['referral_user_id'] = $user_id; 
+                
+                $this->db->insert('user_referrals', $dataReferral);
+            }
             return $this->db->insert('user_details', $dataUser);
         }
     }
