@@ -190,4 +190,8 @@ class User extends CI_Controller {
             return true;
         }
     }
+    public function refer() {
+        $model = new Order_model();
+        $this->load->view('users/refer');
+    }
 }

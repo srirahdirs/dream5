@@ -130,11 +130,18 @@ class Common extends CI_Controller {
             $data['password'] = $this->input->post('login_password');
             $loginModel = new LoginModel();
             $result = $loginModel->login($data);
-            if($result) {
-                return redirect('home');                
-            } else {
+            if($result == 1){
+                return redirect('home'); 
+            }
+            if($result=='user_not_found') {
+                $data['error'] = 'User not found!...';
+                $this->session->set_flashdata('error', $data['error']);
+                $this->load->view('users/login',$data);                               
+            } else if($result=='invalid_password') {
                 $data['error'] = 'Invalid username or password';
-                $this->session->set_flashdata('error', 'Invalid username or password');
+                $this->session->set_flashdata('error', $data['error']);
+                $this->load->view('users/login',$data);                               
+            } else {               
                 $this->load->view('users/login',$data);
             }
         }
@@ -178,5 +185,6 @@ class Common extends CI_Controller {
             $this->session->set_userdata('cash',$balance[0]->cash);
         }
     }
+    
 
 }

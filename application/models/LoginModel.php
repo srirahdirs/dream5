@@ -15,11 +15,18 @@ class LoginModel extends CI_Model
     public function login($request)
     {
         
-        $this->user = $this->credentials($request['username'], $request['password']);
-        if ($this->user) {
-            return $this->setUser();
+        $user = $this->credentials($request['username'], $request['password']);
+        if($user == 'user_not_found'){
+            return $user;
+        } else if($user == 'invalid_password'){
+            return $user;
         } else {
-            return false;
+            $this->user = $this->credentials($request['username'], $request['password']);
+            if ($this->user) {
+                return $this->setUser();
+            } else {
+                return false;
+            }
         }
     }
     public function login_ajax($request)
@@ -40,10 +47,16 @@ class LoginModel extends CI_Model
     {
         $where = "((`username`='".$username."') or (`email` = '".$username."'))";
         $user = $this->db->select('user_wallet.cash,user_wallet.practice_cash,users.*')->join('user_wallet','user_wallet.user_id = users.id','LEFT')->get_where("users",$where)->row(0);
+        if(empty($user)){
+            return 'user_not_found';
+        }
         if($user && password_verify($password, $user->password)) {
             return $user;
         }
-        return false;
+        if($user && empty(password_verify($password, $user->password))){
+            return 'invalid_password';
+        }
+        return true;
     }
     /**
      * Setting session for authenticated user
