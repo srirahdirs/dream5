@@ -339,6 +339,32 @@ class UserModel extends CI_Model {
         $this->db->update('user_wallet', $dataUserWallet);
         
         $this->session->set_userdata('cash',$walletBalance);
+        // mail to admin
+        $data = '';
+        $message = $this->load->view('emailer/new_withdrawal_to_admin.php',$data,TRUE);
+        $config = [
+            'mailtype' => 'html',
+            'charset' => 'utf-8',
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://ssmtp.googlemail.com',
+            'smtp_user' => smtp_user,
+            'smtp_pass' => smtp_pass,
+            'smtp_port' => '465',
+            'smtp_timeout' => '20',
+            'validation' => TRUE,
+            'newline' => "\r\n"
+        ];
+        $this->load->library('email', $config);
+
+        $admin_list = array(admin_email_1, admin_email_2);
+        $this->email->to($admin_list);
+        
+        $this->email->from(email_from, 'Oh No! New Withdrawal !');
+        $this->email->subject('DREAM5 - New Withdrawal Request');
+        $this->email->set_mailtype("html");
+        $this->email->message($message);
+
+        $this->email->send();
     }
     public function withdrawReversal($withdraw_history_id){
         

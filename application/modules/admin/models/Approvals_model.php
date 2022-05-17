@@ -36,7 +36,7 @@ class Approvals_model extends CI_Model {
         return $this->db->select('u.*,wh.*')->join('users u','u.id = wh.user_id')->order_by("wh.id", "DESC")->limit($limit, $start)->get_where('withdrawal_history wh')->result_array();
     }
     public function findUserGameCount(){
-         return $this->db->from('user_games')->group_by('game_id')->count_all_results();
+         return $this->db->select('game_id,*')->from('user_games')->count_all_results();
     }
     public function findUserWithdrawalCount() {
          return $this->db->from('withdrawal_history')->count_all_results();

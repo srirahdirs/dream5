@@ -91,7 +91,7 @@ class Approvals extends CI_Controller {
         $winning_team = $_GET['winning_team'];
         $this->Approvals_model->setMatchResult($game_id,$winning_team); 
         $this->session->set_flashdata('success', 'Result sets Successfully!.');
-        return redirect('admin/user-games'); 
+        return redirect('admin/approvals/userGames'); 
     }
     public function approveWithdrawal($id) {
         $email = $_GET['email'];
