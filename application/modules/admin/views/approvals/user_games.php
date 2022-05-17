@@ -59,7 +59,7 @@ $this->load->view('layouts/menu');
                     <?php $i++; endforeach; ?>
                 </tbody>
             </table>
-            
+            <p class="pagination_list"><?php echo $links; ?></p>
     </div>
 </div>
 <?php // $links; ?>

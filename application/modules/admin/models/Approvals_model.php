@@ -29,13 +29,17 @@ class Approvals_model extends CI_Model {
     public function getUsersKyc() {
         return $this->db->select('users.*,ud.*')->join('user_details ud','users.id = ud.user_id')->get_where($this->users_table)->result_array();
     }
-    public function getUserGames() {
-        // ->group_by('ug.game_id')
-        //->limit($limit, $start)
-        return $this->db->select('u.*,ug.*,ug.game_id as game_id_ug,g.*,g.id as game_id,ug.status as status')->join('users u','u.id = ug.user_id')->join('games g','g.id = ug.game_id')->order_by("ug.id", "DESC")->get_where('user_games ug')->result_array();
+    public function getUserGames($limit, $start) {
+        return $this->db->select('u.*,ug.*,ug.game_id as game_id_ug,g.*,g.id as game_id,ug.status as status')->join('users u','u.id = ug.user_id')->join('games g','g.id = ug.game_id')->order_by("ug.id", "DESC")->limit($limit, $start)->get_where('user_games ug')->result_array();
     }
-    public function findUserGameCount() {
+    public function getUserWithdrawals($limit, $start) {
+        return $this->db->select('u.*,wh.*')->join('users u','u.id = wh.user_id')->order_by("wh.id", "DESC")->limit($limit, $start)->get_where('withdrawal_history wh')->result_array();
+    }
+    public function findUserGameCount(){
          return $this->db->from('user_games')->group_by('game_id')->count_all_results();
+    }
+    public function findUserWithdrawalCount() {
+         return $this->db->from('withdrawal_history')->count_all_results();
     }
     public function getUserGamesById($game_id) {
         return $this->db->select('u.*,ug.*,g.*,g.id as game_id')->join('users u','u.id = ug.user_id')->join('games g','g.id = ug.game_id')->get_where('user_games ug',array('ug.game_id =' => $game_id))->result_array();
@@ -126,6 +130,13 @@ class Approvals_model extends CI_Model {
         } else{
             return 0;
         }
+    }
+    public function approveWithdrawal($id,$email) {
+        $data['status'] = 'successful';        
+        $this->db->where(['id' => $id]);
+        $this->db->update('withdrawal_history',$data);
+        $this->load->model('../../models/Mail_model'); 
+        $orderDetail = $this->Mail_model->sendWithdrawalProcessedMailToUser($email);
     }
     public function ApproveKyc($user_id) {
         $data['is_pan_verified'] = 'Yes';        

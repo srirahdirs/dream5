@@ -57,8 +57,30 @@ class Approvals extends CI_Controller {
         return $this->load->view('admin/approvals/upi_payments',$data);        
     }
     public function UserGames() {
-        $data['listData'] = $this->Approvals_model->getUserGames();
+        $config["base_url"] = base_url() . "admin/approvals/userGames";
+        $config["total_rows"] = $this->Approvals_model->findUserGameCount();
+        $config["per_page"] = 8;
+        $config["uri_segment"] = 4;
+       
+        $this->pagination->initialize($config);
+        $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+        $data["links"] = $this->pagination->create_links();
+        
+        $data['listData'] = $this->Approvals_model->getUserGames($config["per_page"], $page);
         return $this->load->view('admin/approvals/user_games',$data);        
+    }
+    public function UserWithdrawals() {
+        $config["base_url"] = base_url() . "admin/approvals/userWithdrawals";
+        $config["total_rows"] = $this->Approvals_model->findUserWithdrawalCount();
+        $config["per_page"] = 8;
+        $config["uri_segment"] = 4;
+       
+        $this->pagination->initialize($config);
+        $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+        $data["links"] = $this->pagination->create_links();
+        
+        $data['listData'] = $this->Approvals_model->getUserWithdrawals($config["per_page"], $page);
+        return $this->load->view('admin/approvals/user_withdrawals',$data);        
     }
     public function ConfirmUpiPayment($order_id) {
         $this->Approvals_model->approveUpiPayment($order_id);  
@@ -70,6 +92,12 @@ class Approvals extends CI_Controller {
         $this->Approvals_model->setMatchResult($game_id,$winning_team); 
         $this->session->set_flashdata('success', 'Result sets Successfully!.');
         return redirect('admin/user-games'); 
+    }
+    public function approveWithdrawal($id) {
+        $email = $_GET['email'];
+        $this->Approvals_model->approveWithdrawal($id,$email); 
+        $this->session->set_flashdata('success', 'Approved Successfully!.');
+        return redirect('admin/approvals/userWithdrawals'); 
     }
     public function ApproveKyc($user_id) {
         $this->Approvals_model->ApproveKyc($user_id);  

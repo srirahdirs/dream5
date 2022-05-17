@@ -243,6 +243,33 @@ class Mail_model extends CI_Model {
 
         $this->email->send();
     }
+    public function sendWithdrawalProcessedMailToUser($user_email){
+        $data = '';
+        $message = $this->load->view('emailer/new_withdrawal_mail_to_user.php',$data,TRUE);
+        $config = [
+            'mailtype' => 'html',
+            'charset' => 'utf-8',
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://ssmtp.googlemail.com',
+            'smtp_user' => smtp_user,
+            'smtp_pass' => smtp_pass,
+            'smtp_port' => '465',
+            'smtp_timeout' => '20',
+            'validation' => TRUE,
+            'newline' => "\r\n"
+        ];
+        $this->load->library('email', $config);
+
+        $admin_list = array($user_email);
+        $this->email->to($admin_list);
+        
+        $this->email->from(email_from, 'Wooo! Withdrawal has been processed successfully!');
+        $this->email->subject('DREAM5 - Withdrawal');
+        $this->email->set_mailtype("html");
+        $this->email->message($message);
+
+        $this->email->send();
+    }
    
     public function generateToken($id)
     {

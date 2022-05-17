@@ -45,7 +45,12 @@
             </ul>
             <ul class="nav sidebar-nav-sub" >
                 <li class="nav-sub-item">
-                    <a href="<?= site_url('admin/user-games') ?>" class="nav-sub-link upi_master"><i class="icon ion-ios-baseball"></i> &nbsp; User Games </a>
+                    <a href="<?= site_url('admin/approvals/userGames') ?>" class="nav-sub-link upi_master"><i class="icon ion-ios-baseball"></i> &nbsp; User Games </a>
+                </li>
+            </ul>
+            <ul class="nav sidebar-nav-sub" >
+                <li class="nav-sub-item">
+                    <a href="<?= site_url('admin/approvals/userWithdrawals') ?>" class="nav-sub-link upi_master"><i class="icon ion-ios-baseball"></i> &nbsp; User Withdrawals </a>
                 </li>
             </ul>
         </li>

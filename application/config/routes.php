@@ -52,11 +52,13 @@ $route['admin/login'] = 'admin/home/login';
 $route['admin/logout'] = 'admin/home/logout';
 $route['admin/upi-payments'] = 'admin/approvals/UpiPayments';
 $route['admin/user-kycs'] = 'admin/approvals/UserKycs';
-$route['admin/user-games'] = 'admin/approvals/userGames';
+$route['admin/approvals/userGames/(:num)'] = 'admin/approvals/userGames/$1';
+$route['admin/approvals/userWithdrawals/(:num)'] = 'admin/approvals/UserWithdrawals/$1';
 $route['admin/approve-kyc/(:any)'] = 'admin/approvals/ApproveKyc/$1';
 $route['admin/reject-kyc/(:any)'] = 'admin/approvals/RejectKyc/$1';
 $route['admin/confirm-upi-payment/(:num)'] = 'admin/approvals/confirmUpiPayment/$1';
 $route['admin/set-match-result/(:num)'] = 'admin/approvals/setMatchResult/$1';
+$route['admin/approve-withdrawal/(:num)'] = 'admin/approvals/approveWithdrawal/$1';
 $route['admin/games/(:num)'] = 'admin/games/index';
 /**************ADMIN users**************/
 $route['admin/users/(:num)'] = 'admin/users/index';
