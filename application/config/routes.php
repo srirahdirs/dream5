@@ -26,6 +26,7 @@ $route['withdraw-cash'] = 'payments/withdrawCash';
 $route['withdraw-reversal'] = 'payments/withdrawReversal';
 $route['payments/withdrawHistory/(:num)'] = 'payments/withdrawHistory';
 $route['payments/transactions/(:num)'] = 'payments/transactions';
+$route['payments/referralTransactions/(:num)'] = 'payments/referralTransactions';
 $route['payments/games/(:num)'] = 'payments/games';
 $route['add-practice-cash'] = 'payments/addPracticeCash';
 $route['saveBet'] = 'payments/saveBet';

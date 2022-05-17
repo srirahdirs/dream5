@@ -41,7 +41,7 @@ $this->load->view('layouts/menu_session');
                     <p>Invite your friends/ family and earn upto <span class="tx-white mg-b-15">&#8377;500.</span> when each friend joins and plays</p>
                     <div class="row row-sm">
                         <div class="col-sm-6">
-                            <a href="" class="btn btn-primary btn-block">MY EARNINGS</a>
+                            <a href="<?= site_url('payments/referralTransactions'); ?>" class="btn btn-primary btn-block">MY EARNINGS</a>
                         </div><!-- col-6 -->
                         <div class="col-sm-6 mg-t-10 mg-sm-t-0">
                             <a href="<?= site_url('refer'); ?>" class="btn btn-success btn-block">REFER NOW</a>

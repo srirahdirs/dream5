@@ -39,8 +39,11 @@ $encrypted_user_id = encryptId($this->session->userdata('user_id'));
                 <a href="<?= base_url() . 'payments/transactions'?>" class="sidebar-nav-link transactions"><i class="fa fa-exchange" aria-hidden="true"></i> Transactions </a>
             </li>
             <li class="sidebar-nav-item">
-                <a href="#" class="sidebar-nav-link"><i class="fa fa-gift"></i>  My Bonus </a>
+                <a href="<?= base_url() . 'payments/referralTransactions'?>" class="sidebar-nav-link referral_transactions"><i class="fa fa-user-plus " aria-hidden="true"></i> My Referrals </a>
             </li>
+            <!-- <li class="sidebar-nav-item">
+                <a href="#" class="sidebar-nav-link"><i class="fa fa-gift"></i>  My Bonus </a>
+            </li> -->
         </ul>
     </div>
 

@@ -132,6 +132,28 @@ class Payments extends CI_Controller {
         $data['transactions_history'] = $this->Order_model->findUserPurchasedHistory($config["per_page"], $page , $this->session->userdata('user_id'));
         $this->load->view('payments/transactions', $data);
     }
+    public function ReferralTransactions() {
+        
+        $config["base_url"] = base_url() . "payments/referralTransactions";
+        $config["total_rows"] = $this->Order_model->findReferralCount($this->session->userdata('user_id'));
+        $config["per_page"] = 9;
+        $config["uri_segment"] = 3;
+
+        $config['full_tag_open'] = "<div clas='pagination-wrapper'><ul class='pagination pagination-success mg-b-0'>";
+        $config['full_tag_close'] = '</ul></div>';
+        $config['cur_tag_open'] = '&nbsp;<a class="current">';
+        $config['cur_tag_close'] = '</a>';
+        $config['next_link'] = '>';
+        $config['prev_link'] = '<';
+        $this->pagination->initialize($config);
+
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+        $data["links"] = $this->pagination->create_links();
+
+        $data['transactions_history'] = $this->Order_model->findUserReferredHistory($config["per_page"], $page , $this->session->userdata('user_id'));
+        $this->load->view('payments/referral_transactions', $data);
+    }
     public function Games() {
         
         $config["base_url"] = base_url() . "payments/games";
@@ -315,9 +337,9 @@ class Payments extends CI_Controller {
     }
     public function getFinalBetAmount($amount){
         $doubleAmount = $amount * 2;
-        $dream5percentage = 3;
+        $dream5percentage = 5;
         $percentageAmount = ($dream5percentage / 100) * $doubleAmount;
-        if($amount < 1001){
+        if($amount < 999){
             $percentageAmount = 0;
         }
         $finalAmount = $doubleAmount - $percentageAmount;

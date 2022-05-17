@@ -159,6 +159,7 @@ class UserModel extends CI_Model {
                 $dataReferral['username'] = $referral_username; //referred users username
                 $dataReferral['referral_username'] = $data['username']; //newly registered users username
                 $dataReferral['referral_user_id'] = $user_id; 
+                $dataReferral['amount'] = 500; 
                 
                 $this->db->insert('user_referrals', $dataReferral);
             }

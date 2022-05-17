@@ -181,8 +181,8 @@ $this->load->view('layouts/footer');
                     });
 
                     var dbleval = $(this).val() * 2;
-                    var percent = (3 / 100) * dbleval;
-                    if($(this).val() < 1001){
+                    var percent = (5 / 100) * dbleval;
+                    if($(this).val() < 999){
                         percent = 0;
                     }
                     var final_amount = parseInt(dbleval - percent);

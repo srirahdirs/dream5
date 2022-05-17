@@ -16,7 +16,8 @@ $this->load->view('layouts/menu_session');
             <a id="contactNavicon" href="" class="contact-navicon"><i class="icon ion-navicon-round"></i></a>
       </div>
       <!-- <div class="row"> -->
-          <img src="<?= $baseUrl .'/img/referral_banner.jpg'?>" alt="banner" class="refer_banner_img" width="870" height="223">
+          <img src="<?= $baseUrl .'/img/referral_banner.png'?>" alt="banner" style="width: 80%;
+    margin-left: 80px;" class="refer_banner_img" width="870" height="223">
       <!-- </div> -->
       <div class="card card-profile">
         <?php
